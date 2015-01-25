@@ -25,11 +25,11 @@ class Gjett  # Et lite spill
     if svar > @fasit_svar
       puts "lavere. "
     elsif svar < @fasit_svar
-      puts "høyere. "
+      puts "hÃ¸yere. "
     end
     if diff == 0
       @ferdig = true
-      puts "Du klarte det på #@forsoek forsøk!"
+      puts "Du klarte det pÃ¥ #@forsoek forsÃ¸k!"
     end
   end
   def hent_svar
@@ -42,7 +42,7 @@ class Gjett  # Et lite spill
   end
 end 
 
-# La oss unngå å bruke de kryptiske globale variabelnavnene.
+# La oss unngÃ¥ Ã¥ bruke de kryptiske globale variabelnavnene.
 require 'English'
 if __FILE__ == $PROGRAM_NAME then
   begin

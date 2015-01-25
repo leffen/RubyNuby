@@ -6,4 +6,4 @@ class Verden             # Definer en klasse...
 end
 
 verden = Verden.new      # Lag en instans av klassen.
-verden.si_hei            # Kall en metode på objektet.
+verden.si_hei            # Kall en metode pÃ¥ objektet.

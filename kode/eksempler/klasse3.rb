@@ -1,10 +1,9 @@
 # Fortsetter der vi slapp...
-require 'klasse2.rb' 
+require_relative 'klasse2' 
 
 # Arv - alle studenter er en submengde av alle personer
 class Student < Person
-  def initialize( etternavn, fornavn, alder = 0, 
-		  studiested = "NTNU" )
+  def initialize(etternavn, fornavn, alder = 0, studiested = "NTNU" )
     # kall super-klassens versjon av metoden
     super( etternavn, fornavn, alder )
     @studiested = studiested
@@ -16,24 +15,24 @@ class Student < Person
     "#{@etternavn}, #{@fornavn} - studerer ved #{@studiested}."
   end
 
-  def ta_eksamen( karakter )
+  def ta_eksamen(karakter)
     @karakterer.push karakter
   end
 
   def karaktersnitt
     sum = 0
-    @karakterer.each{ |karakter|
+    @karakterer.each do |karakter|
       sum += karakter
-    }
+    end
     sum.to_f / @karakterer.size
   end
   
 end
 
-if __FILE__ == $0 # Kun når vi kjører denne filen:
+if __FILE__ == $0 # Kun nÃ¥r vi kjÃ¸rer denne filen:
   flinkis = Student.new("Einstein", "Al", 128, "Mensa")
-  flinkis.ta_eksamen( 1.0 )
-  flinkis.ta_eksamen( 2.0 )
+  flinkis.ta_eksamen(1.0)
+  flinkis.ta_eksamen(2.0)
   puts flinkis #=> "Einstein, Al - studerer ved Mensa."
   puts flinkis.karaktersnitt #=> 1.5
 end

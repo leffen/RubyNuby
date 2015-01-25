@@ -4,14 +4,14 @@ def si_hei
 end
 
 # Hva er vel en funksjon uten argumenter?
-def si_hei_til( hva )
+def si_hei_til(hva)
   puts "Hei #{hva}"
 end
 
-si_hei_til("Trondheim!") #=> "Hei Trondheim!"
+si_hei_til("Bergen!") #=> "Hei Bergen!"
 
 # Funksjoner kan ta flere argumenter og de kan ha default verdier
-def send_julegave( til, fra="nissen" )
+def send_julegave(til, fra="nissen")
   puts "God jul, #{til}. Hilsen #{fra}."
 end
 

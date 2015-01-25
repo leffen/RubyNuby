@@ -1,19 +1,19 @@
-# Spør først om alderen.
+# SpÃ¸r fÃ¸rst om alderen.
 print "Hvor gammel er du?: "
 alder = gets.to_i
 
-if alder < 1 then puts "Nå tuller du vel?"; exit end
+if alder < 1 then puts "NÃ¥ tuller du vel?"; exit end
 
 if alder >= 18
   puts "Du er myndig."
 elsif alder >= 16
   puts "Du er lovlig."
 else
-  puts "Småen!"
+  puts "SmÃ¥en!"
 end
 
-# 'if' kan også returnere en verdi, så du slipper
-# å bruke '?:' operatoren hvis du ikke liker den.
+# 'if' kan ogsÃ¥ returnere en verdi, sÃ¥ du slipper
+# Ã¥ bruke '?:' operatoren hvis du ikke liker den.
 drikkevare = 
   if alder >= 60
     "Sviskejuice"
@@ -21,9 +21,9 @@ drikkevare =
     if alder >= 20
       "Sprit"
     elsif alder >= 18
-      "Øl og vin"
+      "Ã˜l og vin"
     else
       "Brus"
     end	       
   end
-puts "Kjøp deg litt #{drikkevare}"
+puts "KjÃ¸p deg litt #{drikkevare}"

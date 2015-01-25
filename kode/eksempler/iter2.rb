@@ -1,6 +1,6 @@
 personer = [ "Ola", "Per", "Jan", "Line"]
 
-# Den "gamle" naive måten
+# Den "gamle" naive mÃ¥ten
 for i in (0...personer.size) 
   puts "Hei " + personer[i]
 end
@@ -10,7 +10,7 @@ for person in personer
   puts "Er #{person} tilstede?"
 end
 
-# Ruby-måten: Bruke Iterator og en block
+# Ruby-mÃ¥ten: Bruke Iterator og en block
 personer.each do |person|
   puts "Velkommen #{person}"
 end  

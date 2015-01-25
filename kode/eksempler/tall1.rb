@@ -7,7 +7,7 @@ d = c / b    #=> 2
 # Flyttall
 f = c.to_f / b #=> 2.5
 
-#Tall er også objekter
+# Tall er ogsÃ¥ objekter
 puts "tre og to er " + c.to_s
 -25.abs     #=> 25
 a.zero?     #=> false

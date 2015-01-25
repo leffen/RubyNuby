@@ -1,5 +1,5 @@
 class Bil
-  # En klassevariabel for å telle antall biler i verden.
+  # En klassevariabel for Ã¥ telle antall biler i verden.
   @@num_biler = 0
   def initialize
     @@num_biler += 1

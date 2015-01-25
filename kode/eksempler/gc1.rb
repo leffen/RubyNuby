@@ -1,18 +1,19 @@
+#
 streng = "Hvil i fred."
 
-# Vi gir en block som skal kjøres når streng objektet dør.
-ObjectSpace.define_finalizer(streng){|id|
-  puts "Objektet med ID=#{id} er nå dødt. "
+# Vi gir en block som skal kjÃ¸res nÃ¥r streng objektet dÃ¸r.
+ObjectSpace.define_finalizer(streng) do |id|
+  puts "Objektet med ID=#{id} er nÃ¥ dÃ¸dt. "
   puts "Rest in peace."
-}
+end
 
-# Starter søppeltømmeren eksplisitt.
-puts "Henter søppel!"
+# Starter sÃ¸ppeltÃ¸mmeren eksplisitt.
+puts "Henter sÃ¸ppel!"
 GC.start
-# Men ingenting skjer, da det ennå er en referanse til strengen.
+# Men ingenting skjer, da det ennÃ¥ er en referanse til strengen.
 
-# Prøver en gang til...
+# PrÃ¸ver en gang til...
 streng = nil
-puts "Henter mer søppel!"
+puts "Henter mer sÃ¸ppel!"
 GC.start
-# finalizer blocken blir kjørt.
+# finalizer blocken blir kjÃ¸rt.

@@ -7,7 +7,7 @@ class Familie
   def each
     yield "Far"
     yield "Mor"
-    yield "Sønn"
+    yield "SÃ¸nn"
     yield "Datter"
   end
 end
@@ -15,5 +15,5 @@ end
 f = Familie.new
 
 # include? og sort metodene er mikset inn fra Enumerable.
-puts f.include?("Sønn") #=> true
-puts f.sort.join(", ")  #=> "Datter, Far, Mor, Sønn"
+puts f.include?("SÃ¸nn") #=> true
+puts f.sort.join(", ")  #=> "Datter, Far, Mor, SÃ¸nn"
