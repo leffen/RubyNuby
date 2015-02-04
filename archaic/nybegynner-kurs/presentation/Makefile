@@ -46,7 +46,7 @@ SAMPLE_CODE_FILES = $(notdir $(wildcard code/*.rb))
 	 metoder1.rb 	
 
 #Same source, restrained to CODE sections
-SAMPLE_CODE = $(addprefix html/code/,$(SAMPLE_CODE_FILES))
+SAMPLE_CODE = $(addprefix code/,$(SAMPLE_CODE_FILES))
 
 SAMPLE_CODE_HTML = $(addprefix tmp/,$(addsuffix .html,$(SAMPLE_CODE_FILES)))
 SAMPLE_CODE_SGML = $(addprefix tmp/,$(addsuffix .sgml,$(SAMPLE_CODE_FILES)))
@@ -135,7 +135,7 @@ $(TMP)%.rb.html_section : $(TMP)%.rb.html
 		$(subst .rb.html,.rb,$(subst $(TMP),$(CODE),$<))
 
 # Generate HTML of files
-$(TMP)%.rb.html : $(HTML)code/%.rb
+$(TMP)%.rb.html : $(CODE)/%.rb
 	cat $< | $(RB2HTML)  >   $@
 
 $(TMP)%.rb.sgml_section : $(HTML)code/%.rb
