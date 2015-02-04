@@ -1,0 +1,15 @@
+Norsk Ruby-Nuby
+Introduksjon til Ruby
+
+Formatet er LinuxDoc SGML + HTML-isert Ruby kode eksempler.
+
+
+Kjør:
+
+make clean		# dependancies er ikke helt gode...
+make presentation 	# gir flat presentasjonsstruktur
+make online 		# gir en mer lesbar HTML struktur
+
+og surf til 
+	html/flat_presentation.html
+	html/presentaiton.html

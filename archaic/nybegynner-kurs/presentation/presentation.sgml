@@ -1,0 +1,441 @@
+<!doctype linuxdoc system>
+
+
+<article>
+
+
+<title>En nybegynnerintroduksjon til programmeringsspråket Ruby</title>
+<author>Kent Dahl <tt>&lt; kent@rubendahl.com &gt</tt></author>
+<date>v1.05.1, September 14., 2011</date>
+
+<abstract>En introduksjon til språket Ruby.</abstract>
+
+
+<sect> Bakgrunnsinformasjon
+<p>
+Kort om Ruby før vi titter på litt kode.
+
+<sect1>Hva er Ruby?
+<p>
+<itemize>
+<item>et objekt-orientert programmeringsspråk
+<item>et skriptspråk
+<item>dynamisk typet
+<item>lett å begynne med
+<item>lesbart og samtidig enkelt å uttrykke seg i
+<item>føles "kjent" (PoLS - Principle of Least Surprise)
+</itemize>
+
+
+
+
+<sect1>Hvor kommer Ruby fra?
+<p>
+<itemize>
+<item>Japan
+ <itemize>
+  <item> Ruby større enn Python i Japan (sier ryktene)
+  <item> Mer enn 20 japanske bøker om Ruby
+ </itemize>
+<item>Den geniale hjernen til Yukihiro Matsumoto ("Matz")
+<item> En smeltedigel av features fra forskjellige språk:
+  <itemize>
+   <item> Perl
+   <item> Smalltalk
+   <item> Python
+   <item> CLU
+  </itemize>
+
+</itemize>
+
+
+<sect1>Hvorfor Ruby?
+<p>
+<itemize>
+<item> mer lesbart enn Perl.
+<item> mer objekt-orientert enn Python og Perl.
+<item> en tradisjonell og vanlig syntaks sammenlignet med f.eks. Smalltalk.
+<item> tar de beste sidene ved flere språk og kombinerer dem.
+<item> dynamisk typing.
+</itemize>
+... og noen ting bare føles riktig!
+
+
+
+
+
+<sect1>Hvor finner jeg Ruby?
+<p> 
+	På <url url="http://www.ruby-lang.org/" name="Ruby sin hjemmeside"> 
+	finner du kildekode, dokumentasjon til standardbiblioteket, bindinger til andre bibliotek og programmer, slides, etc.
+
+<p>
+	Det mest aktive Ruby og Rails-miljøet i Norge er Irb.no:
+	<url url="http://irb.no/" name="Interactive Ruby i Oslo og omegn">
+</p>
+
+
+
+<p>Siden begynnelsen av årtusenet har det kommet flere engelske bøker om Ruby. Her er ett par anbefalinger:
+<itemize>
+<item><em><url url="http://pine.fm/LearnToProgram/" name="Learn to Program"></em> (2nd Ed) - Chris Pine </item>
+<item><em>The Ruby Way</em> - Hal Fulton
+<item><em>Teach Yourself Ruby in 21 Days</em> -  Mark Slagell
+</itemize>
+
+
+
+<sect>Vår første smakebit av Ruby-kode.
+<P>
+Eksemplene vises med linjenummer. (Disse er <em>ikke</em> en del av kildekoden!)
+<newline>
+Det vil si, når det står  <verb>    12| puts "Hello"</verb>
+<newline>
+er det <verb>    puts "Hello"</verb> som er kildekoden.
+<p>
+Kodelinjer er ofte annotert med en kommentar: <tt><bf>#=></bf></tt>
+<newline>
+som viser hva resultatet vil bli eller hva som skrives ut. Ett eksempel: 
+<newline>
+<verb>    5 + 2 #=> 7</verb>
+
+
+<sect1>Hei verden!
+<p>Hello World begynner å bli gammel og tynnslitt, så her har vi en litt mer komplisert variant:
+<p><htmlurl url="code/heiverden1.rb" name="SOURCE_CODE">
+
+
+
+
+<sect2> Kjøre heiverden1.rb
+<p>
+Det er flere måter å kjøre Ruby-kode på, bl.a.:
+<itemize>
+<item> Fra kommandolinjen: <newline><tt><bf>ruby heiverden1.rb</bf></tt>
+<p>
+
+<item> Fra "Interactive Ruby" (IRB):<newline>
+<tt><bf>irb</bf><newline>
+<em>irb(main):001:0></em> <bf>load "heiverden1.rb"</bf><newline>
+<em>Hei verden!<newline>
+true</em></tt>
+<p>
+
+<item> I Windows: Dobbeltklikke på <tt>heiverden1.rb</tt> filen.
+<p>
+
+<item> I Unix: Gjøre skriptfilen kjørbar ved å legge til <newline>
+<tt>#!/usr/bin/env ruby</tt><newline>
+på toppen av skriptet, og gjøre filen kjørbar med <tt>chmod a+x heiverden1.rb</tt>
+<p>
+
+</itemize>
+
+
+
+<sect1>Variabler
+<p>
+I Ruby har ikke en variabel noen statisk type. En variabel er bare et navn man forbinder med en referanse til et objekt. 
+(Dette er den korte forklaringen på hva dynamisk typing er.)
+
+<p><htmlurl url="code/variabler1.rb" name="SOURCE_CODE">
+
+<p>Attributter kalles også instansvariable eller felt.
+<!-- Som en enkel huskeregel så bruker man @ for attributter (som tilhører ett objekt), og @@ for "alles attributter" -->
+
+<p>Enhver variabel som begynner med stor forbokstav er konstant i Ruby. 
+Konstant vil si at variabelreferansen er konstant, 
+ikke at objektet ikke kan endre tilstand. (Ønsker du sistnevnte, prøv <tt>freeze</tt>)
+
+
+
+<sect1>Tekststrenger 
+<p>
+Vi kunne ikke skrive ut "Hei verden!" uten å ha litt tekst.<newline>
+I Ruby er tekststrenger instanser av klassen <tt>String</tt>.
+
+<p><htmlurl url="code/tekst1.rb" name="SOURCE_CODE">
+
+Legg merke til at man kan skrive strenger både <tt>"slik"</tt> (med kråketær) og <tt>'slik'</tt> (med apostrof). 
+Disse to versjonene er ikke bare for syns skyld. 
+<!--<REM>
+ ? i metodenavn
+</REM>-->
+
+
+<sect2>Mer om String
+<p>
+<tt>String</tt>-klassen i Ruby fungerer ikke slik som Java sin String-klasse, hvor man ikke kan endre et strengobjekt.
+<!-- Et av skriptspråkenes store styrke er tekst-manipulering, i hvilket tilfelle 'immutable' String objekter ville vært uhensiktsmessig -->
+
+<p><htmlurl url="code/tekst2.rb" name="SOURCE_CODE">
+
+<p> Legg merke til at <tt>sub</tt> generer et helt nytt <tt>String</tt>-objekt, mens <tt>sub!</tt> endrer det faktiske objektet.<newline>
+ Metoder som slutter med utropstegn kalles <bf>"bang"</bf> eller <bf>"destruktive"</bf> metoder, da de som oftest endrer objektet.  <newline>
+<!-- Mange metoder vil finnes i både bang og non-bang versjoner.--> 
+Ruby bruker denne konvensjonen for navngivelse på mange metoder, men er ikke påkrevd.
+
+
+<!--<REM> 
+ bang-metoder returnerer ofte nil når den ikke gjør noen endring 
+ mutators.
+</REM>-->
+
+
+<sect2>Skrive ut tekst
+<p> Det er mer enn en måte å flå en katt på, og der er også mer enn en måte å skrive ut tekst i Ruby. 
+
+<p><htmlurl url="code/utput1.rb" name="SOURCE_CODE">
+
+<p> Her ser vi hvorfor vi både bruker "kråketær" og 'apostrof' for å angi tekststrenger. Med kråketær kan vi escape tegn (slik som <tt><bf>\n</bf></tt> som betyr ny linje), og kjøre Ruby uttrykk inne i tekststrengen. 
+<!-- Med apostrof skjer (nesten) ingen escaping. -->
+<!-- (se linje 16 og 17) -->
+
+
+
+<sect1>Tall.
+<p>
+Selv om tall også er objekter i Ruby, oppfører de seg normalt, og du må ikke vri hjernen din rundt sær syntaks.
+
+<p><htmlurl url="code/tall1.rb" name="SOURCE_CODE">
+
+<p>Ruby har flere tallklasser:
+<itemize>
+<item> <tt>Fixnum</tt> - begrenset heltall
+<item> <tt>Bignum</tt> - ubegrenset heltall (forutsatt uendelig minne ;-)
+<item> <tt>Float</tt>  - flyttall med begrenset presisjon
+</itemize>
+Men du trenger ikke å tenke så mye på dem. Dersom du gjør noe med <tt>Fixnum</tt> som blir for stort, får du automatisk en <tt>Bignum</tt> ut. Du slipper å tenke på overflyt. Flyttall er derimot like unøyaktige som i de fleste språk og avrundingsproblematikk slipper du ikke unna. <newline>
+For å lagre brøker, kan du bruke <tt>Rational</tt>-klassen. ( <tt>require 'rational'</tt> )
+
+<descrip>
+<tag>to_s</tag> to string - lag en tekstlig representasjon av objektet, ikke ulikt Java sin <tt>toString()</tt>.
+</descrip>
+
+<!--<REM>
+  Fixnum er "by-value" i referanser.
+</REM>-->
+
+
+<sect>Flytkontroll
+<p> Logiske uttrykk skiller seg fra en del andre språk på et viktig område: 
+<newline>
+Kun <tt><bf>nil</bf></tt> og <tt><bf>false</bf></tt> evalueres til usant. 
+<newline>
+<tt><bf>0</bf></tt>, <tt><bf>""</bf></tt>, <tt><bf>[]</bf></tt>, <tt><bf>{}</bf></tt> og andre 'tomme' objekter evaluerer til sant. 
+<newline>
+(For folk vant til C, Perl og/eller Python, er dette en av de vanligste kildene til feil.)
+
+<p>
+
+
+<sect1> Hvis, dersom...
+<p> If-setningen byr ikke på så mange overraskelser i Ruby.
+
+<p><htmlurl url="code/hvis1.rb" name="SOURCE_CODE">
+<p>
+Merk at <tt><bf>then</bf></tt> nøkkelordet ikke er nødvendig når man skriver if-setningen over flere linjer. Noen ting er valgfrie i Ruby forutsatt at uttrykket ikke blir tvetydig. 
+<p>
+<descrip>
+<tag>gets</tag> get string - henter en tekststreng ifra standard input.
+<tag>to_i</tag> to integer - forsøker å gjøre objektet om til et heltall.
+</descrip>
+
+
+
+<sect2> Forutsatt, med mindre...
+<p>
+Mulighetene til å skrive logiske uttrykk som er nærmere hvordan vi snakker, gjør Ruby mer lesbart, men kan også forvirre.
+<p><htmlurl url="code/hvis2.rb" name="SOURCE_CODE">
+<p>
+<descrip>
+<tag>chomp</tag>  fjerner et eventuelt newline-tegn i fra slutten av strengen.
+<tag>downcase</tag> gjør store bokstaver om til små.
+<tag>?j</tag> tallverdien til tegnet 'j'
+</descrip>
+Merk at chomp og downcase ikke har noen '!', så de returnerer kopier som har blitt modifisert. De endrer ikke objektet de blir kalt på.
+
+<sect2>Case
+<p>Ruby har også case-konstruksjonen, som ofte er et bedre valg enn en rekke elsif'er mot samme variabel. 
+<p><htmlurl url="code/case1.rb" name="SOURCE_CODE">
+<p> Legg merke til at en <tt><bf>when</bf></tt> blokk kan slå ut på flere oppgitte verdier. Man kan også bruke regulære uttrykk, <tt>Range</tt>-objekter, klasser etc. 
+Du kan også lage dine egne objekter som kan brukes her 
+ved å implementere <tt><bf>===</bf></tt> operatoren, som kalles både "relationship operator" og "case equality operator". 
+(Ja, det er 3 likhetstegn.) 
+
+
+<sect1> Løkker - while
+<p> Hvis ikke du er fra Bergen, så har du vel falt for denne spøken en gang...
+<p><htmlurl url="code/gjenta1.rb" name="SOURCE_CODE">
+<p>
+<descrip>
+<tag>index</tag> gir indeksen til hvor i strengen det gitte argumentet finnes eller nil om
+det ikke finnes.
+</descrip>
+
+<sect2> Until
+<p><htmlurl url="code/gjenta2.rb" name="SOURCE_CODE">
+<p> Merk at når løkke-uttrykket er foran koden som skal gjentas, droppes begin-nøkkelordet.
+
+
+
+<sect1> Iterasjon - Iterator-pattern og 'yield'
+<p> For løkken finnes fremdeles i Ruby, men hvor Python har gjort for-løkken glupere, har Ruby gått videre og tatt i bruk Iterator-pattern'et.
+<p><htmlurl url="code/iter1.rb" name="SOURCE_CODE">
+<p> <tt><bf>(1..10)</bf></tt> lager et <tt>Range</tt>-objekt, som spenner i fra og med 1, til og med 10. Dersom du ikke ønsker å inkludere 10, kan du bruke 3 punktum, for eksempel så spenner <tt><bf>(1...10)</bf></tt> i fra 1, til og med 9. 
+
+
+<sect2>Iterere over en datastruktur 
+<p> Når man skal iterere over datastrukturer, blir indekser lett i veien. 
+<newline>Såkalte "off-by-one" feil er ganske vanlige.<newline> Men hvorfor ikke la datastrukturen stå for itereringen?
+
+<p><htmlurl url="code/iter2.rb" name="SOURCE_CODE">
+
+<p> <em>"Hva er den <tt><bf>|person|</bf></tt>greia?"</em><newline>
+Det er nesten som en argumentdeklarasjon, men ikke til en funksjon. <newline>
+<tt><bf>do |person|; end</bf></tt> er en <bf>block</bf>, et veldig viktig konsept i Ruby.
+
+
+<sect2>Yield og blocks.
+<p>
+En <bf>block</bf> er en kodebit, som kan motta argumenter og returnere en verdi. Der slutter likhetene med en metode. 
+<P>
+En block holder også tak i den omliggende konteksten og bindingen. Det betyr at lokale variable er tilgjengelig i block-koden, noe som gjør den perfekt til callback, f.eks. i grafiske brukergrensesnitt.
+<P><htmlurl url="code/block1.rb" name="SOURCE_CODE">
+<p> En block er ikke et objekt av effektivitetshensyn, men kan innkapsles i et Proc-objekt. (Via Proc.new, nøkkelordene proc og lambda, eller via bruk av <tt><bf>&</bf></tt>-prefikset i argumentlista til metodedefinisjonen)  
+
+<sect3>Blocks for håndtering av ressurser
+<p>
+Minnehåndtering i Ruby ordnes ved garbage collection, men en del andre ressurser krever eksplisitt lukking. Åpne filer, databasetilkoblinger og andre ressurser som tar opp mer enn minne, har det bedre med en eksplisitt lukking. Men slikt glemmer man lett...
+<P><htmlurl url="code/block2.rb" name="SOURCE_CODE">
+<p> Her benytter vi en annen måte for å angi blocker.
+I stedet for <tt><bf>do |arg| ... end</bf></tt> bruker vi <tt><bf>{|arg| ... }</bf></tt>. Varianten med krøllparenteser har høyere presedens.
+
+<sect3> Proc-objekter
+<p>Et Proc-objekt innkapsler som oftest en block. De kan lages via <tt>Proc.new</tt>, nøkkelordene <tt>proc</tt> og <tt>lambda</tt>, eller via bruk av <tt><bf>&</bf></tt>-prefikset i argumentlista til metodedefinisjonen. 
+<P><htmlurl url="code/block3.rb" name="SOURCE_CODE">
+<p>
+
+
+<sect> Metoder, klasser og objekter.
+<p>Ruby er et særdeles objekt-orientert språk. 
+Metoder, klasser og objekter er de grunnleggende byggesteinene. 
+
+<!--<p>Ruby er et særdeles objekt-orientert språk. Det har verken prosedyrer eller funksjoner; kun metoder som kalles på objekter. -->
+
+
+<sect1>Metoder
+<p>
+Ruby har verken prosedyrer eller funksjoner; kun metoder som kalles på objekter. 
+
+<!--<p>Hva sa Tannlege objektet til Pasient objektet som ikke ville åpne munnen? 
+<newline><em>"Jeg har mine metoder."</em> -->
+<p><htmlurl url="code/metoder1.rb" name="SOURCE_CODE">
+<p> Du syntes kanskje det så lite objekt-orientert ut? Ikke var metodene definert i noen klasse, og ikke kalte vi dem på noe objekt heller. Det tror du. Alle metoder som defineres på toppnivå defineres i Object-klassen, og vi har implisitt en toppnivå Object-instans. (Prøv <tt><bf>self.type</bf></tt> og se selv.)
+<!-- SPACING -->
+<newline>
+<newline>
+<newline>
+
+<sect2> Returverdier
+<p> Ruby returnerer normalt den siste verdien i metoden, hvis ikke <tt><bf>return</bf></tt> kalles eksplisitt. 
+<p><htmlurl url="code/metoder2.rb" name="SOURCE_CODE">
+
+<sect2> Spesielle argumenter
+<p>I tillegg til <tt><bf>&</bf></tt>-prefikset som brukes for å pakke en block gitt til en metode inn i et Proc-objekt, brukes <tt><bf>*</bf></tt>-prefikset for å samle flere argumenter i en Array.
+<p><htmlurl url="code/metoder3.rb" name="SOURCE_CODE">
+
+
+<sect1> Klasser
+<p> Som ethvert objekt-orientert språk har Ruby klasser.<newline>
+<p><htmlurl url="code/klasse1.rb" name="SOURCE_CODE">
+<newline>
+<!-- SPACING -->
+
+
+<sect2> Attributter
+<p> Ruby lar deg ikke få tak i et objekts attributter (felter, dataverdier, instansvariable) direkte. Alle attributter er "private".  Enhver tilgang fra utsiden til objektet går via metodekall, såkalte get/set metoder.
+<p>
+Instansvariable er "private" på en måte som er mer som protected i andre språk; metoder i sub- og superklasser har tilgang. Men andre instanser har ikke tilgang, selv ikke instanser av samme klasse.
+<newline>
+<!-- SPACING -->
+<p><htmlurl url="code/klasse2.rb" name="SOURCE_CODE">
+<!--
+<p>Det er omtrent som protected i andre språk; subklasser har full tilgang til instansvariabler. Men et objekt har ikke tilgang til et annet objekts instansmetoder, selv om de er av samme klasse.
+-->
+<descrip>
+<tag>:alder, :etternavn, :fornavn</tag>
+Disse er symboler. (instanser av <tt>Symbol</tt>-klassen) De ligner litt på String, men kan ikke endres, de er "internert" og begrenser seg til lovlige navn på klasser, metoder, variabler o.l. 
+(Symbolet for instansvariabelen <tt>@alder</tt>, metoden <tt>alder</tt> og den lokale 
+variabelen <tt>alder</tt> er alle sammen <tt><bf>:alder</bf></tt>.)
+<tag>attr_accessor, attr_reader, attr_writer</tag>
+Dette er metoder i <tt>Module</tt>-klassen som lager get/set metoder for deg. Som argument tar de symbolene til attributtene du vil lage get/set metoder for. 
+</descrip>
+
+
+<sect2> Arv
+<p> 
+<p><htmlurl url="code/klasse3.rb" name="SOURCE_CODE">
+<p>
+<descrip>
+<tag>super</tag>et alias for superklassens versjon av den metoden vi er i nå. 
+</descrip>
+
+<sect3> Multippel arv
+<p> Beklager. Det er ikke lov å la en klasse arve fra mer enn en superklasse i Ruby.
+<p> Derimot har Ruby <bf>mixin</bf>, som kan legge til funksjonalitet fra flere moduler inn i en klasse. Dvs, du kan bare arve fra en klasse, men kan blande inn funksjonalitet i fra flere moduler.
+<p><htmlurl url="code/modul1.rb" name="SOURCE_CODE">
+<p>I kontrast til Java tilbyr dette multippel arv av funksjonalitet. Java bruker <bf>interface</bf> til å "etterligne" multippel arv, men tilbyr ikke arv av implementasjon og løser noe som er et ikke-problem når man har dynamisk typing.
+<newline>
+
+<sect2> Klassevariabler
+<p> Klassevariabler er variabler som deles mellom alle instanser av klassen, samt instanser av subklasser. (tilsvarende <bf>static</bf> variabler i Java)
+<newline>
+<p><htmlurl url="code/klassevar1.rb" name="SOURCE_CODE">
+
+<sect2> Død og begravelse: Finalize
+<p> Objekter fødes, brukes og dør. I Ruby dør objektene når de hentes av søppeltømmeren. (garbage collector) 
+Når det skjer, er usikkert. Ingen referanser til objektet må eksistere og garbage collectoren må startes eksplisitt eller implisitt, f.eks. når det begynner å bli lite ledig minne.
+<newline>
+<p>
+<p>
+<p><htmlurl url="code/gc1.rb" name="SOURCE_CODE">
+<p> Legg merke til at objektet allerede er dødt når finalizer-blocken kalles. Ressurser som må lukkes eksplisitt, holdes via bindingen til blocken. (Bare pass på at blocken ikke også holder en referanse til objektet.)
+<p> Flere finalizers kan registreres på et objekt.
+
+
+
+
+<sect>Ting vi nesten glemte...
+
+<sect1> Exceptions: Feil og unntak. Når ting går galt.
+<p> For all sin glitrende magi, kan ikke Ruby beskytte deg fra å gjøre feil og heller ikke fra alt som kan gå galt.
+<p><htmlurl url="code/unntak1.rb" name="SOURCE_CODE">
+<p>
+
+
+<sect1> Regulære uttrykk
+<P>Regulære uttrykk (regular expressions) er en gjenganger blant skriptingsspråkene som gjør dem så perfekte til tekstmanipulering. Klassen <tt><bf>Regexp</bf></tt> samler denne funksjonaliteten på en ryddig måte, men Ruby lar deg også bruke regexp literaler.
+<p><htmlurl url="code/regexp1.rb" name="SOURCE_CODE">
+<P>Regulære uttrykk er nesten en vitenskap i seg selv. Dessuten er de omtrent like lesbare som det norske lovverket etter å ha gått igjennom en makuleringsmaskin og bør derfor brukes med omhu.
+
+
+<sect> Et større eksempel
+<p> Om du har hatt en Commodore 64, har du kanskje sett en variant 
+av følgende spill i manualen. 
+Målet er å gjette et tall med minst mulig forsøk, gitt litt tilbakemelding på hvor nær man gjettet.
+<p><htmlurl url="code/gjett.rb" name="SOURCE_CODE">
+
+
+
+<!--
+<sect>Oppgaveforslag
+<p>
+
+
+-->
+
+
+
+</article>
+
