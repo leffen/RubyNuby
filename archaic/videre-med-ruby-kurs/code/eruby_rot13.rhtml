@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+ <head><title> fungerende rot 13 </title></head>
+ <body>
+<% 
+## <CODE>
+# Med litt stygg eval- og klassemagi går det derimot greit.
+String.class_eval {
+  def rot13
+    self.tr( "A-Za-z", "N-ZA-Mn-za-m" )
+  end        
+}
+## </CODE>
+c = CGI.new
+inntekst = c['inntekst'][0]
+if inntekst then
+  uttekst = inntekst.rot13  # Fungerer!
+end    
+%>
+<b><%=inntekst%></b> rot 13 kryptert blir <b><%=uttekst%></b>.
+<form><input type="text" name="inntekst">
+      <input type="submit" value="rot13"></form> 
+ </body>
+</html>

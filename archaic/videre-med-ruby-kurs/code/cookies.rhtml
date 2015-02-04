@@ -1,0 +1,23 @@
+## <CODE>
+<%
+require 'cgi'
+c = CGI.new
+
+kurs_tekst, antall_tekst = c.cookies['rubywebnuby']
+antall_besok = (antall_tekst ? antall_tekst.to_i+1 : 0)
+
+ny_cookie = CGI::Cookie.new('rubywebnuby',    # Kakenavn.
+  'Ruby Web Nuby', antall_besok.to_s          # Verdier.
+)
+
+# Setter cookie-headeren via modruby.
+Apache::request.headers_out.add('Set-Cookie', ny_cookie.to_s)
+
+%>
+<html>
+  <body>
+    Du har vært her <%=antall_besok%> ganger før,
+    da i forbindelse med <%=kurs_tekst%>. 
+  </body>
+</html>
+## </CODE>

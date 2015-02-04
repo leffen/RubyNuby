@@ -1,0 +1,39 @@
+## <CODE>
+<%
+require 'cgi'
+c = CGI.new("html4")
+
+# Hent ut den gamle kaken, en Array av strenger på formen "nøkkel=verdi".
+gamle_cookie_verdier = c.cookies['rubywebnuby']
+
+# Hent ut selve verdiene på en litt mer ryddig måte og lag en Hash.
+verdier = Hash.new
+gamle_cookie_verdier.each{|linje|
+  key, value = linje.split('=')
+  verdier[key] = value
+} 
+
+antall_tekst = verdier['AntallBesok']
+antall_besok = if antall_tekst then 
+		 antall_tekst.to_i + 1 
+	       else 0 end
+kurs = verdier['Kurs']
+
+# Lag ny cookie
+ny_cookie = CGI::Cookie.new('rubywebnuby', 
+			    'Kurs=Ruby Web Nuby', 
+			    "AntallBesok=#{antall_besok}"
+)
+ny_cookie.expires = Time.now + 60*5
+
+Apache::request['Set-Cookie'] = ny_cookie.to_s
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+ <head><title> eruby og cookies </title></head>
+ <body>
+ <p>Du har vært her  <%= antall_besok %> ganger før.
+ <p>Det var i forbindelse med <%= kurs %>.
+ </body>
+</html>
+## </CODE>

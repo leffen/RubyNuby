@@ -1,0 +1,24 @@
+## <CODE>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+  <head><title> ikke-fungerende rot 13 </title></head>
+  <body>
+<% 
+class String  # Dette lager en ny String-klasse i  
+  def rot13   # stedet for å utvide den eksisterende.
+    self.tr( "A-Za-z", "N-ZA-Mn-za-m" )
+  end
+end
+require 'cgi'
+c = CGI.new
+inntekst = c['inntekst'][0]
+if inntekst then
+  uttekst = inntekst.rot13  # Fungerer ikke.
+end    
+%>
+  <b><%=inntekst%></b> rot 13 kryptert blir <b><%=uttekst%></b>.
+  <form><input type="text" name="inntekst">
+        <input type="submit" value="rot13"></form> 
+ </body>
+</html>
+## </CODE>

@@ -1,0 +1,497 @@
+<!doctype linuxdoc system>
+
+
+<article>
+
+
+<title>Ruby Web-Nuby - Intro til webapplikasjoner i Ruby.</title>
+<author>Kent Dahl <tt>&lt; kentda@pvv.org &gt</tt></author>
+<date>v0.41, Mars 26., 2003</date>
+
+<!-- påbegynner migrering mot en "anonym"  versjon for ruby.no distribusjon.
+  Må da fjerne litt PVV/NTNU-spesifikke greier.
+-->
+
+<abstract>En introduksjon til hvordan man skriver webapplikasjoner i Ruby.</abstract>
+
+<p><newline><newline>Copyright &copy; 2003 by Kent Dahl. Released under the <url url="http://opencontent.org/openpub/" name="Open Publication License v1.0">. 
+<newline>Distribution of substantively modified versions of this document is prohibited without the explicit permission of the copyright holder. Distribution of the work or derivative of the work in any standard (paper) book form is prohibited unless prior permission is obtained from the copyright holder.
+<newline><url url="http://www.ruby.no/prosjekt/RubyNuby.html" name="Electronic copy available">.
+
+
+
+<sect> Dagens agenda
+<p>Planen er å gå igjennom en del ymse emner som er aktuelle med hensyn på programmering av webapplikasjoner. Deretter følger forslag til noen oppgaver som gir dere får mulighet til å øve og benytte det som presenteres.
+
+<p><bf>Forutsetninger:</bf><newline>
+Det forutsettes kunnskap om programmering, HTML og databaser, samt litt kjennskap til Ruby.
+
+<p><bf>Notasjon:</bf><newline>
+Eksemplene vises med linjenummer, som <em>ikke</em> er en del av kildekoden.
+Det vil si, når det står
+<newline> <tt><bf>12| puts "Hello"</bf></tt> er det <tt><bf>puts "Hello"</bf></tt> som er kildekoden.
+<newline>
+Kodelinjer er ofte annotert med en kommentar, <tt><bf>#=></bf></tt>, som viser hva resultatet vil bli eller hva som vil skrives ut. For eksempel: <tt><bf>5 + 2 #=> 7</bf></tt>
+<!--
+<p>Men vi har mye å gå igjennom, så la oss få opp noe kode først som sist...
+-->
+
+<sect>CGI
+<p>Det å skrive CGI-skript (Common Gateway Interface)  i Ruby skiller seg ikke nevneverdig fra å skrive CGI-skript i andre språk. Skriv ut HTTP-hodelinjer (headers), hent inn CGI-variabler, generer HTML (eller noe annet interessant innhold) dynamisk og spyl det av gårde til klienten.
+
+<p><htmlurl url="code/cgi_hei.rb" name="SOURCE_CODE">
+
+<p>Øverste linje angir hvor Ruby-fortolkeren befinner seg på serveren. 
+<tt><bf>/usr/bin/ruby</bf></tt> er bare en vanlig plassering på noen Linux-varianter, når du innstallerer fra pakker. Prøv å skriv '<tt>which ruby</tt>' om du lurer på hvor fortolkeren er på den maskinen du er på nå.
+<!--
+<p>Grunnen til at vi sender "\r\n" og ikke bare "\n" er at vi antar at vi kjører på et UNIX-lignende operativsystem, hvor linjeskift (newline) er kun en byte, 10. "\r" setter inn retur-tegn (carriage return) eksplisitt, slik som HTTP (og Windows) vil ha det.
+-->
+<p>Men dette var ikke særlig spennende uten noen mulighet for å påvirke resultatet dynamisk...
+
+<sect1>Variabler
+<p>... så la oss lage en liten web-basert kalkulator.
+
+<p><htmlurl url="code/cgi_regne.rb" name="SOURCE_CODE">
+<!--
+<p>Det virker dog noe tungvint å skrive all denne HTML-koden for hånd...
+-->
+<sect1>HTML
+<p>CGI-biblioteket kan også hjelpe deg litt med å skrive HTML-koden.
+
+<p><htmlurl url="code/cgi_pent.rb" name="SOURCE_CODE">
+
+<p>Du slipper å huske hvilke element som skal avsluttes og i hvilken rekkefølge, men får noe som ligner litt for mye på Lisp.
+
+<!-- andre templating systemer, f.eks. amrita -->
+
+
+<sect1>Cookies
+<p>Cookies er en måte å lagre små datamengder på maskinen til brukeren som surfer inn på sidene våre, som vi kan hente ut igjen når de kommer tilbake en annen gang.
+
+<p><htmlurl url="code/cookies.rb" name="SOURCE_CODE">
+
+<!--<p>
+Cookies, kaker, trodde jeg før var en merkelig betegnelse for konseptet. Men så innså jeg at cookies, som de fysiske kakene, legger seg både her og der, og hvor den ene fyller livreima, fyller den andre harddisken din. Privatlivet påvirkes også. Alt for mye personlig informasjon er tilgjengelig i cookies. (Smulene i skjegget forteller dog bare noe om hygiene og kosthold.)
+-->
+<p>
+Cookies er et kjekt verktøy når man ikke har noen database å lagre i, dataene er små eller brukerne er overmåte allergisk mot innloggingsskjermer. Ellers er det kanskje en ide å lagre ting på serversiden og/eller i skjulte input-elementer. 
+
+<sect1>Sesjoner
+<p>Sesjoner er et overbygg over cookies, som lagrer en liten bit data i en cookie hos klienten, og (potensielt) et tonn med data på serveren. 
+
+<p><htmlurl url="code/sesjon.rb" name="SOURCE_CODE">
+
+<p>Da har vi iallfall fått lagret en god del mer på serversiden, og høyde, alder, øyenfarge, samt en million "theme"-innstillinger for webapplikasjonen vår må ikke sendes over nettet hver gang en side hentes. 
+
+
+<sect1>Ytelse
+<p>Til nå har vi bare kjørt disse CGI-skriptene på den trauste, trege måten. For hvert kall til sidene, må Ruby-fortolkeren startes opp og biblioteker lastes. Dette er ufattelig ineffektivt.
+<p>Vi trenger å ha minimum Ruby-fortolkeren, og helst også biblioteker, ferdig lastet og klare til dyst når en HTTP-forespørsel kommer inn. Det er flere muligheter,  blant annet: 
+<p><label id="webrammeverklisten">
+<url url="http://www.modruby.net"              name="mod_ruby">, 
+<url url="http://www.webrick.org/"  name="WEBrick">, 
+<url url="http://idanso.dyndns.org:8081/"       name="Radical">, 
+fastcgi, 
+<url url="http://sourceforge.net/projects/iowa" name="IOWA">, 
+<url url="http://www.segment7.net/ruby-code/borges/borges.html" name="Borges">,
+httpd, httpserv, wwwd, wwwsrv ... etc 
+
+<!--
+<itemize>
+<item><url url="http://www.modruby.net"              name="mod_ruby"></item>
+<item><url url="http://www.webrick.org/"  name="WEBrick"></item>
+<item><url url="http://idanso.dyndns.org:8081/"       name="Radical"></item>
+<item>fastcgi</item>
+<item><url url="http://sourceforge.net/projects/iowa" name="IOWA"></item>
+<item><url url="http://www.segment7.net/ruby-code/borges/borges.html" name="Borges"></item>
+<item>httpd, httpserv, wwwd, wwwsrv ... etc</item>
+</itemize>
+-->
+<!-- <item><url url="" name=""></item> -->
+
+<!--
+<p>... men vi skal i hovedsak se nærmere på mod_ruby som er integrering mellom Ruby og webserveren Apache.
+-->
+
+<sect>Ruby i Apache: mod_ruby
+<p>Ruby kan integreres i <url url="http://httpd.apache.org/" name="Apache-webserveren"> ved hjelp av <htmlurl url="http://www.modruby.net/" name="mod_ruby">. 
+Vi går ikke inn på konfigurering og installering, men fokuserer på den praktiske bruken av mod_ruby.
+
+<p>mod_ruby kan brukes til så mangt, da det egentlig bare:
+<itemize>
+<item>lenker Ruby-fortolkeren inn i Apache dynamisk</item>
+<item>slenger gitte HTTP-forespørsler til Ruby-fortolkeren</item>
+</itemize>
+
+<p> En vanlig bruk er å sette opp slik at Ruby CGI-skript kjøres i Ruby-fortolkeren som er inne i Apache-prosessen i stedet. I tillegg til at det går fortere, har man da også tilgang til deler av Apaches API.
+
+<p><htmlurl url="code/modruby1.rb" name="SOURCE_CODE">
+<p>(NB: Det er vanlig å bruke <tt>.rbx</tt>-prefikset når koden skal kjøres direkte i mod_ruby.)
+<!--
+Vel blir det kjappere, men å sitte å trykke refresh for på en side for å "se hvor rask den ble" er like moro som å se maling tørke.
+<p>  å kjøre dokumenter igjennom et filter som kjører innbakt kode og substituerer resultatet inn der hvor koden var før det sendes til nettleseren, slik som eruby.
+-->
+
+<!-- eruby eksempler:
+- RAA
+-->
+
+
+<sect1>Apache-prosesser og mod_ruby
+<p> For de som er kjent med Apache er dette kanskje en selvfølge, men det er viktig å innse at Apache-webserveren kjører flere prosesser som mottar og betjener HTTP-forespørslene til en webside.
+
+<figure loc="here">
+<eps file="apache1.eps" height="5cm">
+<img src="figures/apache1.png">
+<caption>Flere Apache-prosesser.
+</figure>
+
+<p> En påfølgende forespørsel fra en bruker vil ikke nødvendigvis havne hos samme prosess som den forrige forespørselen gjorde. Dermed kan vi ikke stole på at tilstanden vi forlot den interne <!--innbakt[e]?--> Ruby-fortolkeren i er den vi møter igjen. (Så tro ikke at globale variable kan brukes for å lagre tilstand mellom forespørsler.)
+
+<sect1>Ruby inni HTML: eruby
+<p>eruby står for Embedded Ruby og gjør slik at man kan programmere dynamiske websider i Ruby på samme måte som man gjør med f.eks. PHP, JSP eller ASP. "Embedded" betyr her "innbakt" i annen tekst.
+
+<p><htmlurl url="code/hei_eruby.rhtml" name="SOURCE_CODE">
+
+ <p>Det finnes andre alternativer for å generere HTML og lignende fra templater, f.eks. <htmlurl url="http://www.brain-tokyo.jp/research/amrita/" name="Amrita">, som tilbyr noe 'renere' separering av HTML og Ruby-kode.
+
+
+<sect1>Anonyme moduler i eruby
+<p>Dersom du bare skal kjøre en webapplikasjon på en webserver, trenger du ikke bekymre deg om forsøpling av navnerommene til fortolker-instansene i Apache-prosessene. Du kan bare passe på selv at du ikke roter til og lager to metoder med samme navn som gjør litt forskjellige ting. (Lykke til på sinnssykehuset.)
+
+<p>Skal man derimot ha flere webapplikasjoner, er det ønskelig at man beskyttes litt mot navneforurensing. Alle fortolker-instansene deles jo mellom alle webapplikasjoner som kjøres. Derfor utfører eruby koden som skal kjøres for en dynamisk generert HTML-side innpakket i en anonym modul.
+
+<p>Følgende kode fungerer derfor ikke:
+
+<p><htmlurl url="code/eruby_anonym.rhtml" name="SOURCE_CODE">
+
+<p>Ruby er selvsagt dynamisk nok til å komme seg rundt slike stengsler...
+
+<p><htmlurl url="code/eruby_rot13.rhtml" name="SOURCE_CODE">
+
+<p>...men dette vil påvirke alle prosesser som noensinne kjører skriptet, og den forrige ikke-fungerende versjonen vil enten feile eller fungere alt etter hvilken tilstand prosessen som blir valgt ut til å håndtere forespørselen er i.
+
+<!--
+<p>(Så, det er en dårlig ide å påvirke den varige tilstanden til fortolker-instansene. Hva kan vi da gjøre? Vi kan legge til en RubyRequire i httpd.conf, slik at alle felles endringer er samlet et sted.)
+-->
+
+
+<sect>Sikkerhet
+<p>CGI-skript og webapplikasjoner har sitt grensesnitt ut mot hele verden; en samling som ikke nødvendigvis er like tillitsverdig. Ansvaret er ene og alene vårt for å gjøre våre programmer motstandsdyktige mot angrep, men Ruby tilbyr noen hjelpemidler.
+
+<sect1>Tainting - besudlede data
+<p>En av de store sikkerhetsfarene er eksterne data: Alt av informasjon som kommer fra brukeren kan potensielt være livsfarlig, skrevet med bare den hensikt å ødelegge dagen din.
+<p>Ruby tilbyr en mekanisme som merker alle data fra eksterne kilder: <tt><bf>tainting</bf></tt>. Det antyder hvorvidt data er "besudlet" eller "smittebærende", slik at du ikke kan stole på dem lenger enn du kan kaste dem.
+
+<p><htmlurl url="code/taint1.rb" name="SOURCE_CODE">
+
+<p>Dette fungerer dog kun som øremerking og har lite innvirkning før det settes i en sammenheng hvor statusen tas hensyn til. Vi skrur opp paranoiaen et hakk og går til DefCon-1...
+
+
+<sect1>$SAFE-nivåer
+
+<p>I Ruby finnes det en spesiell variabel <tt><bf>$SAFE</bf></tt> som angir sikkerhetsnivået. I Ruby versjonene 1.6.* går verdien fra 0 til og med 4. (Se i <url url="http://www.rubycentral.com/book/taint.html" name="Programming Ruby"> kapittelet om <htmlurl url="http://www.ruby.no/prosjekt/ProgrammeringIRuby/taint.html" name="nedlåsing av Ruby"> for detaljer.)
+
+<p>Vanlige Ruby programmer kjører normalt med <tt><bf>$SAFE==0</bf></tt> og eruby skript med <tt><bf>$SAFE==1</bf></tt> per default, men det kan stilles på i konfigurasjonen. Man kan øke sikkerhetsnivået, men aldri senke det. 
+
+<p><htmlurl url="code/safe1.rb" name="SOURCE_CODE">
+
+<p>Men hva gjør vi med en besudlet <tt>String</tt> da? For <tt><bf>$SAFE</bf></tt>-nivåer under 3, kan man gjøre litt "vasking" av dataene og så kalle <tt><bf>untaint</bf></tt>. For nivå 3 og oppover går det derimot ikke å kalle <tt><bf>untaint</bf></tt> på objekter.
+
+<sect>Databaser
+<p>Det finnes en bråte av Ruby-bindinger til mange forskjellige databaser. Man kan  bruke disse for å koble seg direkte til databasen og ha full tilgang til alle dens særegenheter. 
+<p>
+For eksempel kan man benytte <url url="http://www.tmtm.org/en/mysql/" name="MySQL-bindingene direkte">. (En liten <url url="http://www.rubywizard.net/ruby-mysql.html" name="innføring til Ruby og MySQL">)
+
+<!-- <p>
+http://www.tmtm.org/en/mysql/             MySQL
+http://www.rubywizard.net/ruby-mysql.html 
+-->
+
+<sect1>Databasegrensesnitt: dbi
+<p>Men det gjør også at man knytter seg mer fast til typen database som brukes, så det kan være lurt å generalisere litt. Biblioteket <tt><bf><url url="http://ruby-dbi.sourceforge.net/" name="dbi"></bf></tt> er et overbygg som gir et mer generelt grensesnitt til mange databaser i Ruby. Du må fremdeles installere de databasespesifikke bindingene, men i koden du skriver trenger du ikke knytte deg unødig tett til databasetypen.
+
+<p><htmlurl url="code/dbi_select1.rb" name="SOURCE_CODE">
+
+
+<p>Legg merke til at vi her angir blokker til metodekallene. Dette gjør at vi slipper å huske på å slippe ressursene løs selv; det skjer automatisk når blokken er ferdig utført.
+
+<p> Når man skal gi argumenter inn i SQL uttrykkene, kan man bruke 
+strenginterpolering eller addere strenger selv. Men stedfortreder-argumenter, som brukt over, er å foretrekke, da det både er ryddigere, bruker mindre minne og lar biblioteket gjøre argument-escaping for deg.
+
+
+
+<sect2>SQL insert 
+<p>Select-metodene er enkle å bruke, men man har ofte litt større behov, 
+så som å skrive til databasen. 
+<p><htmlurl url="code/dbi_insert1.rb" name="SOURCE_CODE">
+
+
+<!--
+PostgreSQL - plruby - pgconngroup
+-->
+
+<sect>Annet
+<p>Til nå har vi fort tatt for oss det nødvendigste, og man kan forsåvidt løpe ut og skrive noen webapplikasjoner nå. Men HTML og en database utgjør ikke det mest spennende i verden, så la oss titte dypere ned i verktøykassa.
+
+<sect1>E-post
+<p>Hva er vel en webapplikasjon som ikke kan spamme brukerne sine?
+
+<p><htmlurl url="code/epost1.rb" name="SOURCE_CODE">
+
+<!--<p>
+Koblingen avsluttes automatisk etter at blokken er kjørt
+dersom man angir en block til Net::SMTP.start kallet. -->
+<p>Vi angir mottakerne med en <tt>Array</tt>, slik at vi kan sende en e-post til flere om gangen. I dette tilfellet kunne vi sendt en <tt>String</tt> direkte, siden det bare var en.
+
+
+<p>Dersom man skal skrive en stor e-post og ikke ønsker å bruke så mye minne 
+på å bygge den opp i en <tt>String</tt> eller <tt>Array</tt> før man sender, 
+kan man benytte 
+instansmetoden <tt><bf><htmlurl url="http://www.ruby.no/prosjekt/ProgrammeringIRuby/lib_network.html#class_Net::SMTP" name="Net::SMTP#ready"></bf></tt> etter
+ å ha startet koblingen. Den tar en blokk med et argument, 
+et adapter-objekt som du kan skrive til fortløpende.
+<!--
+<p><htmlurl url="code/epost2.rb" name="SOURCE_CODE">
+
+<p>Dette er perfekt for å sikre god ytelse når man skal sende en stor e-post med mange dynamisk genererte biter, slik som f.eks. e-post med HTML... (Hei, hva skal du med det balltreet?)
+-->
+
+
+
+
+<sect1>Tråder
+<p> Ruby har et lett lite trådsystem internt. Det kjører fullstendig inne i fortolkeren, benytter ikke plattformspesifikke tråder, kan ikke dra nytte av flere CPUer og dersom en tråd kaller en C-metode som blokker, kan det sulte ut alle de andre trådene også. Men dersom mye av prosesseringen du gjør skjer i Ruby, er de veldig nyttige.
+
+<p><htmlurl url="code/traad1.rb" name="SOURCE_CODE">
+<p> Merk at når hovedtråden (main) avslutter, drepes alle andre tråder. Man må kalle <tt><bf>join</bf></tt> eller lignende på trådene om man ønsker å vente på dem.
+<p>Ønsker man å returnere en verdi fra en tråd, kan man kalle <tt><bf>value</bf></tt> i stedet for <tt><bf>join</bf></tt>.
+
+<p><htmlurl url="code/traad2.rb" name="SOURCE_CODE">
+
+<p>NB: Unntak som heves i tråder vil svinne hen i stillhet, med mindre vi eksplisitt venter på at tråden skal avslutte, eller <tt><bf>Thread.abort_on_exception</bf></tt> er satt til <tt>true</tt>.
+
+<sect2>Tråder som sandkasser
+<p>Tråder kan også brukes som sikre(re?) sandkasser. Husker du <tt><bf>$SAFE</bf></tt>-variabelen fra tidligere? Den er ikke en global variabel, men en tråd-lokal variabel. Hver tråd har sitt eget sikkerhetsnivå, og det kan vi benytte oss av for å kjøre "skumle" kodebiter i en noe tryggere "sandkasse".
+
+<p><htmlurl url="code/traad_sandkasse1.rb" name="SOURCE_CODE">
+
+<sect2>Synkronisering av tråder
+<p>Med trådene følger det en håndfull verktøy for synkronisering av tråder; 
+<tt><bf>Thread.critical=</bf>, </tt><tt><bf>Mutex</bf></tt> og <tt><bf>ConditionVariable</bf></tt>.
+<p><htmlurl url="code/traad_mutex1.rb" name="SOURCE_CODE">
+<p>Det er flere synkroniseringsverktøy tilgjengelig, slik 
+som <tt><bf>Queue</bf></tt>, <tt><bf>SizedQueue</bf></tt>,
+<tt><bf>Synchronizer</bf></tt> og <tt><bf>Monitor</bf></tt> for
+å nevne noen.
+
+
+<sect1>Distribuert Ruby - druby
+
+<p><url url="http://www2a.biglobe.ne.jp/&tilde;seki/ruby/druby.en.html" name="Distribuert Ruby"> (druby a.k.a. DRb) lar oss kommunisere og samhandle enkelt med andre Ruby-programmer over nettet, ikke ulikt RMI, 
+CORBA (<url url="http://sourceforge.net/projects/rinn/" name="rinn">) eller
+XML-RPC (<url url="http://www.fantasy-coders.de/ruby/xmlrpc4r/index.html" name="xmlrpc4r">) og lignende.
+
+<p>Et lite eksempel hvor vi deler ut et tjenerobjekt over nettet. Serveren:
+
+<p><htmlurl url="code/drb_server.rb" name="SOURCE_CODE">
+<p>... hvor vi må vente på at druby sin tråd skal avslutte, slik at serveren ikke stopper med en gang. 
+<newline>Dernest kobler vi oss opp med en klient:
+
+<p><htmlurl url="code/drb_klient.rb" name="SOURCE_CODE">
+<p>Merk at vi angir <tt>nil</tt> som første argument til <tt>DRbObject</tt>-konstruktøren, siden vi ikke har et ordentlig objekt på "vår" side.
+
+<sect2>Verdioverføring og referanseoverføring
+<p>Oversending av parametre og returnverdier i distribuerte systemer deles i to hovedkategorier: verdioverføring (pass-by-value) og referanseoverføring (pass-by-reference). 
+<p>Standard i druby er at objekter sendes ved verdioverføring. Objektene serialiseres (se <tt><htmlurl url="http://www.ruby.no/prosjekt/ProgrammeringIRuby/ospace.html#S6" name="Marshal"></tt>-modulen), sendes over nettet og en kopi opprettes på mottakerens side. Dersom objektet ikke kan serialiseres/marshalles, fanges unntaket og det sendes over en referanse. Mottakeren ender da opp med en <tt>DRbObject</tt>-instans som videresender metodekall over nettet.
+<p>
+<figure loc="here">
+<eps file="druby1.eps" height="4.8cm">
+<img src="figures/druby1.png">
+<caption>druby og videospiller/tvslave-eksemplet
+</figure>
+<newline>
+<p> <newline> 
+
+<p><htmlurl url="code/drb_videospiller.rb" name="SOURCE_CODE">
+<!--Da har vi fått opp et litt søkt eksempel, hvor vi så går inn på "soverommet" og manipulerer videospilleren "i stua" på avstand. 
+-->
+<p> <newline> 
+<newline>
+
+<p><htmlurl url="code/drb_tvslave.rb" name="SOURCE_CODE">
+<!--
+<p><htmlurl url="code/drb_undumped.rb" name="SOURCE_CODE">
+-->
+<!-- <p>[... druby og threading..] -->
+
+
+<sect2>Apache-prosesser og druby-server
+<p>Dette kan benyttes for å flytte logikk i fra Apache-prosessene og over i en samlet druby-prosess. 
+<p>
+<figure loc="here">
+<eps file="distribuert1.eps" height="4cm">
+<img src="figures/distribuert1.png">
+<caption>Arkitektur hvor logikken separeres fra mod_ruby-prosessene.
+</figure>
+<p>
+<!--
+<p>Hmm, er ikke dette en 3-tier arkitektur da?
+<p>Noen av de andre rammeverkene for webapplikasjoner som finnes i Ruby (deriblant IOWA) benytter seg av en lignende arkitektur.
+-->
+
+<sect>Videre
+<p>Dette har vært en kjapp gjennomgang av noen verktøy for 
+webprogrammering i Ruby. På 
+RAA (<url url="http://raa.ruby-lang.org/" name="Ruby Application Archive">) 
+finner du flere biblioteker som kan hjelpe deg. Noen av disse er allerede 
+nevnt i <ref id="webrammeverklisten" name="webrammeverklisten">, men det er mange, og de har ofte 
+litt sære navn. 
+<p>Dersom du gjør mye CGI  kan det være en ide å titte på <url url="http://narf-lib.sourceforge.net/doc/" name="narf">, et alternativ til standard CGI-biblioteket.
+<p>Går det mye i HTML, kan det være ønskelig å ha en ryddigere separering av HTML-filer og Ruby-kode. <url url="http://www.brain-tokyo.jp/research/amrita/" name="Amrita"> har blitt nevnt og er et av de mer populære templatingsverktøyene.
+<p>Har du ingen webserver å kjøre på eller vil skrive din egen? Ta da en titt på <htmlurl url="http://www.webrick.org/"  name="WEBrick">.
+<p>Ønsker du enkle og ryddige webapplikasjonsrammeverk som lar deg både utvikle og prototype raskt?  Titt nærmere på 
+<htmlurl url="http://idanso.dyndns.org:8081/"       name="Radical">, 
+<htmlurl url="http://www.segment7.net/ruby-code/borges/borges.html" name="Borges"> eller
+<htmlurl url="http://sourceforge.net/projects/iowa" name="IOWA">.
+
+ 
+<!--<p>Hal Fulton sin bok "The Ruby Way" går litt dypere inn på webprogrammering (og andre emner) enn Thomas og Hunt sin "Programming Ruby".
+-->
+
+<p> Sist, men ikke minst: Ikke få panikk om du googler og får opp japanske sider. Ruby-koden pleier å være lesbar nok til å gi en løsning på problemet, om ikke annet så iallefall i kombinasjon med det Babelfish spyr ut. 
+
+<!--
+
+<sect>Ressurser
+<p>
+
+http://www.rubydoc.org/book/
+
+
+-->
+
+
+
+
+<sect>Øvingsoppgave
+<p>Her følger et forslag til øvingsoppgave for å få prøvd ut det vi har gått igjennom så langt.
+
+<p>Oppgaven går i korte trekk ut på å lage et web-basert system i Ruby hvor studenter kan registrere seg på forskjellige kurs og presentasjoner, slik som dette.
+
+
+<sect1>Oppgave 1)
+<p>Implementer følgende krav til systemet i Ruby.
+<enum>
+  <item>Brukere kan logge inn med et brukernavn og passord. (Ikke stud-passordet!)
+  <item>Brukere som logger inn vises en oversikt over:
+    <enum>
+       <item>Kurs de er påmeldt, som holdes i dag eller i fremtiden.
+       <item>Kurs som er tilgjengelig for oppmelding og som holdes innen de neste 30 dagene.
+       <item>Nyheter i kurs de er påmeldt.
+  </enum>
+</enum>
+
+
+<p>Ta en titt på <ref id="databaseskjema ER-diagram" name="ER-diagrammet"> for en oversikt. 
+<p>SQL koden m.m. er å finne elektronisk via <url url="http://www.ruby.no/prosjekt/RubyNuby.html" name="Ruby Web-Nuby siden">. 
+
+
+
+<sect1>Oppgave 2)
+<p>
+Utvid systemet med følgende krav. Vel innlogget skal brukere kunne:
+<enum>
+<item>Registrere seg på kurs som vises i oversikten.
+<item>Avregistrere seg på kurs de er påmeldt på.
+<item>Logge ut.
+</enum>
+
+<!--
+<p>Da disse og senere krav krever skrivetilgang, må dere ha en egen MySQL-database. Dere kan enten sette opp selv, eller få hjelp til dette. Dersom dere setter opp selv, kan dere gjerne endre databaseskjemaet hvis dere syntes designet er uhensiktsmessig, men det kan da bli litt vanskeligere å få hjelp.
+
+-->
+
+
+
+
+
+<sect1>Oppgave 3)
+<p>
+Utvid systemet med følgende krav:
+<enum>
+<item>Nye brukere kan opprettes forutsatt at brukernavnet ikke allerede er tatt.
+<item>Ved opprettelse av ny bruker genereres et tilfeldig passord som sendes på e-post til den nye brukeren for å bekrefte identiteten.
+</enum>
+<p>
+Dette krever mulighet for å sende e-post. Titt på dokumentasjonen til 
+<htmlurl name="Net::SMTP"  url="http://www.ruby.no/prosjekt/ProgrammeringIRuby/lib_network.html#class_Net::SMTP">.
+ (Bruk deres egne e-post adresser til testing.)
+
+
+
+
+
+
+
+<sect1>Oppgave 4)
+<p>Enda mer featuritis. Administratorer skal kunne:
+<enum>
+<item>Endre passord på andre brukere.
+<item>Legge til kurs
+</enum>
+Administratorer og kursholdere skal kunne:
+<enum>
+<item>Legge inn nyheter på kurs. 
+<item>Angi en viktighetsgrad på nyheten. (Høy/Lav)
+<item>Dersom viktighetsgraden er høy, skal systemet sende nyheten på e-post til alle som er påmeldt. (Pass på å bare sende til dere selv når dere tester! Ingen spamming takk!)
+</enum>
+<p>Siden det kan være mange som skal ha nyheten på e-post, ønsker ikke administratoren/kursholderen å vente til alle e-poster er sendt før han kan trykke videre i systemet. 
+<!--
+Hint: Metodene <tt>Apache::sync</tt> og <tt>Apache::sync=</tt>
+-->
+
+
+
+<sect1>Oppgave 5)
+<p>
+Tenkt scenario: 
+Programvareverkstedet ønsker å ta i bruk det fine systemet ditt, 
+men er ikke like begeistret for databaseavhengigheten. PVV bruker allerede <url url="http://www.adict.net/" name="ADiCT"> og ønsker
+å integrere systemet ditt opp mot ADiCT gradvis.
+
+<p>Første oppgave kan da deles opp slik:
+<enum>
+<item>Separer databaselogikken fra koden som lager HTML-sidene.
+<item>Lag et overordnet objekt som gir tilgang til, og innkapsler, databaselogikken.
+<item>Flytt databaselogikken over i en egen prosess og kommuniser mellom mod_ruby/CGI-skript-prosessene og denne ene prosessen via druby.
+</enum>
+
+
+
+
+
+<sect>Vedlegg
+<sect1>Databaseskjema til oppgave<label id="databaseskjema ER-diagram">
+<p>
+<figure loc="here">
+<eps file="databaseskjema.eps" height="6cm">
+<img src="figures/databaseskjema.png">
+<caption>Oversiktsdiagram over den enkle testdatabasen.
+</figure>
+<p>SQL koden m.m. er å finne elektronisk via <url url="http://www.ruby.no/prosjekt/RubyNuby.html" name="Ruby Web-Nuby siden">. 
+
+
+<!--
+<sect1>PVV oppsett detaljer. 
+<p>(Hvordan benytte mod_ruby m.m.?)
+
+<p>MySQL-databasen på PVV er på <tt>mysql</tt>-maskinen (a.k.a. <tt>verden</tt>). 
+-->
+
+
+<!-- <tt><bf></bf></tt> -->
+
+
+
+</article>

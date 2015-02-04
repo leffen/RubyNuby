@@ -1,0 +1,25 @@
+## <CODE>
+<% require 'cgi'
+require 'cgi/session'
+c = CGI.new('html4')
+sesjon = CGI::Session.new( c, 
+  'session_key' => 'rubywebnuby2',
+  'prefix' => 'ruby_sesjon.')
+
+# Hent ut antall besøk fra sesjonen
+antall_tekst = sesjon['AntallBesok']
+antall_besok = (antall_tekst ? antall_tekst.to_i+1 : 0)
+
+# Sett det nye antallet tilbake i sesjonen
+sesjon['AntallBesok'] = antall_besok
+
+cgi.header   # Print ut headerne slik at sesjonens cookie kommer med.
+sesjon.close # Viktig i modruby!!!
+
+%>
+<html>
+  <body>
+    Du har vært her <%= antall_besok %> ganger før.
+  </body>
+</html>
+## </CODE>

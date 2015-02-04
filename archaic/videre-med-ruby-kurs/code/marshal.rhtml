@@ -1,0 +1,49 @@
+## <CODE>
+<html><body>
+<%
+require 'cgi'
+cgi = CGI.new
+
+Person = Struct.new('Person', :fornavn, :etternavn, :alder)
+
+fornavn   = cgi['fornavn'][0]
+etternavn = cgi['etternavn'][0]
+alder     = cgi['alder'][0]
+
+# Får vi parametre, så setter vi cookien.
+if fornavn and etternavn and alder
+  person = Person.new( fornavn, etternavn, alder )
+
+  dumped = Marshal.dump( person )
+  cookie = CGI::Cookie.new('rubyperson',    # Kakenavn.
+        dumped #    Marshal.dump( person )
+  )
+  Apache::request.headers_out.add('Set-Cookie', cookie.to_s)
+else
+  # Hvis ikke så henter vi den.
+  cookie = cgi.cookies['rubyperson']
+  begin
+    dumped = cookie[0].to_s
+    person = Marshal.load( dumped )  
+  rescue Exception => e
+    # Default verdier...
+    person = Person.new('Ola', 'Nordmann', '0')
+  end
+end
+
+%>
+  Hei, <%= person.fornavn %> <%= person.etternavn %>, 
+  er ikke du <%= person.alder %> år gammel?
+  <hr>
+  <form>
+        Fornavn: <input type='text' name='fornavn' 
+                value='<%= person.fornavn%>'>  <br>
+        Etternavn: <input type='text' name='etternavn'
+                value='<%= person.etternavn %>'>  <br>
+        Alder: <input type='text' name='alder'
+                value='<%= person.alder %>'>  <br>
+             <input type='submit' value='Lagre nytt'>               
+  </form>       
+<pre><%= CGI.escape(dumped) %></pre>
+</html>
+## </CODE>

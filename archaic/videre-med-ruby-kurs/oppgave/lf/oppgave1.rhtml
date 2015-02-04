@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<%
+require 'database1.rb'
+
+cgi = CGI.new
+brukernavn = cgi['brukernavn'][0]
+passord    = cgi['passord'][0]
+logg_inn = brukernavn && passord && 
+  brukernavn.size.nonzero? && passord.size.nonzero?
+
+if not logg_inn then
+%>
+  <head><title>Logg inn</title></head>
+  <body>
+    <form>
+    <p>Brukernavn: <input type='text'     name='brukernavn'>
+    <p>Passord:    <input type='password' name='passord'>
+    <p><input type='submit' value='Logg inn'>
+    </form>
+  </body>
+</html>
+
+<% 
+else 
+
+  db = Database.new
+  # Sjekk opp passordet for å finne brukeren.
+  bruker = db.logg_inn( brukernavn, passord )
+  
+  # Logget inn rett?
+  if bruker then
+    # Generell velkomst
+%>
+  <head><title>Velkommen <%= bruker['fornavn'] %></title></head>
+  <body>
+    <h1>Kurskalender</h1>
+    <p>Velkommen <%= bruker['fornavn'] %> <%= bruker['etternavn'] %>
+<%
+    # Er vedkommende påmeldt på noen kurs?
+    kursliste = db.hent_kurs( bruker )
+    if not kursliste.empty? then
+%>
+    <h2>Kurs du er påmeldt:</h2><ul>
+<%
+      kursliste.each{|kurs|
+%>
+        <li><b><%= kurs['tittel'] %></b>
+         - <%= kurs['beskrivelse'] %>
+         - holdes <%= kurs['dato'] %>
+
+<%
+        # Er det noen nyheter på dette kurset?
+        nyheter = db.hent_nyheter kurs
+        if not nyheter.empty? then
+%>
+         <ul>
+<%
+          nyheter.each{|nyhet|
+%>
+            <li><b><%= nyhet['tittel'] %></b>
+             - <%= nyhet['innhold'] %>
+            </li>
+<%
+          }
+%>
+          </ul>
+<%
+        end
+%>
+
+        </li>
+<%
+      }
+%>
+      </ul>
+<%
+    end
+    paameldtekurs = kursliste.collect{|kurs| kurs['kursid']}
+
+    # Hvilke kurs er tilgjengelig for påmelding?
+    kursliste = db.hent_alle_kurs
+ 
+    # Fjern de som allerede er påmeldt (og nevnt over)
+    kursliste = kursliste.delete_if{|kurs| 
+      paameldtekurs.include? kurs['kursid']
+    }
+
+    if not kursliste.empty? then
+%>
+       <h2>Kurs som holdes den neste måneden:</h2><ul>
+<%
+       kursliste.each{|kurs|
+%>
+        <li><b><%= kurs['tittel'] %></b>
+         - <%= kurs['beskrivelse'] %>
+         - holdes <%= kurs['dato'] %></li>
+<%
+      }
+%>
+     </ul>
+<%
+    end
+%>
+    </body>
+<%
+  else
+    # Ingen gydlig bruker. Skriv ut feilmelding
+%>
+    <head><title>Feil brukernavn eller passord!</title></head>
+    <body><p>Feil brukernavn eller passord!
+
+    <form>
+    <p>Brukernavn: <input type='text'     name='brukernavn'>
+    <p>Passord:    <input type='password' name='passord'>
+    <p><input type='submit' value='Logg inn'>
+    </form>
+  </body>
+
+<%
+  end
+
+  db.lukk # Lukk ned databasekoblingen. 
+
+end
+%>
+
+
+
+
