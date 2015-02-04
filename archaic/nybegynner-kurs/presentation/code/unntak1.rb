@@ -1,19 +1,17 @@
-## <CODE>
 $livvakter = true
 
 def hent_kongen
   if $livvakter
     puts "Kanskje kommer Kongen..."
   else
-    raise SecurityError, "Redd for bløtekake."
+    raise SecurityError, "Redd for blÃ¸tekake."
   end
 end
 
 begin
   hent_kongen #=> "Kanskje kommer Kongen..."
   $livvakter = false
-  hent_kongen #=> "Niks: Redd for bløtekake."
+  hent_kongen #=> "Niks: Redd for blÃ¸tekake."
 rescue SecurityError => error
   puts "Niks: #{error}"
 end
-## </CODE>

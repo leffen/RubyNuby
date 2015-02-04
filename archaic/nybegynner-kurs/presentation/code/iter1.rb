@@ -1,8 +1,7 @@
-## <CODE>
-# La oss skrive ut 3-gange-tabellen
-tall = 3
+# La oss skrive ut 7-gange-tabellen
+tall = 7
 
-# Ruby har for-løkker som de fleste språk
+# Ruby har for-lÃ¸kker som de fleste sprÃ¥k
 for i in (1..10)
   puts "#{i} gange #{tall} er #{i*tall}"
 end
@@ -10,10 +9,9 @@ end
 # 5-gange-tabellen
 tall = 5
 
-# men for-løkkens dager er talte. 
-# for-løkken over er syntaktisk sukker for
-# følgende bruk av iterator-metoden each.
+# men for-lÃ¸kkens dager er talte. 
+# for-lÃ¸kken over er syntaktisk sukker for
+# fÃ¸lgende bruk av iterator-metoden each.
 (1..10).each do |i|
   puts "#{i} gange #{tall} er #{i*tall}"
 end  
-## </CODE>

@@ -1,6 +1,5 @@
-## <CODE>
 # Tekst kan skrives ut
-navn = 'Kent'
+navn = 'Finn'
 puts 'Jeg heter ' + navn
 
 # Liker du ikke puts?
@@ -10,10 +9,10 @@ print "Jeg heter " + navn + ".\n"
 printf "Jeg heter %s!\n", navn
 
 # Forelska i C++?
-STDOUT << "Dahl... " << 
-  navn << " Dahl.\n"
+STDOUT << "Ikke Bjarne... " <<
+  "Ikke Jan-Thomas... " <<
+  "Jeg heter " << navn << "!!!\n"
 
 # Tekst-streng interpolering.
 puts "Jeg heter fremdeles #{navn}"
-puts "Jeg blir #{2003-1978} år i år"
-## </CODE>
+puts "Jeg blir #{Time.now.year-1978} Ã¥r i Ã¥r"

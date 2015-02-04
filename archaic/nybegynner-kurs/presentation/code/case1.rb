@@ -1,16 +1,14 @@
-## <CODE>
 print "Er du gutt eller jente?: "
 svar = gets.downcase.chomp
 
-# case er også kjent som switch/case i andre språk
+# case er ogsÃ¥ kjent som switch/case i andre sprÃ¥k
 case svar
-when "intetkjønn" 
-  puts "Hei!"
-when "jente", "kvinne", "dame"
-  puts "Heisann søta!"
-when "gutt", "mann", "herre"
-  puts "Heisann kjekken!"
-else 
-  puts "God dag herr/fru?"
-end
-## </CODE>
+  when "intetkjÃ¸nn"
+    puts "Hei!"
+  when "jente", "kvinne", "dame"
+    puts "Heisann sÃ¸ta!"
+  when "gutt", "mann", "herre"
+    puts "Heisann kjekken!"
+  else 
+    puts "God dag herr/fru?"
+  end

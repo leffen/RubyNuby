@@ -1,9 +1,8 @@
-## <CODE>
 # En enkel klasse. 
-# Klassenavn må begynne med stor bokstav.
+# Klassenavn mÃ¥ begynne med stor bokstav.
 class Person
   # Person.new videresender argumentene til initialize
-  def initialize( etternavn, fornavn, alder = 0 )
+  def initialize(etternavn, fornavn, alder = 0)
     # attributter prefikses med @
     @etternavn  = etternavn
     @fornavn    = fornavn
@@ -12,12 +11,11 @@ class Person
   
   # en vanlig instansmetode
   def to_s
-    "#{@fornavn} #{@etternavn} er #{@alder} år."
+    "#{@fornavn} #{@etternavn} er #{@alder} Ã¥r."
   end
 end
 
-if __FILE__ == $0 # Kun når vi kjører denne filen:
+if __FILE__ == $0 # Kun nÃ¥r vi kjÃ¸rer denne filen:
   p = Person.new("Nordmann", "Ola", 23) 
-  puts p #=> "Ola Nordmann er 23 år."
+  puts p #=> "Ola Nordmann er 23 Ã¥r."
 end
-## </CODE>

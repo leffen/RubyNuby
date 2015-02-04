@@ -1,4 +1,3 @@
-## <CODE>
 # String objekter kan instansieres
 navn = String.new("Ruby") # veldig eksplisit, eller
 navn = "Ruby"             # implisitt
@@ -19,17 +18,3 @@ puts fullt_navn #=> "Nordmann, Ola"
 #...inspiseres...
 "TEAMWORK".include?("I")  #=> false
 "Kulturuke".index("tur")  #=> 3 
-## </CODE>
-
-
-
-
-
-
-
-
-
-
-
-
-

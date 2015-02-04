@@ -1,4 +1,3 @@
-## <CODE>
 # En enkel, naiv iterator metode.
 def tell_fingre
   yield "Tommel"
@@ -11,8 +10,7 @@ end
 # Blocken har tilgang til lokale variabler.
 postfix = "finger..."
 
-# Vi sender med en block når vi kaller iterator-metoden.
+# Vi sender med en block nÃ¥r vi kaller iterator-metoden.
 tell_fingre do |finger|
   puts finger + postfix
 end
-## </CODE>

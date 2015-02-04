@@ -1,4 +1,3 @@
-## <CODE>
 # Ett klassisk eksempel
 class Verden             # Definer en klasse...
   def si_hei             # med en metode...
@@ -7,5 +6,4 @@ class Verden             # Definer en klasse...
 end
 
 verden = Verden.new      # Lag en instans av klassen.
-verden.si_hei            # Kall en metode på objektet.
-## </CODE>
+verden.si_hei            # Kall en metode pÃ¥ objektet.
