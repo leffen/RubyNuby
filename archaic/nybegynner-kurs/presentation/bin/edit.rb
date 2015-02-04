@@ -9,10 +9,10 @@ module LineSubstituter
     File.open( infile, "r" ) do 
       |cin|
       File.open( outfile, "w") do 
-	|cout|	
-	cin.readlines.each{|line|
-	  cout.puts yield line
-	}	
+  |cout|  
+  cin.readlines.each{|line|
+    cout.puts yield line
+  } 
       end
     end    
         
@@ -22,12 +22,12 @@ end
 
 module UmlautSub
   UMLAUTS = { 
-	'æ' => '&aelig;', #'&#230;',
-	'Æ' => '&AElig;', #'&#198;',
-	'ø' => '&oslash;',
-	'Ø' => '&Oslash;',
-	'å' => '&aring;',
-	'Å' => '&Aring;'
+  'Ã¦' => '&aelig;', #'&#230;',
+  'Ã†' => '&AElig;', #'&#198;',
+  'Ã¸' => '&oslash;',
+  'Ã˜' => '&Oslash;',
+  'Ã¥' => '&aring;',
+  'Ã…' => '&Aring;'
 }
 
   def UmlautSub.sgml( input )
@@ -36,7 +36,7 @@ module UmlautSub
       #puts umlaut, sgmlentity
       output.gsub!(umlaut, sgmlentity )
     }
-    output	         
+    output           
   end
 end # UmlautSub
 
@@ -70,21 +70,21 @@ module Commands
     end
     def run
       LineSubstituter.substitute( @infile, @outfile ){|line|
-	line.gsub(/<sect[0-9]*>/){|m| 
+  line.gsub(/<sect[0-9]*>/){|m| 
           sectiontype = (m.to_s[5..-1]).to_i
-	  
-	  if @section.size <= sectiontype
-	    @section << 0
-	  end
+    
+    if @section.size <= sectiontype
+      @section << 0
+    end
 
-	  @section = @section[0..sectiontype]
-	  @section[sectiontype]+=1
+    @section = @section[0..sectiontype]
+    @section[sectiontype]+=1
 
-	  
+    
 
-	  "<sect> &lt;#{@section.join('.')}&gt;:  "
+    "<sect> &lt;#{@section.join('.')}&gt;:  "
         }
-      }	
+      } 
     end # run
   end # Flatten
   
@@ -101,17 +101,17 @@ module Commands
     end
     def run
       @argv.each do |f|
-	File.open(f,"r") do |infile| 
-	File.open(f+".html","w") do |out|	
-	    puts f
-	    @current = f
-	    IO.popen("ruby bin/rb2html.rb","w+") do |html|
-	      feed( html, infile )
-	      html.close_write
-	      consume( html, out )
-	    end
-	  end
-	end
+  File.open(f,"r") do |infile| 
+  File.open(f+".html","w") do |out| 
+      puts f
+      @current = f
+      IO.popen("ruby bin/rb2html.rb","w+") do |html|
+        feed( html, infile )
+        html.close_write
+        consume( html, out )
+      end
+    end
+  end
       end    
     end
   
@@ -119,26 +119,26 @@ module Commands
     def feed( html, infile )
       ignore = true
       infile.readlines.each{|line|
-	if line.index "</CODE>" then ignore = true end
-	if !ignore then html << line end
-	if line.index "<CODE>" then ignore = false end
+  if line.index "</CODE>" then ignore = true end
+  if !ignore then html << line end
+  if line.index "<CODE>" then ignore = false end
       }
     end
     
     def consume( html, out )
       ignore = true
       html.readlines.each{|line|
-	line.gsub!("stdin"){|match|
-	  if line.index("<div") || 
-	      line.index("</div>") then
-	    '<A HREF="'+@current+'">' + @current + '</A>'
-	  else
-	    match.to_s
-	  end
-	}
-	if line.index "</body>" then ignore = true end	
-	if !ignore then out << line end
-	if line.index "<body>"  then ignore = false end
+  line.gsub!("stdin"){|match|
+    if line.index("<div") || 
+        line.index("</div>") then
+      '<A HREF="'+@current+'">' + @current + '</A>'
+    else
+      match.to_s
+    end
+  }
+  if line.index "</body>" then ignore = true end  
+  if !ignore then out << line end
+  if line.index "<body>"  then ignore = false end
       }
     end
   end  # Htmlize
@@ -155,22 +155,22 @@ module Commands
 
     def run
       @argv.each do |f|
-	infile = f
-	outfile = "html/" + f.split("/")[-1]
+  infile = f
+  outfile = "html/" + f.split("/")[-1]
 
-	re = /\<a href\="(.*)">SOURCE_CODE<\/a>/i  #/ " 
+  re = /\<a href\="(.*)">SOURCE_CODE<\/a>/i  #/ " 
 
-	LineSubstituter.substitute( infile, outfile ){|line|
-	  line.gsub( re ){|match|
-	    m = match.to_s
-	    file = Regexp.last_match[1] #(/".*\.*"/.match m).to_s[1...-1]
+  LineSubstituter.substitute( infile, outfile ){|line|
+    line.gsub( re ){|match|
+      m = match.to_s
+      file = Regexp.last_match[1] #(/".*\.*"/.match m).to_s[1...-1]
 
-	    puts file
+      puts file
 
-	    a = file.split("/")[-1]
-	    File.open("tmp/"+a+".html_section","r").readlines.join
-	  }
-	}	
+      a = file.split("/")[-1]
+      File.open("tmp/"+a+".html_section","r").readlines.join
+    }
+  } 
 
       end
     end    
@@ -187,23 +187,23 @@ module Commands
 
     def run
 
-	infile = @infile
-	outfile = @outfile #"html/" + f.split("/")[-1]
+  infile = @infile
+  outfile = @outfile #"html/" + f.split("/")[-1]
 
-	re = /\<htmlurl url\="(.*)" name\=\"SOURCE_CODE\">/i  #/ " 
-	#re = /\<a href\=".*\">SOURCE_CODE<\/a>/i  #/ " 
+  re = /\<htmlurl url\="(.*)" name\=\"SOURCE_CODE\">/i  #/ " 
+  #re = /\<a href\=".*\">SOURCE_CODE<\/a>/i  #/ " 
 
-	LineSubstituter.substitute( infile, outfile ){|line|
-	  line.gsub( re ){|match|
-	    m = match.to_s
-	    file = Regexp.last_match[1] #(/\".*\.r.*\"/.match m).to_s[1...-1]
+  LineSubstituter.substitute( infile, outfile ){|line|
+    line.gsub( re ){|match|
+      m = match.to_s
+      file = Regexp.last_match[1] #(/\".*\.r.*\"/.match m).to_s[1...-1]
 
-	    puts file
+      puts file
 
-	    a = file.split("/")[-1]
-	    File.open("tmp/"+a+".sgml_section","r").readlines.join
-	  }
-	}	
+      a = file.split("/")[-1]
+      File.open("tmp/"+a+".sgml_section","r").readlines.join
+    }
+  } 
 
 
     end    
@@ -229,26 +229,26 @@ module Commands
       url_re = /\<url\s+url\="([^"]*)"\s+name\="([^"]*)">/i
       
       LineSubstituter.substitute( @infile, @outfile ){|line|
-	line.gsub( re ){|match|
-	  m = match.to_s
-	  puts "Inserting #{m}"
-	  file = Regexp.last_match[1] # (/\".*\.r.*\"/.match m).to_s[1...-1]
-	  
-	  result = "<code>"
-	  result += "[ "+file+" ]\n"
-	  count = 0
-	  File.open("html/"+file,"r") do |file|
+  line.gsub( re ){|match|
+    m = match.to_s
+    puts "Inserting #{m}"
+    file = Regexp.last_match[1] # (/\".*\.r.*\"/.match m).to_s[1...-1]
+    
+    result = "<code>"
+    result += "[ "+file+" ]\n"
+    count = 0
+    File.open("html/"+file,"r") do |file|
             file.readlines.each{|line|
-	    count+=1
-	    prefix = (count<=9) ? " " : ""
-	    line = LaTeX.sub( line )
+      count+=1
+      prefix = (count<=9) ? " " : ""
+      line = LaTeX.sub( line )
             line = UmlautSub.sgml( line )
 
-	    result += "#{prefix}#{count}| #{line}"
-	  }
+      result += "#{prefix}#{count}| #{line}"
+    }
           end
-	  result + "</code>"
-	}.gsub( url_re ){|match|
+    result + "</code>"
+  }.gsub( url_re ){|match|
           url, name = Regexp.last_match[1..2]
           "<url url=\"<" + url + ">\" name=\"" + name + "\">"
           "<it>"+ name + "</it><footnote>"+url+"</footnote>"
@@ -275,10 +275,10 @@ module Commands
 
     def run
       File.open( @infile , "r"  ) do |infile| 
-	File.open( @outfile , "w" ) do |out|	
-	  puts @outfile	  
-	  feed( out, infile )
-	end
+  File.open( @outfile , "w" ) do |out|  
+    puts @outfile   
+    feed( out, infile )
+  end
       end
     end # run
   end # StripStuff
@@ -297,9 +297,9 @@ module Commands
     def feed( out, infile )
       ignore = true
       infile.readlines.each{|line|
-	if line.index @turnoff then ignore = true end
-	if !ignore then out << line end
-	if line.index @turnon then ignore = false end
+  if line.index @turnoff then ignore = true end
+  if !ignore then out << line end
+  if line.index @turnon then ignore = false end
       }
     end
 
@@ -316,22 +316,22 @@ module Commands
   class StripToHtmlSection < StripToggle
     def initialize( argv )
       super argv, "<body>", "</body>"
-      @filename = argv[2]
+      @filename = argv[2] # WAS: argv[2]
     end
     def feed( out, html )
       ignore = true
       html.readlines.each{|line|
-	line.gsub!("stdin"){|match|
-	  if line.index("<div") || 
-	      line.index("</div>") then
-	    '<A HREF="'+@filename+'">' + @filename + '</A>'
-	  else
-	    match.to_s
-	  end
-	}
-	if line.index "</body>" then ignore = true end	
-	if !ignore then out << UmlautSub.sgml(line) end
-	if line.index "<body>"  then ignore = false end
+  line.gsub!("stdin"){|match|
+    if line.index("<div") || 
+        line.index("</div>") then
+      '<A HREF="'+@filename+'">' + @filename + '</A>'
+    else
+      match.to_s
+    end
+  }
+  if line.index "</body>" then ignore = true end  
+  if !ignore then out << UmlautSub.sgml(line) end
+  if line.index "<body>"  then ignore = false end
       }
     end
 
@@ -347,8 +347,8 @@ module Commands
     end
     def run
       LineSubstituter.substitute( @infile, @outfile ){|line|
-	UmlautSub.sgml( line )
-      }	
+  UmlautSub.sgml( line )
+      } 
     end # run
   end # Flatten
 
@@ -364,7 +364,8 @@ class Edit
     
     command = @argv[0][1..-1]
     klass = Commands.const_get( command )
-    @action = klass.new( argv[1..-1] )
+    args = argv[1..-1]
+    @action = klass.new( args )
   end
 
 

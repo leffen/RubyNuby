@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby
-# Rubyе╣епеъе╫е╚бдJavaе╜б╝е╣бдC++е╜б╝е╣дЄHTMLд╦└░╖┴д╣ды
-# енб╝еяб╝е╔бде│есеєе╚бд╩╕╗·╬єд╦┐здЄ╔╒д▒ды
+# Ruby┬е┬╣┬е┬п┬е├к┬е├Ч┬е├И┬б┬дJava┬е┬╜┬б┬╝┬е┬╣┬б┬дC++┬е┬╜┬б┬╝┬е┬╣┬д├▓HTML┬д├Л├А┬░┬╖├Б┬д┬╣┬д├л
+# ┬е┬н┬б┬╝┬е├п┬б┬╝┬е├Й┬б┬д┬е┬│┬е├б┬е├│┬е├И┬б┬д├К┬╕┬╗├║├О├│┬д├Л┬┐┬з┬д├▓├Й├Х┬д┬▒┬д├л
 
 # Copyright (c) 2001 HORIKAWA Hisashi. All rights reserved.
 #   mailto:vzw00011@nifty.ne.jp
@@ -39,7 +39,7 @@ class Ruby2Html < HtmlFormat
 
 
   def state1(ch)
-    # ├╧д╬╩╕
+    # ├Г├П┬д├О├К┬╕
     case ch
     when '"'
       que_out()
@@ -85,7 +85,7 @@ class Ruby2Html < HtmlFormat
           @here_end << [0, tail]
           print html_escape(tail)
         end
-        print html_escape(@line.shift) # tailд╬╕хдэд╬'
+        print html_escape(@line.shift) # tail┬д├О┬╕├е┬д├н┬д├О'
         return
       elsif @line[0, 1] == '<' && @line[1, 1] != ' '
         que_out()
@@ -104,7 +104,7 @@ class Ruby2Html < HtmlFormat
         return
       end
     when '?'
-      # ?/ => ┐Ї├═еъе╞ещеы
+      # ?/ => ┬┐├┤├Г├Н┬е├к┬е├Ж┬е├й┬е├л
       if @line != ''
         @que << ch << @line.shift
         return
@@ -201,7 +201,7 @@ class Ruby2Html < HtmlFormat
       ch = @line.shift
       case @state
       when 1
-        # ├╧д╬╩╕
+        # ├Г├П┬д├О├К┬╕
         state1(ch)
       when 2
         # "..."
