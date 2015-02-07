@@ -18,4 +18,4 @@ File.open( filnavn, "r") do |fil|
     print "#{linjenummer}>: #{linje}" 
   end
 end
-# File.open lukker filen etter å ha  kjørt koden i blocken.
+# File.open lukker filen etter å ha  kjørt koden i blokken.
