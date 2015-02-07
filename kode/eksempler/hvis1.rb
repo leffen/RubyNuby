@@ -2,7 +2,7 @@
 print "Hvor gammel er du?: "
 alder = gets.to_i
 
-if alder < 1 then puts "Nå tuller du vel?"; exit end
+if alder < 3 then puts "Nå tuller du vel?"; exit end
 
 if alder >= 18
   puts "Du er myndig."
@@ -13,7 +13,7 @@ else
 end
 
 # 'if' kan også returnere en verdi, så du slipper
-# å bruke '?:' operatoren hvis du ikke liker den.
+# å bruke "ternary" (? : ) operatoren hvis du ikke liker den.
 drikkevare = 
   if alder >= 60
     "Sviskejuice"

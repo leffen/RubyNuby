@@ -160,7 +160,7 @@ Disse to versjonene er ikke bare for syns skyld.
 <p><htmlurl url="kode/tekst2.rb" name="SOURCE_CODE">
 
 <p> Legg merke til at <tt>sub</tt> generer et helt nytt <tt>String</tt>-objekt, mens <tt>sub!</tt> endrer det faktiske objektet.<newline>
- Metoder som slutter med utropstegn kalles <bf>"bang"</bf> eller <bf>"destruktive"</bf> metoder, da de som oftest endrer objektet.  <newline>
+ Metoder som slutter med utropstegn kalles <bf>"bang"</bf>, <bf>"mutator"</bf> eller <bf>"destruktive"</bf> metoder, da de som oftest endrer objektet.  <newline>
 <!-- Mange metoder vil finnes i både bang og non-bang versjoner.--> 
 Ruby bruker denne konvensjonen for navngivelse på mange metoder, men er ikke påkrevd.
 
@@ -240,7 +240,6 @@ Mulighetene til å skrive logiske uttrykk som er nærmere hvordan vi snakker, gj
 <descrip>
 <tag>chomp</tag>  fjerner et eventuelt newline-tegn i fra slutten av strengen.
 <tag>downcase</tag> gjør store bokstaver om til små.
-<tag>?j</tag> tallverdien til tegnet 'j'
 </descrip>
 Merk at chomp og downcase ikke har noen '!', så de returnerer kopier som har blitt modifisert. De endrer ikke objektet de blir kalt på.
 
@@ -254,7 +253,7 @@ ved å implementere <tt><bf>===</bf></tt> operatoren, som kalles både "relation
 
 
 <sect1> Løkker - while
-<p> Hvis ikke du er fra Bergen, så har du vel falt for denne spøken en gang...
+<p> Hvis ikke du er fra Bergen opprinnelig, så har du vel falt for denne spøken en gang...
 <p><htmlurl url="kode/gjenta1.rb" name="SOURCE_CODE">
 <p>
 <descrip>
@@ -269,7 +268,7 @@ det ikke finnes.
 
 
 <sect1> Iterasjon - Iterator-pattern og 'yield'
-<p> For løkken finnes fremdeles i Ruby, men hvor Python har gjort for-løkken glupere, har Ruby gått videre og tatt i bruk Iterator-pattern'et.
+<p> For løkken finnes fremdeles i Ruby, men hvor Python har gjort for-løkken glupere, har Ruby gått videre og tatt i bruk Enumertor-pattern'et.
 <p><htmlurl url="kode/iter1.rb" name="SOURCE_CODE">
 <p> <tt><bf>(1..10)</bf></tt> lager et <tt>Range</tt>-objekt, som spenner i fra og med 1, til og med 10. Dersom du ikke ønsker å inkludere 10, kan du bruke 3 punktum, for eksempel så spenner <tt><bf>(1...10)</bf></tt> i fra 1, til og med 9. 
 
@@ -384,7 +383,7 @@ Dette er metoder i <tt>Module</tt>-klassen som lager get/set metoder for deg. So
 
 <sect2> Død og begravelse: Finalize
 <p> Objekter fødes, brukes og dør. I Ruby dør objektene når de hentes av søppeltømmeren. (garbage collector) 
-Når det skjer, er usikkert. Ingen referanser til objektet må eksistere og garbage collectoren må startes eksplisitt eller implisitt, f.eks. når det begynner å bli lite ledig minne.
+Når det skjer, er usikkert. Ingen referanser til objektet må eksistere og garbage collectoren må startes eksplisitt eller implisitt, som skjer jevnlig.
 <newline>
 <p>
 <p>

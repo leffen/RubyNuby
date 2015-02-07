@@ -1,4 +1,4 @@
-#!/usr/bin/ruby 
+#!/usr/bin/env ruby 
 class Gjett  # Et lite spill 
   def initialize
     @max = 100
@@ -34,21 +34,24 @@ class Gjett  # Et lite spill
   end
   def hent_svar
     begin
-      print "Gjett ett tall mellom #@min og #@max >:"
-      svar = gets.to_i
+      print "Gjett ett tall mellom #@min og #@max >: "
+      svar_streng = gets.chomp
+      if svar_streng == "slutt"
+        puts "Ha det bra!"
+        exit
+      end
+      svar = svar_streng.to_i
     end until svar >= @min and svar <= @max
     @forsoek += 1
     svar
   end
 end 
 
-# La oss unngå å bruke de kryptiske globale variabelnavnene.
-require 'English'
-if __FILE__ == $PROGRAM_NAME then
+if __FILE__ == $0 then
   begin
     g = Gjett.new
     g.spill
     print "Spille en gang til? [j/n]: "
     svar = gets.downcase
-  end while svar[0] == ?j
+  end while svar[0] == "j"
 end
