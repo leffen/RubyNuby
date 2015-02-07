@@ -1,0 +1,380 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: Metoder, klasser og objekter.</TITLE>
+ <LINK HREF="pres-5.html" REL=next>
+ <LINK HREF="pres-3.html" REL=previous>
+ <LINK HREF="pres.html#toc4" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="pres-5.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-3.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc4"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s4">4.</A> <A HREF="pres.html#toc4">Metoder, klasser og objekter.</A></H2>
+
+<P>Ruby er et s&aelig;rdeles objekt-orientert spr&aring;k. 
+Metoder, klasser og objekter er de grunnleggende byggesteinene. </P>
+
+
+
+<H2><A NAME="ss4.1">4.1</A> <A HREF="pres.html#toc4.1">Metoder</A>
+</H2>
+
+<P>Ruby har verken prosedyrer eller funksjoner; kun metoder som kalles p&aring; objekter. </P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder1.rb">kode/metoder1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Husker du denne?</span>
+  2| <span style="color:blue">def</span> si_hei
+  3|   puts <span style="color:#660066">&quot;Hei verden!&quot;</span>
+  4| <span style="color:blue">end</span>
+  5| 
+  6| <span style="color:green"># Hva er vel en funksjon uten argumenter?</span>
+  7| <span style="color:blue">def</span> si_hei_til(hva)
+  8|   puts <span style="color:#660066">&quot;Hei #{hva}&quot;</span>
+  9| <span style="color:blue">end</span>
+ 10| 
+ 11| si_hei_til(<span style="color:#660066">&quot;Bergen!&quot;</span>) <span style="color:green">#=&gt; &quot;Hei Bergen!&quot;</span>
+ 12| 
+ 13| <span style="color:green"># Funksjoner kan ta flere argumenter og de kan ha default verdier</span>
+ 14| <span style="color:blue">def</span> send_julegave(til, fra=<span style="color:#660066">&quot;nissen&quot;</span>)
+ 15|   puts <span style="color:#660066">&quot;God jul, #{til}. Hilsen #{fra}.&quot;</span>
+ 16| <span style="color:blue">end</span>
+ 17| 
+ 18| send_julegave(<span style="color:#660066">&quot;Junior&quot;</span> )    <span style="color:green">#=&gt; &quot;God jul, Junior. Hilsen nissen.&quot;</span>
+ 19| send_julegave(<span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;far&quot;</span>) <span style="color:green">#=&gt; &quot;God jul, Ola. Hilsen far.&quot;</span>
+</pre>
+</td></table>
+</P>
+<P> Du syntes kanskje det s&aring; lite objekt-orientert ut? Ikke var metodene definert i noen klasse, og ikke kalte vi dem p&aring; noe objekt heller. Det tror du. Alle metoder som defineres p&aring; toppniv&aring; defineres i Object-klassen, og vi har implisitt en toppniv&aring; Object-instans. (Pr&oslash;v <CODE><B>self.type</B></CODE> og se selv.)<BR><BR><BR></P>
+
+<H3>Returverdier</H3>
+
+<P> Ruby returnerer normalt den siste verdien i metoden, hvis ikke <CODE><B>return</B></CODE> kalles eksplisitt. </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder2.rb">kode/metoder2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">def</span> legg_sammen( a, b)
+  2|   a + b   <span style="color:green"># det siste uttrykket returneres</span>
+  3| <span style="color:blue">end</span>
+  4| puts legg_sammen(9, 6) <span style="color:green">#=&gt; 15</span>
+  5| 
+  6| <span style="color:green"># fibonacci</span>
+  7| <span style="color:blue">def</span> fib(i)
+  8|   <span style="color:blue">if</span> i &lt;= 1
+  9|     <span style="color:blue">return</span> 1   <span style="color:green"># vi kan returnere eksplisitt</span>
+ 10|   <span style="color:blue">end</span>
+ 11|   <span style="color:blue">return</span> fib(i-1) + fib(i-2)
+ 12| <span style="color:blue">end</span>
+ 13| puts fib(3) <span style="color:green">#=&gt;  3</span>
+ 14| puts fib(5) <span style="color:green">#=&gt;  8</span>
+</pre>
+</td></table>
+</P>
+
+<H3>Spesielle argumenter</H3>
+
+<P>I tillegg til <CODE><B>&amp;</B></CODE>-prefikset som brukes for &aring; pakke en block gitt til en metode inn i et Proc-objekt, brukes <CODE><B>*</B></CODE>-prefikset for &aring; samle flere argumenter i en liste (Array).</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder3.rb">kode/metoder3.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># * prefikset brukes for &aring; pakke argumentlista inn i en Array</span>
+  2| <span style="color:blue">def</span> list_opp(og_frase, *args)
+  3|   puts args[0..-2].join(<span style="color:#660066">&quot;, &quot;</span>).capitalize +
+  4|     og_frase + args[-1] + <span style="color:#660066">'.'</span>
+  5| <span style="color:blue">end</span>
+  6| 
+  7| list_opp(<span style="color:#660066">&quot; og &quot;</span>, <span style="color:#660066">&quot;epler&quot;</span>, <span style="color:#660066">&quot;p&aelig;rer&quot;</span>, <span style="color:#660066">&quot;bananer&quot;</span>)
+  8|   <span style="color:green">#=&gt; &quot;Epler, p&aelig;rer og bananer.&quot;</span>
+  9| 
+ 10| <span style="color:green"># eller pakke opp en Array for &aring; bruke elementene som argumenter</span>
+ 11| a =  [ <span style="color:#660066">&quot; and &quot;</span>, <span style="color:#660066">&quot;apples&quot;</span>, <span style="color:#660066">&quot;pears&quot;</span>, <span style="color:#660066">&quot;bananas&quot;</span> ]
+ 12| list_opp(*a) <span style="color:green">#=&gt; &quot;Apples, pears and bananas.&quot;</span>
+</pre>
+</td></table>
+</P>
+
+
+<H2><A NAME="ss4.2">4.2</A> <A HREF="pres.html#toc4.2">Klasser</A>
+</H2>
+
+<P> Som ethvert objekt-orientert spr&aring;k har Ruby klasser.<BR></P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klasse1.rb">kode/klasse1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># En enkel klasse. </span>
+  2| <span style="color:green"># Klassenavn m&aring; begynne med stor bokstav.</span>
+  3| <span style="color:blue">class</span> Person
+  4|   <span style="color:green"># Person.new videresender argumentene til initialize</span>
+  5|   <span style="color:blue">def</span> initialize(etternavn, fornavn, alder = 0)
+  6|     <span style="color:green"># attributter prefikses med @</span>
+  7|     @etternavn  = etternavn
+  8|     @fornavn    = fornavn
+  9|     @alder      = alder
+ 10|   <span style="color:blue">end</span>
+ 11|   
+ 12|   <span style="color:green"># en vanlig instansmetode</span>
+ 13|   <span style="color:blue">def</span> to_s
+ 14|     <span style="color:#660066">&quot;#{@fornavn} #{@etternavn} er #{@alder} &aring;r.&quot;</span>
+ 15|   <span style="color:blue">end</span>
+ 16| <span style="color:blue">end</span>
+ 17| 
+ 18| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:green"># Kun n&aring;r vi kj&oslash;rer denne filen:</span>
+ 19|   p = Person.new(<span style="color:#660066">&quot;Nordmann&quot;</span>, <span style="color:#660066">&quot;Ola&quot;</span>, 23) 
+ 20|   puts p <span style="color:green">#=&gt; &quot;Ola Nordmann er 23 &aring;r.&quot;</span>
+ 21| <span style="color:blue">end</span>
+</pre>
+</td></table>
+<BR></P>
+
+
+<H3>Attributter</H3>
+
+<P> Ruby lar deg ikke f&aring; tak i et objekts attributter (felter, dataverdier, instansvariable) direkte. Alle attributter er "private".  Enhver tilgang fra utsiden til objektet g&aring;r via metodekall, s&aring;kalte get/set metoder.</P>
+<P>Instansvariable er "private" p&aring; en m&aring;te som er mer som protected i andre spr&aring;k; metoder i sub- og superklasser har tilgang. Men andre instanser har ikke tilgang, selv ikke instanser av samme klasse.<BR></P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klasse2.rb">kode/klasse2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Vi vil bruke Person-klassen videre</span>
+  2| require_relative <span style="color:#660066">'klasse1'</span> 
+  3| 
+  4| <span style="color:green"># Klasser er &quot;&aring;pne&quot; skop, og kan enkelt utvides.</span>
+  5| <span style="color:blue">class</span> Person  
+  6|   <span style="color:green"># Ruby tillater deg ikke &aring; f&aring; tak i attributtene</span>
+  7|   <span style="color:green"># fra utsiden av objektet. Du m&aring; g&aring; via metodekall.</span>
+  8| 
+  9|   <span style="color:green">#  get-metode</span>
+ 10|   <span style="color:blue">def</span> alder
+ 11|     @alder
+ 12|   <span style="color:blue">end</span>
+ 13|   <span style="color:green"># set-metode</span>
+ 14|   <span style="color:blue">def</span> alder=( ny_alder )
+ 15|     @alder = ny_alder
+ 16|   <span style="color:blue">end</span>
+ 17| 
+ 18|   <span style="color:green"># tungvint? Jepp, s&aring; Ruby har en snarvei:</span>
+ 19|   attr_accessor :alder     <span style="color:green"># definerer metodene over automatisk</span>
+ 20| 
+ 21|   <span style="color:green"># Vi vil ogs&aring; gjerne kunne lese navnene til personen</span>
+ 22|   attr_reader   :etternavn, :fornavn
+ 23| 
+ 24| <span style="color:blue">end</span>
+ 25| 
+ 26| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:green"># Kun n&aring;r vi kj&oslash;rer denne filen:</span>
+ 27|   p = Person.new( <span style="color:#660066">&quot;Nordmann&quot;</span>, <span style="color:#660066">&quot;Baby&quot;</span> )
+ 28|   p.alder = 3     <span style="color:green"># Vi setter alderen</span>
+ 29|   puts p.alder    <span style="color:green">#=&gt; 3</span>
+ 30|   p.alder += 1    <span style="color:green"># &Oslash;k alderen med et &aring;r</span>
+ 31|   puts p.alder    <span style="color:green">#=&gt; 4</span>
+ 32|   puts p.fornavn  <span style="color:green">#=&gt; &quot;Baby&quot;</span>
+ 33| <span style="color:blue">end</span>
+</pre>
+</td></table>
+
+<DL>
+<DT><B>:alder, :etternavn, :fornavn</B><DD>
+<P>Disse er symboler. (instanser av <CODE>Symbol</CODE>-klassen) De ligner litt p&aring; String, men kan ikke endres, de er "internert" og begrenser seg til lovlige navn p&aring; klasser, metoder, variabler o.l. 
+(Symbolet for instansvariabelen <CODE>@alder</CODE>, metoden <CODE>alder</CODE> og den lokale 
+variabelen <CODE>alder</CODE> er alle sammen <CODE><B>:alder</B></CODE>.)</P>
+<DT><B>attr_accessor, attr_reader, attr_writer</B><DD>
+<P>Dette er metoder i <CODE>Module</CODE>-klassen som lager get/set metoder for deg. Som argument tar de symbolene til attributtene du vil lage get/set metoder for. </P>
+</DL>
+</P>
+
+
+<H3>Arv</H3>
+
+<P> </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klasse3.rb">kode/klasse3.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Fortsetter der vi slapp...</span>
+  2| require_relative <span style="color:#660066">'klasse2'</span> 
+  3| 
+  4| <span style="color:green"># Arv - alle studenter er en submengde av alle personer</span>
+  5| <span style="color:blue">class</span> Student &lt; Person
+  6|   <span style="color:blue">def</span> initialize(etternavn, fornavn, alder = 0, studiested = <span style="color:#660066">&quot;NTNU&quot;</span> )
+  7|     <span style="color:green"># kall super-klassens versjon av metoden</span>
+  8|     <span style="color:blue">super</span>( etternavn, fornavn, alder )
+  9|     @studiested = studiested
+ 10|     @karakterer = [] <span style="color:green"># Eventuelt Array.new</span>
+ 11|   <span style="color:blue">end</span>
+ 12|   
+ 13|   <span style="color:green"># redefinerer Person#to_s metoden</span>
+ 14|   <span style="color:blue">def</span> to_s
+ 15|     <span style="color:#660066">&quot;#{@etternavn}, #{@fornavn} - studerer ved #{@studiested}.&quot;</span>
+ 16|   <span style="color:blue">end</span>
+ 17| 
+ 18|   <span style="color:blue">def</span> ta_eksamen(karakter)
+ 19|     @karakterer.push karakter
+ 20|   <span style="color:blue">end</span>
+ 21| 
+ 22|   <span style="color:blue">def</span> karaktersnitt
+ 23|     sum = 0
+ 24|     @karakterer.each <span style="color:blue">do</span> |karakter|
+ 25|       sum += karakter
+ 26|     <span style="color:blue">end</span>
+ 27|     sum.to_f / @karakterer.size
+ 28|   <span style="color:blue">end</span>
+ 29|   
+ 30| <span style="color:blue">end</span>
+ 31| 
+ 32| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:green"># Kun n&aring;r vi kj&oslash;rer denne filen:</span>
+ 33|   flinkis = Student.new(<span style="color:#660066">&quot;Einstein&quot;</span>, <span style="color:#660066">&quot;Al&quot;</span>, 128, <span style="color:#660066">&quot;Mensa&quot;</span>)
+ 34|   flinkis.ta_eksamen(1.0)
+ 35|   flinkis.ta_eksamen(2.0)
+ 36|   puts flinkis <span style="color:green">#=&gt; &quot;Einstein, Al - studerer ved Mensa.&quot;</span>
+ 37|   puts flinkis.karaktersnitt <span style="color:green">#=&gt; 1.5</span>
+ 38| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>super</B><DD>
+<P>et alias for superklassens versjon av den metoden vi er i n&aring;. </P>
+</DL>
+</P>
+
+<H3>Multippel arv</H3>
+
+<P> Beklager. Det er ikke lov &aring; la en klasse arve fra mer enn en superklasse i Ruby.</P>
+<P> Derimot har Ruby <B>mixin</B>, som kan legge til funksjonalitet fra flere moduler inn i en klasse. Dvs, du kan bare arve fra en klasse, men kan blande inn funksjonalitet i fra flere moduler.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/modul1.rb">kode/modul1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">class</span> Familie
+  2|   <span style="color:green"># Vi inkluderer funksjonalitet fra modulen kalt Enumerable.</span>
+  3|   include Enumerable
+  4| 
+  5|   <span style="color:green"># Enumerable forventer at each metoden yield'er</span>
+  6|   <span style="color:green"># det som skal itereres over.</span>
+  7|   <span style="color:blue">def</span> each
+  8|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Far&quot;</span>
+  9|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Mor&quot;</span>
+ 10|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;S&oslash;nn&quot;</span>
+ 11|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Datter&quot;</span>
+ 12|   <span style="color:blue">end</span>
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| f = Familie.new
+ 16| 
+ 17| <span style="color:green"># include? og sort metodene er mikset inn fra Enumerable.</span>
+ 18| puts f.include?(<span style="color:#660066">&quot;S&oslash;nn&quot;</span>) <span style="color:green">#=&gt; true</span>
+ 19| puts f.sort.join(<span style="color:#660066">&quot;, &quot;</span>)  <span style="color:green">#=&gt; &quot;Datter, Far, Mor, S&oslash;nn&quot;</span>
+</pre>
+</td></table>
+</P>
+<P>I kontrast til Java tilbyr dette multippel arv av funksjonalitet. Java bruker <B>interface</B> til &aring; "etterligne" multippel arv, men tilbyr ikke arv av implementasjon og l&oslash;ser noe som er et ikke-problem n&aring;r man har dynamisk typing.<BR></P>
+
+<H3>Klassevariabler</H3>
+
+<P> Klassevariabler er variabler som deles mellom alle instanser av klassen, samt instanser av subklasser. (tilsvarende <B>static</B> variabler i Java)<BR></P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klassevar1.rb">kode/klassevar1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">class</span> Bil
+  2|   <span style="color:green"># En klassevariabel for &aring; telle antall biler i verden.</span>
+  3|   @@num_biler = 0
+  4|   <span style="color:blue">def</span> initialize
+  5|     @@num_biler += 1
+  6|   <span style="color:blue">end</span>
+  7|   <span style="color:blue">def</span> Bil.antall
+  8|     @@num_biler
+  9|   <span style="color:blue">end</span>
+ 10| <span style="color:blue">end</span>
+ 11| 
+ 12| <span style="color:blue">class</span> Lada &lt; Bil
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| <span style="color:blue">class</span> Yugo &lt; Bil
+ 16|   <span style="color:blue">def</span> krasj
+ 17|     <span style="color:green"># klassevariabelen er felles for alle instanser av Bil,</span>
+ 18|     <span style="color:green"># samt instanser av subklasser av bil</span>
+ 19|     @@num_biler -= 1
+ 20|   <span style="color:blue">end</span>
+ 21| <span style="color:blue">end</span>
+ 22| 
+ 23| lada = Lada.new
+ 24| yugo = Yugo.new
+ 25| puts Bil.antall <span style="color:green">#=&gt; 2</span>
+ 26| 
+ 27| yugo.krasj
+ 28| puts Bil.antall <span style="color:green">#=&gt; 1</span>
+</pre>
+</td></table>
+</P>
+
+<H3>D&oslash;d og begravelse: Finalize</H3>
+
+<P> Objekter f&oslash;des, brukes og d&oslash;r. I Ruby d&oslash;r objektene n&aring;r de hentes av s&oslash;ppelt&oslash;mmeren. (garbage collector) 
+N&aring;r det skjer, er usikkert. Ingen referanser til objektet m&aring; eksistere og garbage collectoren m&aring; startes eksplisitt eller implisitt, som skjer jevnlig.<BR></P>
+
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gc1.rb">kode/gc1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green">#</span>
+  2| streng = <span style="color:#660066">&quot;Hvil i fred.&quot;</span>
+  3| 
+  4| <span style="color:green"># Vi gir en block som skal kj&oslash;res n&aring;r streng objektet d&oslash;r.</span>
+  5| ObjectSpace.define_finalizer(streng) <span style="color:blue">do</span> |id|
+  6|   puts <span style="color:#660066">&quot;Objektet med ID=#{id} er n&aring; d&oslash;dt. &quot;</span>
+  7|   puts <span style="color:#660066">&quot;Rest in peace.&quot;</span>
+  8| <span style="color:blue">end</span>
+  9| 
+ 10| <span style="color:green"># Starter s&oslash;ppelt&oslash;mmeren eksplisitt.</span>
+ 11| puts <span style="color:#660066">&quot;Henter s&oslash;ppel!&quot;</span>
+ 12| GC.start
+ 13| <span style="color:green"># Men ingenting skjer, da det enn&aring; er en referanse til strengen.</span>
+ 14| 
+ 15| <span style="color:green"># Pr&oslash;ver en gang til...</span>
+ 16| streng = <span style="color:blue">nil</span>
+ 17| puts <span style="color:#660066">&quot;Henter mer s&oslash;ppel!&quot;</span>
+ 18| GC.start
+ 19| <span style="color:green"># finalizer blocken blir kj&oslash;rt.</span>
+</pre>
+</td></table>
+</P>
+<P> Legg merke til at objektet allerede er d&oslash;dt n&aring;r finalizer-blocken kalles. Ressurser som m&aring; lukkes eksplisitt, holdes via bindingen til blocken. (Bare pass p&aring; at blocken ikke ogs&aring; holder en referanse til objektet.)</P>
+<P> Flere finalizers kan registreres p&aring; et objekt.</P>
+
+
+
+
+<HR>
+<A HREF="pres-5.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-3.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc4"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

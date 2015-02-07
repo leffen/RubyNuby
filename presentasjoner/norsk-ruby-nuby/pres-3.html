@@ -1,0 +1,478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: Flytkontroll</TITLE>
+ <LINK HREF="pres-4.html" REL=next>
+ <LINK HREF="pres-2.html" REL=previous>
+ <LINK HREF="pres.html#toc3" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="pres-4.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-2.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc3"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s3">3.</A> <A HREF="pres.html#toc3">Flytkontroll</A></H2>
+
+<P> Logiske uttrykk skiller seg fra en del andre spr&aring;k p&aring; et viktig omr&aring;de: <BR>
+Kun <CODE><B>nil</B></CODE> og <CODE><B>false</B></CODE> evalueres til usant. <BR>
+<CODE><B>0</B></CODE>, <CODE><B>""</B></CODE>, <CODE><B>[]</B></CODE>, <CODE><B>{}</B></CODE> og andre 'tomme' objekter evaluerer til sant. <BR>
+(For folk vant til C, Perl og/eller Python, er dette en av de vanligste kildene til feil.)</P>
+
+
+
+
+<H2><A NAME="ss3.1">3.1</A> <A HREF="pres.html#toc3.1">Hvis, dersom...</A>
+</H2>
+
+<P> If-setningen byr ikke p&aring; s&aring; mange overraskelser i Ruby.</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/hvis1.rb">kode/hvis1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Sp&oslash;r f&oslash;rst om alderen.</span>
+  2| print <span style="color:#660066">&quot;Hvor gammel er du?: &quot;</span>
+  3| alder = gets.to_i
+  4| 
+  5| <span style="color:blue">if</span> alder &lt; 3 <span style="color:blue">then</span> puts <span style="color:#660066">&quot;N&aring; tuller du vel?&quot;</span>; exit <span style="color:blue">end</span>
+  6| 
+  7| <span style="color:blue">if</span> alder &gt;= 18
+  8|   puts <span style="color:#660066">&quot;Du er myndig.&quot;</span>
+  9| <span style="color:blue">elsif</span> alder &gt;= 16
+ 10|   puts <span style="color:#660066">&quot;Du er lovlig.&quot;</span>
+ 11| <span style="color:blue">else</span>
+ 12|   puts <span style="color:#660066">&quot;Sm&aring;en!&quot;</span>
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| <span style="color:green"># 'if' kan ogs&aring; returnere en verdi, s&aring; du slipper</span>
+ 16| <span style="color:green"># &aring; bruke &quot;ternary&quot; (? : ) operatoren hvis du ikke liker den.</span>
+ 17| drikkevare = 
+ 18|   <span style="color:blue">if</span> alder &gt;= 60
+ 19|     <span style="color:#660066">&quot;Sviskejuice&quot;</span>
+ 20|   <span style="color:blue">else</span>
+ 21|     <span style="color:blue">if</span> alder &gt;= 20
+ 22|       <span style="color:#660066">&quot;Sprit&quot;</span>
+ 23|     <span style="color:blue">elsif</span> alder &gt;= 18
+ 24|       <span style="color:#660066">&quot;&Oslash;l og vin&quot;</span>
+ 25|     <span style="color:blue">else</span>
+ 26|       <span style="color:#660066">&quot;Brus&quot;</span>
+ 27|     <span style="color:blue">end</span>	       
+ 28|   <span style="color:blue">end</span>
+ 29| puts <span style="color:#660066">&quot;Kj&oslash;p deg litt #{drikkevare}&quot;</span>
+</pre>
+</td></table>
+</P>
+<P>Merk at <CODE><B>then</B></CODE> n&oslash;kkelordet ikke er n&oslash;dvendig n&aring;r man skriver if-setningen over flere linjer. Noen ting er valgfrie i Ruby forutsatt at uttrykket ikke blir tvetydig. </P>
+<P>
+<DL>
+<DT><B>gets</B><DD>
+<P>get string - henter en tekststreng ifra standard input.</P>
+<DT><B>to_i</B><DD>
+<P>to integer - fors&oslash;ker &aring; gj&oslash;re objektet om til et heltall.</P>
+</DL>
+</P>
+
+
+
+<H3>Forutsatt, med mindre...</H3>
+
+<P>Mulighetene til &aring; skrive logiske uttrykk som er n&aelig;rmere hvordan vi snakker, gj&oslash;r Ruby mer lesbart, men kan ogs&aring; forvirre.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/hvis2.rb">kode/hvis2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| print <span style="color:#660066">&quot;Liker du Ruby? [ja/nei]:&quot;</span>
+  2| svar = gets.chomp.downcase 
+  3| 
+  4| <span style="color:green"># if kan ogs&aring; brukes etter uttrykk</span>
+  5| puts <span style="color:#660066">&quot;Jeg liker ogs&aring; Ruby!&quot;</span> <span style="color:blue">if</span> svar==<span style="color:#660066">&quot;ja&quot;</span>
+  6| 
+  7| <span style="color:green"># 'unless' er det motsatte av 'if'</span>
+  8| puts <span style="color:#660066">&quot;La oss kode litt Ruby.&quot;</span> <span style="color:blue">unless</span> svar==<span style="color:#660066">&quot;nei&quot;</span>
+  9| 
+ 10| <span style="color:green"># men b&oslash;r brukes forsiktig</span>
+ 11| <span style="color:blue">unless</span> svar[0] == ?j
+ 12|   puts <span style="color:#660066">&quot;Mener du at du ikke liker Ruby?&quot;</span>
+ 13| <span style="color:blue">else</span>
+ 14|   puts <span style="color:#660066">&quot;Doble negasjoner er forvirrende...&quot;</span>
+ 15| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>chomp</B><DD>
+<P>fjerner et eventuelt newline-tegn i fra slutten av strengen.</P>
+<DT><B>downcase</B><DD>
+<P>gj&oslash;r store bokstaver om til sm&aring;.</P>
+</DL>
+
+Merk at chomp og downcase ikke har noen '!', s&aring; de returnerer kopier som har blitt modifisert. De endrer ikke objektet de blir kalt p&aring;.</P>
+
+<H3>Case</H3>
+
+<P>Ruby har ogs&aring; case-konstruksjonen, som ofte er et bedre valg enn en rekke elsif'er mot samme variabel. </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/case1.rb">kode/case1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| print <span style="color:#660066">&quot;Er du gutt eller jente?: &quot;</span>
+  2| svar = gets.downcase.chomp
+  3| 
+  4| <span style="color:green"># case er ogs&aring; kjent som switch/case i andre spr&aring;k</span>
+  5| <span style="color:blue">case</span> svar
+  6|   <span style="color:blue">when</span> <span style="color:#660066">&quot;intetkj&oslash;nn&quot;</span>
+  7|     puts <span style="color:#660066">&quot;Hei!&quot;</span>
+  8|   <span style="color:blue">when</span> <span style="color:#660066">&quot;jente&quot;</span>, <span style="color:#660066">&quot;kvinne&quot;</span>, <span style="color:#660066">&quot;dame&quot;</span>
+  9|     puts <span style="color:#660066">&quot;Heisann s&oslash;ta!&quot;</span>
+ 10|   <span style="color:blue">when</span> <span style="color:#660066">&quot;gutt&quot;</span>, <span style="color:#660066">&quot;mann&quot;</span>, <span style="color:#660066">&quot;herre&quot;</span>
+ 11|     puts <span style="color:#660066">&quot;Heisann kjekken!&quot;</span>
+ 12|   <span style="color:blue">else</span> 
+ 13|     puts <span style="color:#660066">&quot;God dag herr/fru?&quot;</span>
+ 14|   <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P> Legg merke til at en <CODE><B>when</B></CODE> blokk kan sl&aring; ut p&aring; flere oppgitte verdier. Man kan ogs&aring; bruke regul&aelig;re uttrykk, <CODE>Range</CODE>-objekter, klasser etc. 
+Du kan ogs&aring; lage dine egne objekter som kan brukes her 
+ved &aring; implementere <CODE><B>===</B></CODE> operatoren, som kalles b&aring;de "relationship operator" og "case equality operator". 
+(Ja, det er 3 likhetstegn.) </P>
+
+
+<H2><A NAME="ss3.2">3.2</A> <A HREF="pres.html#toc3.2">L&oslash;kker - while</A>
+</H2>
+
+<P> Hvis ikke du er fra Bergen opprinnelig, s&aring; har du vel falt for denne sp&oslash;ken en gang...</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gjenta1.rb">kode/gjenta1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># while - gjenta s&aring; lenge noe er sant</span>
+  2| <span style="color:blue">begin</span>
+  3|   print <span style="color:#660066">&quot;En gutt og ei jente satt i ett tre. \n&quot;</span>
+  4|   print <span style="color:#660066">&quot;S&aring; falt gutten ned. \n&quot;</span>
+  5|   print <span style="color:#660066">&quot;  Hvem satt igjen? :&gt; &quot;</span>
+  6|   svar = gets.chomp.downcase
+  7| <span style="color:blue">end</span> <span style="color:blue">while</span> svar.index(<span style="color:#660066">&quot;jenta&quot;</span>)
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>index</B><DD>
+<P>gir indeksen til hvor i strengen det gitte argumentet finnes eller nil om
+det ikke finnes.</P>
+</DL>
+</P>
+
+<H3>Until</H3>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gjenta2.rb">kode/gjenta2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Litt mer g&oslash;y med matte.</span>
+  2| a = <span style="color:blue">nil</span>
+  3| 
+  4| <span style="color:green"># until - gjenta inntil noe blir sant</span>
+  5| <span style="color:blue">until</span> a == 0
+  6|   print <span style="color:#660066">&quot;Skriv inn ett tall (0 avslutter): &quot;</span>
+  7|   a = gets.to_i
+  8|   puts <span style="color:#660066">&quot;#{a} opph&oslash;yd i 2      = &quot;</span> + (a**2).to_s
+  9|   puts <span style="color:#660066">&quot;Kvaderatroten av #{a} = &quot;</span> + (Math.sqrt(a)).to_s 
+ 10| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P> Merk at n&aring;r l&oslash;kke-uttrykket er foran koden som skal gjentas, droppes begin-n&oslash;kkelordet.</P>
+
+<H3>Datastrukturer</H3>
+
+<P> De to viktigste datastrukturene i Ruby er lister (Array) og hashmaps (Hash).</P>
+<H3>Array</H3>
+
+<P> En line&aelig;r liste med objekter av allverdens typer</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/liste1.rb">kode/liste1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Lister</span>
+  2| fisketyper = [<span style="color:#660066">'torsk'</span>, <span style="color:#660066">'laks'</span>, <span style="color:#660066">'&oslash;rret'</span>, <span style="color:#660066">'sei'</span>]
+  3| 
+  4| pizza  = Array.new
+  5| pizza.push <span style="color:#660066">'pepperoni'</span>    <span style="color:green"># Legge til elementer i listen:</span>
+  6| pizza.unshift <span style="color:#660066">'ananas'</span>
+  7| pizza &lt;&lt; :chorizo
+  8| pizza += %w{kylling biff kj&oslash;ttboller}   <span style="color:green"># Sl&aring; sammen to lister</span>
+  9| 
+ 10| <span style="color:green"># Manipulering</span>
+ 11| puts fisketyper.collect{|fisk| <span style="color:#660066">&quot;Jeg liker ikke &quot;</span> + fisk }.join(<span style="color:#660066">&quot; ei!\n&quot;</span>)
+ 12| 
+ 13| pizza.delete(<span style="color:#660066">'Ananas'</span>)
+ 14| puts <span style="color:#660066">&quot;Jeg vil ha en pizza med #{pizza.join(', ')} og masse ost!&quot;</span>
+</pre>
+</td></table>
+</P>
+<H3>Hash</H3>
+
+<P> Hash ('ordbok'?), ogs&aring; kjent som 'map', 'dictionary' i andre spr&aring;k.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/ordbok1.rb">kode/ordbok1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Hash map / dictionary</span>
+  2| ordbok = {
+  3|   <span style="color:#660066">'ruby'</span>    =&gt; <span style="color:#660066">'Edelsten eller spr&aring;k'</span>,
+  4|   <span style="color:#660066">'python'</span>  =&gt; <span style="color:#660066">'Reptil eller spr&aring;k'</span>,
+  5|   :pi       =&gt; <span style="color:#660066">'Matematisk symbol'</span>,
+  6|   alpha:    <span style="color:#660066">'Gresk symbol for bokstaven A'</span>,
+  7| }
+  8| 
+  9| <span style="color:green"># Oppslag </span>
+ 10| ordbok[<span style="color:#660066">'ruby'</span>]
+ 11| ordbok[:alpha]
+ 12| ordbok[:beta]   <span style="color:green">#=&gt; nil # fordi n&oslash;kkelen ikke finnes</span>
+ 13| ordbok[:pi]
+ 14| ordbok[<span style="color:#660066">'pi'</span>]    <span style="color:green">#=&gt; nil # fordi Symbol og String er forskjellig</span>
+ 15| 
+ 16| ordbok[<span style="color:#660066">'python'</span>] = <span style="color:#660066">'Mener du som i Monty Python?'</span>   <span style="color:green"># Overskriver</span>
+ 17| ordbok[:e] = Math::E    <span style="color:green"># Legger til</span>
+ 18| ordbok[:pi] ||= 3.142   <span style="color:green"># Overskrives ikke, da den allerede finnes</span>
+ 19| 
+ 20| tekst = ordbok.map <span style="color:blue">do</span> |ord, beskrivelse|
+ 21|   <span style="color:#660066">&quot;Ordet '#{ord}' er definert som: #{beskrivelse}.&quot;</span> <span style="color:blue">if</span> beskrivelse
+ 22| <span style="color:blue">end</span>.compact.join(<span style="color:#660066">&quot;\n&quot;</span>)
+ 23| puts tekst
+</pre>
+</td></table>
+</P>
+<P>Om n&oslash;kkelen ikke finnes, returnes 'nil'</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/ordbok2.rb">kode/ordbok2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># N&oslash;sting av hash</span>
+  2| treet = {
+  3|   rot: {
+  4|     stamme: {
+  5|       grener: [
+  6|         {blader: <span style="color:#660066">'gr&oslash;nne'</span>, knopper: <span style="color:#660066">'spirende'</span>},
+  7|         {blader: <span style="color:#660066">'gule'</span>},
+  8|         {blader: <span style="color:#660066">'r&oslash;de'</span>,   bladlus: <span style="color:#660066">'d&oslash;ende'</span>},
+  9|         {blader: <span style="color:#660066">'brune'</span>},
+ 10|         {blader: <span style="color:blue">false</span>, insekter: <span style="color:blue">nil</span>},
+ 11|         {sn&oslash;: <span style="color:#660066">'kald'</span>},
+ 12|       ]
+ 13|     }
+ 14|   }
+ 15| }
+ 16| 
+ 17| puts <span style="color:#660066">&quot;Bladene p&aring; treet har gjennom &aring;ret&quot;</span>
+ 18| treet[:rot][:stamme][:grener].each <span style="color:blue">do</span> |gren|
+ 19|   dikt = gren.collect <span style="color:blue">do</span> |key, verdi|
+ 20|     <span style="color:blue">if</span> verdi
+ 21|       <span style="color:#660066">&quot;#{verdi} #{key}&quot;</span>
+ 22|     <span style="color:blue">else</span>
+ 23|       <span style="color:#660066">&quot;ingen #{key}&quot;</span>
+ 24|     <span style="color:blue">end</span>
+ 25|   <span style="color:blue">end</span>.compact.join(<span style="color:#660066">' med '</span>)
+ 26|   puts dikt
+ 27| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+
+
+<H2><A NAME="ss3.3">3.3</A> <A HREF="pres.html#toc3.3">Iterasjon - Iterator-pattern og 'yield'</A>
+</H2>
+
+<P> For l&oslash;kken finnes fremdeles i Ruby, men hvor Python har gjort for-l&oslash;kken glupere, har Ruby g&aring;tt videre og tatt i bruk Enumertor-pattern'et.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/iter1.rb">kode/iter1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># La oss skrive ut 7-gange-tabellen</span>
+  2| tall = 7
+  3| 
+  4| <span style="color:green"># Ruby har for-l&oslash;kker som de fleste spr&aring;k</span>
+  5| <span style="color:blue">for</span> i <span style="color:blue">in</span> (1..10)
+  6|   puts <span style="color:#660066">&quot;#{i} gange #{tall} er #{i*tall}&quot;</span>
+  7| <span style="color:blue">end</span>
+  8| 
+  9| <span style="color:green"># 5-gange-tabellen</span>
+ 10| tall = 5
+ 11| 
+ 12| <span style="color:green"># men for-l&oslash;kkens dager er talte. </span>
+ 13| <span style="color:green"># for-l&oslash;kken over er syntaktisk sukker for</span>
+ 14| <span style="color:green"># f&oslash;lgende bruk av iterator-metoden each.</span>
+ 15| (1..10).each <span style="color:blue">do</span> |i|
+ 16|   puts <span style="color:#660066">&quot;#{i} gange #{tall} er #{i*tall}&quot;</span>
+ 17| <span style="color:blue">end</span>  
+</pre>
+</td></table>
+</P>
+<P> <CODE><B>(1..10)</B></CODE> lager et <CODE>Range</CODE>-objekt, som spenner i fra og med 1, til og med 10. Dersom du ikke &oslash;nsker &aring; inkludere 10, kan du bruke 3 punktum, for eksempel s&aring; spenner <CODE><B>(1...10)</B></CODE> i fra 1, til og med 9. </P>
+
+
+<H3>Iterere over en datastruktur </H3>
+
+<P> N&aring;r man skal iterere over datastrukturer, blir indekser lett i veien. <BR>
+S&aring;kalte "off-by-one" feil er ganske vanlige.<BR> Men hvorfor ikke la datastrukturen st&aring; for itereringen?</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/iter2.rb">kode/iter2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| personer = [ <span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;Per&quot;</span>, <span style="color:#660066">&quot;Jan&quot;</span>, <span style="color:#660066">&quot;Line&quot;</span>]
+  2| 
+  3| <span style="color:green"># Den &quot;gamle&quot; naive m&aring;ten</span>
+  4| <span style="color:blue">for</span> i <span style="color:blue">in</span> (0...personer.size) 
+  5|   puts <span style="color:#660066">&quot;Hei &quot;</span> + personer[i]
+  6| <span style="color:blue">end</span>
+  7| 
+  8| <span style="color:green"># Alle objekter som implementerer 'each' kan itereres over</span>
+  9| <span style="color:blue">for</span> person <span style="color:blue">in</span> personer
+ 10|   puts <span style="color:#660066">&quot;Er #{person} tilstede?&quot;</span>
+ 11| <span style="color:blue">end</span>
+ 12| 
+ 13| <span style="color:green"># Ruby-m&aring;ten: Bruke Iterator og en block</span>
+ 14| personer.each <span style="color:blue">do</span> |person|
+ 15|   puts <span style="color:#660066">&quot;Velkommen #{person}&quot;</span>
+ 16| <span style="color:blue">end</span>  
+</pre>
+</td></table>
+</P>
+
+<P> <EM>"Hva er den <CODE><B>|person|</B></CODE>greia?"</EM><BR>
+Det er nesten som en argumentdeklarasjon, men ikke til en funksjon. <BR>
+<CODE><B>do |person|; end</B></CODE> er en <B>block</B>, et veldig viktig konsept i Ruby.</P>
+
+
+<H3>Yield og blocks.</H3>
+
+<P>En <B>block</B> er en kodebit, som kan motta argumenter og returnere en verdi. Der slutter likhetene med en metode. </P>
+<P>En block holder ogs&aring; tak i den omliggende konteksten og bindingen. Det betyr at lokale variable er tilgjengelig i block-koden, noe som gj&oslash;r den perfekt til callback, f.eks. i grafiske brukergrensesnitt.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/block1.rb">kode/block1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># En enkel, naiv iterator metode.</span>
+  2| <span style="color:blue">def</span> tell_fingre
+  3|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Tommel&quot;</span>
+  4|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Peke&quot;</span>
+  5|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Lange&quot;</span>
+  6|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Ringe&quot;</span>
+  7|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Lille&quot;</span>
+  8| <span style="color:blue">end</span>
+  9| 
+ 10| <span style="color:green"># Blocken har tilgang til lokale variabler.</span>
+ 11| postfix = <span style="color:#660066">&quot;finger...&quot;</span>
+ 12| 
+ 13| <span style="color:green"># Vi sender med en block n&aring;r vi kaller iterator-metoden.</span>
+ 14| tell_fingre <span style="color:blue">do</span> |finger|
+ 15|   puts finger + postfix
+ 16| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P> En block er ikke et objekt av effektivitetshensyn, men kan innkapsles i et Proc-objekt. (Via Proc.new, n&oslash;kkelordene proc og lambda, eller via bruk av <CODE><B>&amp;</B></CODE>-prefikset i argumentlista til metodedefinisjonen)  </P>
+
+<H3>Blocks for h&aring;ndtering av ressurser</H3>
+
+<P>Minneh&aring;ndtering i Ruby ordnes ved garbage collection, men en del andre ressurser krever eksplisitt lukking. &Aring;pne filer, databasetilkoblinger og andre ressurser som tar opp mer enn minne, har det bedre med en eksplisitt lukking. Men slikt glemmer man lett...</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/block2.rb">kode/block2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Hent filnavn fra kommandolinjen.</span>
+  2| filnavn = ARGV[0]
+  3| 
+  4| <span style="color:green"># Gamle m&aring;ten.</span>
+  5| fil = File.open(filnavn, <span style="color:#660066">&quot;r&quot;</span>)
+  6| linjenummer = 0
+  7| fil.readlines.each{ |linje|
+  8|   linjenummer +=1
+  9|   print <span style="color:#660066">&quot;#{linjenummer}: #{linje}&quot;</span> 
+ 10| }
+ 11| fil.close   <span style="color:green"># Lukker filen eksplisitt</span>
+ 12| 
+ 13| <span style="color:green"># Bruk block til ressurs styring.</span>
+ 14| File.open( filnavn, <span style="color:#660066">&quot;r&quot;</span>) <span style="color:blue">do</span> |fil|
+ 15|   linjenummer = 0
+ 16|   fil.readlines.each <span style="color:blue">do</span> |linje|
+ 17|     linjenummer += 1
+ 18|     print <span style="color:#660066">&quot;#{linjenummer}&gt;: #{linje}&quot;</span> 
+ 19|   <span style="color:blue">end</span>
+ 20| <span style="color:blue">end</span>
+ 21| <span style="color:green"># File.open lukker filen etter &aring; ha  kj&oslash;rt koden i blokken.</span>
+</pre>
+</td></table>
+</P>
+<P> Her benytter vi en annen m&aring;te for &aring; angi blocker.
+I stedet for <CODE><B>do |arg| ... end</B></CODE> bruker vi <CODE><B>{|arg| ... }</B></CODE>. Varianten med kr&oslash;llparenteser har h&oslash;yere presedens.</P>
+
+<H3>Proc-objekter</H3>
+
+<P>Et Proc-objekt innkapsler som oftest en block. De kan lages via <CODE>Proc.new</CODE>, n&oslash;kkelordene <CODE>proc</CODE> og <CODE>lambda</CODE>, eller via bruk av <CODE><B>&amp;</B></CODE>-prefikset i argumentlista til metodedefinisjonen. </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/block3.rb">kode/block3.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Lager ett Proc-objekt av en block.</span>
+  2| p = proc <span style="color:blue">do</span> |i| 
+  3|   puts <span style="color:#660066">&quot;Hei #{i}!&quot;</span> 
+  4| <span style="color:blue">end</span>
+  5| 
+  6| <span style="color:green"># Vi kan kalle Proc'en eksplisitt...</span>
+  7| p.call(<span style="color:#660066">'Jens'</span>) <span style="color:green">#=&gt; &quot;Hei Jens!&quot;</span>
+  8| 
+  9| <span style="color:green"># Bruke den som block...</span>
+ 10| [1,2,3].each(&amp;p) 
+ 11| 
+ 12| <span style="color:green"># &amp; prefikset gj&oslash;r en evt. block om til et Proc-objekt.</span>
+ 13| <span style="color:blue">def</span> tar_block(a, &amp;block)
+ 14|   block.call(a)
+ 15| <span style="color:blue">end</span>
+ 16| 
+ 17| tar_block(5) <span style="color:blue">do</span> |b| 
+ 18|   puts  <span style="color:#660066">&quot;Hallo #{b}.&quot;</span>
+ 19| <span style="color:blue">end</span> <span style="color:green">#=&gt; &quot;Hallo 5.&quot;</span>
+</pre>
+</td></table>
+</P>
+
+
+
+<HR>
+<A HREF="pres-4.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-2.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc3"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: Et st&oslash;rre eksempel</TITLE>
+ <LINK HREF="pres-5.html" REL=previous>
+ <LINK HREF="pres.html#toc6" REL=contents>
+</HEAD>
+<BODY>
+<IMG SRC="next.png" ALT="Next">
+<A HREF="pres-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s6">6.</A> <A HREF="pres.html#toc6">Et st&oslash;rre eksempel</A></H2>
+
+<P> Om du har hatt en Commodore 64, har du kanskje sett en variant 
+av f&oslash;lgende spill i manualen. 
+M&aring;let er &aring; gjette et tall med minst mulig fors&oslash;k, gitt litt tilbakemelding p&aring; hvor n&aelig;r man gjettet.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gjett.rb">kode/gjett.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green">#!/usr/bin/env ruby </span>
+  2| <span style="color:blue">class</span> Gjett  <span style="color:green"># Et lite spill </span>
+  3|   <span style="color:blue">def</span> initialize
+  4|     @max = 100
+  5|     @min = 1
+  6|     @forsoek = 0
+  7|     @ferdig = <span style="color:blue">false</span>
+  8|     @fasit_svar = ((@max-@min)*rand).to_i + @min
+  9|   <span style="color:blue">end</span>
+ 10|   <span style="color:blue">def</span> spill
+ 11|     puts <span style="color:#660066">&quot;\nGjettekonkurranse!&quot;</span>
+ 12|     <span style="color:blue">while</span> @forsoek &lt; 10 <span style="color:blue">and</span> <span style="color:blue">not</span> @ferdig
+ 13|       gjett( hent_svar )
+ 14|     <span style="color:blue">end</span>
+ 15|   <span style="color:blue">end</span>
+ 16|   <span style="color:blue">def</span> gjett( svar )
+ 17|     diff = (svar - @fasit_svar).abs
+ 18|     <span style="color:blue">if</span> diff &gt; 25
+ 19|       print <span style="color:#660066">&quot;Mye &quot;</span>
+ 20|     <span style="color:blue">elsif</span> diff &gt; 15  
+ 21|       print <span style="color:#660066">&quot;Endel &quot;</span>
+ 22|     <span style="color:blue">elsif</span> diff &gt; 0 
+ 23|       print <span style="color:#660066">&quot;Litt &quot;</span>
+ 24|     <span style="color:blue">end</span>
+ 25|     <span style="color:blue">if</span> svar &gt; @fasit_svar
+ 26|       puts <span style="color:#660066">&quot;lavere. &quot;</span>
+ 27|     <span style="color:blue">elsif</span> svar &lt; @fasit_svar
+ 28|       puts <span style="color:#660066">&quot;h&oslash;yere. &quot;</span>
+ 29|     <span style="color:blue">end</span>
+ 30|     <span style="color:blue">if</span> diff == 0
+ 31|       @ferdig = <span style="color:blue">true</span>
+ 32|       puts <span style="color:#660066">&quot;Du klarte det p&aring; #@forsoek fors&oslash;k!&quot;</span>
+ 33|     <span style="color:blue">end</span>
+ 34|   <span style="color:blue">end</span>
+ 35|   <span style="color:blue">def</span> hent_svar
+ 36|     <span style="color:blue">begin</span>
+ 37|       print <span style="color:#660066">&quot;Gjett ett tall mellom #@min og #@max &gt;: &quot;</span>
+ 38|       svar_streng = gets.chomp
+ 39|       <span style="color:blue">if</span> svar_streng == <span style="color:#660066">&quot;slutt&quot;</span>
+ 40|         puts <span style="color:#660066">&quot;Ha det bra!&quot;</span>
+ 41|         exit
+ 42|       <span style="color:blue">end</span>
+ 43|       svar = svar_streng.to_i
+ 44|     <span style="color:blue">end</span> <span style="color:blue">until</span> svar &gt;= @min <span style="color:blue">and</span> svar &lt;= @max
+ 45|     @forsoek += 1
+ 46|     svar
+ 47|   <span style="color:blue">end</span>
+ 48| <span style="color:blue">end</span> 
+ 49| 
+ 50| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:blue">then</span>
+ 51|   <span style="color:blue">begin</span>
+ 52|     g = Gjett.new
+ 53|     g.spill
+ 54|     print <span style="color:#660066">&quot;Spille en gang til? [j/n]: &quot;</span>
+ 55|     svar = gets.downcase
+ 56|   <span style="color:blue">end</span> <span style="color:blue">while</span> svar[0] == <span style="color:#660066">&quot;j&quot;</span>
+ 57| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+
+
+
+
+
+
+<HR>
+<IMG SRC="next.png" ALT="Next">
+<A HREF="pres-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

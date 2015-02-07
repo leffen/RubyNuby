@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: Ting vi nesten glemte...</TITLE>
+ <LINK HREF="pres-6.html" REL=next>
+ <LINK HREF="pres-4.html" REL=previous>
+ <LINK HREF="pres.html#toc5" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="pres-6.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-4.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc5"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s5">5.</A> <A HREF="pres.html#toc5">Ting vi nesten glemte...</A></H2>
+
+<H2><A NAME="ss5.1">5.1</A> <A HREF="pres.html#toc5.1">Exceptions: Feil og unntak. N&aring;r ting g&aring;r galt.</A>
+</H2>
+
+<P> For all sin glitrende magi, kan ikke Ruby beskytte deg fra &aring; gj&oslash;re feil og heller ikke fra alt som kan g&aring; galt.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/unntak1.rb">kode/unntak1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| $livvakter = <span style="color:blue">true</span>
+  2| 
+  3| <span style="color:blue">def</span> hent_kongen
+  4|   <span style="color:blue">if</span> $livvakter
+  5|     puts <span style="color:#660066">&quot;Kanskje kommer Kongen...&quot;</span>
+  6|   <span style="color:blue">else</span>
+  7|     raise SecurityError, <span style="color:#660066">&quot;Redd for bl&oslash;tekake.&quot;</span>
+  8|   <span style="color:blue">end</span>
+  9| <span style="color:blue">end</span>
+ 10| 
+ 11| <span style="color:blue">begin</span>
+ 12|   hent_kongen <span style="color:green">#=&gt; &quot;Kanskje kommer Kongen...&quot;</span>
+ 13|   $livvakter = <span style="color:blue">false</span>
+ 14|   hent_kongen <span style="color:green">#=&gt; &quot;Niks: Redd for bl&oslash;tekake.&quot;</span>
+ 15| <span style="color:blue">rescue</span> SecurityError =&gt; error
+ 16|   puts <span style="color:#660066">&quot;Niks: #{error}&quot;</span>
+ 17| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+
+
+
+<H2><A NAME="ss5.2">5.2</A> <A HREF="pres.html#toc5.2">Regul&aelig;re uttrykk</A>
+</H2>
+
+<P>Regul&aelig;re uttrykk (regular expressions) er en gjenganger blant skriptingsspr&aring;kene som gj&oslash;r dem s&aring; perfekte til tekstmanipulering. Klassen <CODE><B>Regexp</B></CODE> samler denne funksjonaliteten p&aring; en ryddig m&aring;te, men Ruby lar deg ogs&aring; bruke regexp literaler.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/regexp1.rb">kode/regexp1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Litt HTML tekst &aring; lete i</span>
+  2| html = <span style="color:#660066">'&lt;UL&gt;
+  3| &lt;LI&gt;&lt;IMG SRC=&quot;next.gif&quot;&gt;&lt;/LI&gt;
+  4| &lt;LI&gt;&lt;A HREF=&quot;index.html&quot;&gt;Hei&lt;/A&gt;&lt;/LI&gt;
+  5| &lt;/UL&gt;'</span>
+  6| 
+  7| <span style="color:green"># Den ryddige m&aring;ten &aring; lage Regexp'er p&aring;:</span>
+  8| r1 = Regexp.new(<span style="color:#660066">'&lt;IMG SRC=&quot;.*&quot;&gt;'</span>)
+  9| puts r1.match( html ).to_s <span style="color:green">#=&gt; '&lt;IMG SRC=&quot;next.gif&quot;&gt;'</span>
+ 10| 
+ 11| <span style="color:green"># Regexp-literaler</span>
+ 12| r2 = <span style="color:#660066">/&lt;A HREF=&quot;.*&quot;&gt;.*&lt;\/</span>A&gt;/ <span style="color:green"># slash m&aring; escapes</span>
+ 13| puts r2.match( html ).to_s <span style="color:green">#=&gt; '&lt;A HREF=&quot;index.html&quot;&gt;Hei&lt;/A&gt;'</span>
+ 14| 
+ 15| <span style="color:green"># String-klassen har ogs&aring; en del metoder som tar imot</span>
+ 16| <span style="color:green"># ett Regexp-objekt, deriblant sub og gsub</span>
+ 17| antall_e = 0
+ 18| <span style="color:#660066">&quot;Hvor mange e'er er det i denne setningen?&quot;</span>.scan(<span style="color:#660066">/e/</span>){ |match|
+ 19|   antall_e += 1
+ 20| }
+ 21| puts <span style="color:#660066">&quot;Totalt #{antall_e} e'er.&quot;</span> <span style="color:green">#=&gt; Totalt 9 e'er.</span>
+</pre>
+</td></table>
+</P>
+<P>Regul&aelig;re uttrykk er nesten en vitenskap i seg selv. Dessuten er de omtrent like lesbare som det norske lovverket etter &aring; ha g&aring;tt igjennom en makuleringsmaskin og b&oslash;r derfor brukes med omhu.</P>
+<P>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)</P>
+
+<HR>
+<A HREF="pres-6.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="pres-4.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="pres.html#toc5"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>
