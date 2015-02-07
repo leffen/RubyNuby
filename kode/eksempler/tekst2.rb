@@ -1,7 +1,7 @@
 # String objekter kan endres:
 navn = "Ola Nordmann"
 
-# Kjønnsoperasjon?
+# KjÃ¸nnsoperasjon?
 nyttnavn = navn.sub("Ola", "Oline")
 
 # sub lager ett nytt String objekt.

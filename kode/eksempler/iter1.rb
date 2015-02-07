@@ -1,5 +1,5 @@
-# La oss skrive ut 3-gange-tabellen
-tall = 3
+# La oss skrive ut 7-gange-tabellen
+tall = 7
 
 # Ruby har for-løkker som de fleste språk
 for i in (1..10)
