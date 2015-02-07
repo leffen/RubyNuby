@@ -268,7 +268,7 @@ det ikke finnes.
 <sect2>Datastrukturer
 <p> De to viktigste datastrukturene i Ruby er lister (Array) og hashmaps (Hash).
 <sect2> Array
-En lineær liste med objekter av allverdens typer
+<p> En lineær liste med objekter av allverdens typer
 <p><htmlurl url="kode/liste1.rb" name="SOURCE_CODE">
 <sect2> Hash
 <p> Hash ('ordbok'?), også kjent som 'map', 'dictionary' i andre språk.
