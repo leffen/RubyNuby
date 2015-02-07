@@ -6,7 +6,7 @@
 
 <title>En nybegynnerintroduksjon til programmeringsspråket Ruby</title>
 <author>Kent Dahl <tt>&lt; kent@rubendahl.no &gt</tt></author>
-<date>v1.2, Februar 10., 2014</date>
+<date>v1.7.x, Februar 10., 2014</date>
 
 <abstract>En introduksjon til språket Ruby.</abstract>
 
@@ -265,7 +265,7 @@ det ikke finnes.
 <p><htmlurl url="kode/gjenta2.rb" name="SOURCE_CODE">
 <p> Merk at når løkke-uttrykket er foran koden som skal gjentas, droppes begin-nøkkelordet.
 
-<sect2>Datastrukturer
+<sect1>Datastrukturer
 <p> De to viktigste datastrukturene i Ruby er lister (Array) og hashmaps (Hash).
 <sect2> Array
 <p> En lineær liste med objekter av allverdens typer
@@ -407,21 +407,6 @@ Når det skjer, er usikkert. Ingen referanser til objektet må eksistere og garb
 
 
 
-
-<sect>Ting vi nesten glemte...
-
-<sect1> Exceptions: Feil og unntak. Når ting går galt.
-<p> For all sin glitrende magi, kan ikke Ruby beskytte deg fra å gjøre feil og heller ikke fra alt som kan gå galt.
-<p><htmlurl url="kode/unntak1.rb" name="SOURCE_CODE">
-<p>
-
-
-<sect1> Regulære uttrykk
-<P>Regulære uttrykk (regular expressions) er en gjenganger blant skriptingsspråkene som gjør dem så perfekte til tekstmanipulering. Klassen <tt><bf>Regexp</bf></tt> samler denne funksjonaliteten på en ryddig måte, men Ruby lar deg også bruke regexp literaler.
-<p><htmlurl url="kode/regexp1.rb" name="SOURCE_CODE">
-<P>Regulære uttrykk er nesten en vitenskap i seg selv. Dessuten er de omtrent like lesbare som det norske lovverket etter å ha gått igjennom en makuleringsmaskin og bør derfor brukes med omhu.
-<p>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)
-
 <sect> Et større eksempel
 <p> Om du har hatt en Commodore 64, har du kanskje sett en variant 
 av følgende spill i manualen. 
@@ -430,12 +415,49 @@ Målet er å gjette et tall med minst mulig forsøk, gitt litt tilbakemelding p�
 
 
 
+
+<sect>Noen nødvendigheter
+
+<sect1> Exceptions: Feil og unntak. Når ting går galt.
+<p> For all sin glitrende magi, kan ikke Ruby beskytte deg fra å gjøre feil og heller ikke fra alt som kan gå galt.
+<p><htmlurl url="kode/unntak1.rb" name="SOURCE_CODE">
+<p> Du kan også legge til en ensure-klausul som kjøres uansett om det heves et unntak eller ikke.
+<p><htmlurl url="kode/unntak2.rb" name="SOURCE_CODE">
+
+
+<sect1> Regulære uttrykk
+<P>Regulære uttrykk (regular expressions) er en gjenganger blant skriptingsspråkene som gjør dem så perfekte til tekstmanipulering. Klassen <tt><bf>Regexp</bf></tt> samler denne funksjonaliteten på en ryddig måte, men Ruby lar deg også bruke regexp literaler.
+<p><htmlurl url="kode/regexp1.rb" name="SOURCE_CODE">
+<P>Regulære uttrykk er nesten en vitenskap i seg selv. Dessuten er de omtrent like lesbare som det norske lovverket etter å ha gått igjennom en makuleringsmaskin og bør derfor brukes med omhu.
+<p><htmlurl url="kode/regexp2.rb" name="SOURCE_CODE">
+
+<p>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)
+
+
 <!--
 <sect>Oppgaveforslag
 <p>
-
-
 -->
+
+
+
+
+<sect>Ruby på avveie
+<p>"Men jeg kan ikke bruke Ruby på jobb, fordi vi programmerer i..."
+
+<itemize>
+<item> <tt>Java</tt> JRuby
+<item> <tt>C#</tt> IronRuby
+<item> <tt>C</tt> Ruby (MRI versjonen) er skrevet i C... Lenk i vei.
+<item> <tt>JavaScript</tt> Opal? (http://opalrb.org/)
+
+<p>"Ja, men, vi kjører på ..."
+<itemize>
+<item> <tt>Android</tt> JRuby + Ruboto
+<item> <tt>iOS</tt> RubyMotion
+</itemize>
+
+
 
 
 
