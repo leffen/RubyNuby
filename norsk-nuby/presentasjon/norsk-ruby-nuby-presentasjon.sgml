@@ -5,7 +5,7 @@
 
 
 <title>En nybegynnerintroduksjon til programmeringsspråket Ruby</title>
-<author>Kent Dahl <tt>&lt; kent@rubendahl.com &gt</tt></author>
+<author>Kent Dahl <tt>&lt; kent@rubendahl.no &gt</tt></author>
 <date>v1.2, Februar 10., 2014</date>
 
 <abstract>En introduksjon til språket Ruby.</abstract>
@@ -32,7 +32,7 @@ Kort om Ruby før vi titter på litt kode.
 <sect1>Hvor kommer Ruby fra?
 <p>
 <itemize>
-<item>Japan
+<item>Japan (1995)
 <item>Den geniale hjernen til Yukihiro Matsumoto ("Matz")
 <item> En smeltedigel av features fra forskjellige språk:
   <itemize>
@@ -265,7 +265,21 @@ det ikke finnes.
 <p><htmlurl url="kode/gjenta2.rb" name="SOURCE_CODE">
 <p> Merk at når løkke-uttrykket er foran koden som skal gjentas, droppes begin-nøkkelordet.
 
+<sect2>Datastrukturer
+<p> De to viktigste datastrukturene i Ruby er lister (Array) og hashmaps (Hash).
+<sect2> Array
+En lineær liste med objekter av allverdens typer
+<p><htmlurl url="kode/liste1.rb" name="SOURCE_CODE">
+<sect2> Hash
+<p> Hash ('ordbok'?), også kjent som 'map', 'dictionary' i andre språk.
+<p><htmlurl url="kode/ordbok1.rb" name="SOURCE_CODE">
+<p>Om nøkkelen ikke finnes, returnes 'nil'
+<p><htmlurl url="kode/ordbok2.rb" name="SOURCE_CODE">
 
+<!--
+<sect2> Annet...
+<p> .. som er verdt å nevne er Set, 
+-->
 
 <sect1> Iterasjon - Iterator-pattern og 'yield'
 <p> For løkken finnes fremdeles i Ruby, men hvor Python har gjort for-løkken glupere, har Ruby gått videre og tatt i bruk Enumertor-pattern'et.
@@ -330,7 +344,7 @@ Ruby har verken prosedyrer eller funksjoner; kun metoder som kalles på objekter
 <p><htmlurl url="kode/metoder2.rb" name="SOURCE_CODE">
 
 <sect2> Spesielle argumenter
-<p>I tillegg til <tt><bf>&</bf></tt>-prefikset som brukes for å pakke en block gitt til en metode inn i et Proc-objekt, brukes <tt><bf>*</bf></tt>-prefikset for å samle flere argumenter i en Array.
+<p>I tillegg til <tt><bf>&</bf></tt>-prefikset som brukes for å pakke en block gitt til en metode inn i et Proc-objekt, brukes <tt><bf>*</bf></tt>-prefikset for å samle flere argumenter i en liste (Array).
 <p><htmlurl url="kode/metoder3.rb" name="SOURCE_CODE">
 
 
@@ -406,7 +420,7 @@ Når det skjer, er usikkert. Ingen referanser til objektet må eksistere og garb
 <P>Regulære uttrykk (regular expressions) er en gjenganger blant skriptingsspråkene som gjør dem så perfekte til tekstmanipulering. Klassen <tt><bf>Regexp</bf></tt> samler denne funksjonaliteten på en ryddig måte, men Ruby lar deg også bruke regexp literaler.
 <p><htmlurl url="kode/regexp1.rb" name="SOURCE_CODE">
 <P>Regulære uttrykk er nesten en vitenskap i seg selv. Dessuten er de omtrent like lesbare som det norske lovverket etter å ha gått igjennom en makuleringsmaskin og bør derfor brukes med omhu.
-
+<p>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)
 
 <sect> Et større eksempel
 <p> Om du har hatt en Commodore 64, har du kanskje sett en variant 
