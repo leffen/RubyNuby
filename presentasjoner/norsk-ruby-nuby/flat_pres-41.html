@@ -2,71 +2,17 @@
 <HTML>
 <HEAD>
  <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
- <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: Noen n&oslash;dvendigheter</TITLE>
- <LINK HREF="pres-7.html" REL=next>
- <LINK HREF="pres-5.html" REL=previous>
- <LINK HREF="pres.html#toc6" REL=contents>
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;6.2&gt;:   Regul&aelig;re uttrykk</TITLE>
+ <LINK HREF="flat_pres-42.html" REL=next>
+ <LINK HREF="flat_pres-40.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc41" REL=contents>
 </HEAD>
 <BODY>
-<A HREF="pres-7.html"><IMG SRC="next.png" ALT="Next"></A>
-<A HREF="pres-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
-<A HREF="pres.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+<A HREF="flat_pres-42.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-40.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc41"><IMG SRC="toc.png" ALT="Contents"></A>
 <HR>
-<H2><A NAME="s6">6.</A> <A HREF="pres.html#toc6">Noen n&oslash;dvendigheter</A></H2>
-
-<H2><A NAME="ss6.1">6.1</A> <A HREF="pres.html#toc6.1">Exceptions: Feil og unntak. N&aring;r ting g&aring;r galt.</A>
-</H2>
-
-<P> For all sin glitrende magi, kan ikke Ruby beskytte deg fra &aring; gj&oslash;re feil og heller ikke fra alt som kan g&aring; galt.</P>
-<P>
-<table >
-      <tr style="background-color:#F0D0D0" ><td>
-<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/unntak1.rb">kode/unntak1.rb</A></div>
-<tr style="background-color:#FFF0F0"><td>
-<pre style="margin-top:0">
-  1| $livvakter = <span style="color:blue">true</span>
-  2| 
-  3| <span style="color:blue">def</span> hent_kongen
-  4|   <span style="color:blue">if</span> $livvakter
-  5|     puts <span style="color:#660066">&quot;Kanskje kommer Kongen...&quot;</span>
-  6|   <span style="color:blue">else</span>
-  7|     raise SecurityError, <span style="color:#660066">&quot;Redd for bl&oslash;tekake.&quot;</span>
-  8|   <span style="color:blue">end</span>
-  9| <span style="color:blue">end</span>
- 10| 
- 11| <span style="color:blue">begin</span>
- 12|   hent_kongen <span style="color:green">#=&gt; &quot;Kanskje kommer Kongen...&quot;</span>
- 13|   $livvakter = <span style="color:blue">false</span>
- 14|   hent_kongen <span style="color:green">#=&gt; &quot;Niks: Redd for bl&oslash;tekake.&quot;</span>
- 15| <span style="color:blue">rescue</span> SecurityError =&gt; error
- 16|   puts <span style="color:#660066">&quot;Niks: #{error}&quot;</span>
- 17| <span style="color:blue">end</span>
-</pre>
-</td></table>
-</P>
-<P> Du kan ogs&aring; legge til en ensure-klausul som kj&oslash;res uansett om det heves et unntak eller ikke.</P>
-<P>
-<table >
-      <tr style="background-color:#F0D0D0" ><td>
-<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/unntak2.rb">kode/unntak2.rb</A></div>
-<tr style="background-color:#FFF0F0"><td>
-<pre style="margin-top:0">
-  1| <span style="color:blue">begin</span>
-  2|   kode_som_kaster_unntak
-  3| <span style="color:blue">rescue</span> SecurityError =&gt; error
-  4|   puts <span style="color:#660066">&quot;Sikkerhetsproblem: #{error}&quot;</span>
-  5| <span style="color:blue">rescue</span> 
-  6|   puts <span style="color:#660066">&quot;En eller annen StandardError.&quot;</span>
-  7| <span style="color:blue">ensure</span>
-  8|   puts <span style="color:#660066">&quot;Opprydning gj&oslash;res okke som.&quot;</span>
-  9| <span style="color:blue">end</span>
-</pre>
-</td></table>
-</P>
-
-
-<H2><A NAME="ss6.2">6.2</A> <A HREF="pres.html#toc6.2">Regul&aelig;re uttrykk</A>
-</H2>
+<H2><A NAME="s41">41.</A> <A HREF="flat_pres.html#toc41">&lt;6.2&gt;:   Regul&aelig;re uttrykk</A></H2>
 
 <P>Regul&aelig;re uttrykk (regular expressions) er en gjenganger blant skriptingsspr&aring;kene som gj&oslash;r dem s&aring; perfekte til tekstmanipulering. Klassen <CODE><B>Regexp</B></CODE> samler denne funksjonaliteten p&aring; en ryddig m&aring;te, men Ruby lar deg ogs&aring; bruke regexp literaler.</P>
 <P>
@@ -121,8 +67,8 @@
 <P>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)</P>
 
 <HR>
-<A HREF="pres-7.html"><IMG SRC="next.png" ALT="Next"></A>
-<A HREF="pres-5.html"><IMG SRC="prev.png" ALT="Previous"></A>
-<A HREF="pres.html#toc6"><IMG SRC="toc.png" ALT="Contents"></A>
+<A HREF="flat_pres-42.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-40.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc41"><IMG SRC="toc.png" ALT="Contents"></A>
 </BODY>
 </HTML>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.2.2&gt;:   Arv</TITLE>
+ <LINK HREF="flat_pres-35.html" REL=next>
+ <LINK HREF="flat_pres-33.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc34" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-35.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-33.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc34"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s34">34.</A> <A HREF="flat_pres.html#toc34">&lt;4.2.2&gt;:   Arv</A></H2>
+
+<P> </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klasse3.rb">kode/klasse3.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Fortsetter der vi slapp...</span>
+  2| require_relative <span style="color:#660066">'klasse2'</span> 
+  3| 
+  4| <span style="color:green"># Arv - alle studenter er en submengde av alle personer</span>
+  5| <span style="color:blue">class</span> Student &lt; Person
+  6|   <span style="color:blue">def</span> initialize(etternavn, fornavn, alder = 0, studiested = <span style="color:#660066">&quot;NTNU&quot;</span> )
+  7|     <span style="color:green"># kall super-klassens versjon av metoden</span>
+  8|     <span style="color:blue">super</span>( etternavn, fornavn, alder )
+  9|     @studiested = studiested
+ 10|     @karakterer = [] <span style="color:green"># Eventuelt Array.new</span>
+ 11|   <span style="color:blue">end</span>
+ 12|   
+ 13|   <span style="color:green"># redefinerer Person#to_s metoden</span>
+ 14|   <span style="color:blue">def</span> to_s
+ 15|     <span style="color:#660066">&quot;#{@etternavn}, #{@fornavn} - studerer ved #{@studiested}.&quot;</span>
+ 16|   <span style="color:blue">end</span>
+ 17| 
+ 18|   <span style="color:blue">def</span> ta_eksamen(karakter)
+ 19|     @karakterer.push karakter
+ 20|   <span style="color:blue">end</span>
+ 21| 
+ 22|   <span style="color:blue">def</span> karaktersnitt
+ 23|     sum = 0
+ 24|     @karakterer.each <span style="color:blue">do</span> |karakter|
+ 25|       sum += karakter
+ 26|     <span style="color:blue">end</span>
+ 27|     sum.to_f / @karakterer.size
+ 28|   <span style="color:blue">end</span>
+ 29|   
+ 30| <span style="color:blue">end</span>
+ 31| 
+ 32| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:green"># Kun n&aring;r vi kj&oslash;rer denne filen:</span>
+ 33|   flinkis = Student.new(<span style="color:#660066">&quot;Einstein&quot;</span>, <span style="color:#660066">&quot;Al&quot;</span>, 128, <span style="color:#660066">&quot;Mensa&quot;</span>)
+ 34|   flinkis.ta_eksamen(1.0)
+ 35|   flinkis.ta_eksamen(2.0)
+ 36|   puts flinkis <span style="color:green">#=&gt; &quot;Einstein, Al - studerer ved Mensa.&quot;</span>
+ 37|   puts flinkis.karaktersnitt <span style="color:green">#=&gt; 1.5</span>
+ 38| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>super</B><DD>
+<P>et alias for superklassens versjon av den metoden vi er i n&aring;. </P>
+</DL>
+</P>
+
+<HR>
+<A HREF="flat_pres-35.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-33.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc34"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

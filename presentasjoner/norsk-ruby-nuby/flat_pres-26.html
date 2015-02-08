@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.4.2.1&gt;:  Blocks for h&aring;ndtering av ressurser</TITLE>
+ <LINK HREF="flat_pres-27.html" REL=next>
+ <LINK HREF="flat_pres-25.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc26" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-27.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-25.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc26"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s26">26.</A> <A HREF="flat_pres.html#toc26">&lt;3.4.2.1&gt;:  Blocks for h&aring;ndtering av ressurser</A></H2>
+
+<P>Minneh&aring;ndtering i Ruby ordnes ved garbage collection, men en del andre ressurser krever eksplisitt lukking. &Aring;pne filer, databasetilkoblinger og andre ressurser som tar opp mer enn minne, har det bedre med en eksplisitt lukking. Men slikt glemmer man lett...</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/block2.rb">kode/block2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Hent filnavn fra kommandolinjen.</span>
+  2| filnavn = ARGV[0]
+  3| 
+  4| <span style="color:green"># Gamle m&aring;ten.</span>
+  5| fil = File.open(filnavn, <span style="color:#660066">&quot;r&quot;</span>)
+  6| linjenummer = 0
+  7| fil.readlines.each{ |linje|
+  8|   linjenummer +=1
+  9|   print <span style="color:#660066">&quot;#{linjenummer}: #{linje}&quot;</span> 
+ 10| }
+ 11| fil.close   <span style="color:green"># Lukker filen eksplisitt</span>
+ 12| 
+ 13| <span style="color:green"># Bruk block til ressurs styring.</span>
+ 14| File.open( filnavn, <span style="color:#660066">&quot;r&quot;</span>) <span style="color:blue">do</span> |fil|
+ 15|   linjenummer = 0
+ 16|   fil.readlines.each <span style="color:blue">do</span> |linje|
+ 17|     linjenummer += 1
+ 18|     print <span style="color:#660066">&quot;#{linjenummer}&gt;: #{linje}&quot;</span> 
+ 19|   <span style="color:blue">end</span>
+ 20| <span style="color:blue">end</span>
+ 21| <span style="color:green"># File.open lukker filen etter &aring; ha  kj&oslash;rt koden i blokken.</span>
+</pre>
+</td></table>
+</P>
+<P> Her benytter vi en annen m&aring;te for &aring; angi blocker.
+I stedet for <CODE><B>do |arg| ... end</B></CODE> bruker vi <CODE><B>{|arg| ... }</B></CODE>. Varianten med kr&oslash;llparenteser har h&oslash;yere presedens.</P>
+
+<HR>
+<A HREF="flat_pres-27.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-25.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc26"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

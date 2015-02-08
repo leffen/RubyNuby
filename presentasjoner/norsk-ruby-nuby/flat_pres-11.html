@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;2.3.1&gt;:  Mer om String</TITLE>
+ <LINK HREF="flat_pres-12.html" REL=next>
+ <LINK HREF="flat_pres-10.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc11" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-12.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-10.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc11"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s11">11.</A> <A HREF="flat_pres.html#toc11">&lt;2.3.1&gt;:  Mer om String</A></H2>
+
+<P><CODE>String</CODE>-klassen i Ruby fungerer ikke slik som Java sin String-klasse, hvor man ikke kan endre et strengobjekt.</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/tekst2.rb">kode/tekst2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># String objekter kan endres:</span>
+  2| navn = <span style="color:#660066">&quot;Ola Nordmann&quot;</span>
+  3| 
+  4| <span style="color:green"># Kj&oslash;nnsoperasjon?</span>
+  5| nyttnavn = navn.sub(<span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;Oline&quot;</span>)
+  6| 
+  7| <span style="color:green"># sub lager ett nytt String objekt.</span>
+  8| puts nyttnavn <span style="color:green">#=&gt; &quot;Oline Nordmann&quot;</span>
+  9| puts navn     <span style="color:green">#=&gt; &quot;Ola Nordmann&quot;</span>
+ 10| 
+ 11| <span style="color:green"># sub! (sub-bang) endrer selve streng objektet</span>
+ 12| nyttnavn = navn.sub!(<span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;Oline&quot;</span>)
+ 13| puts nyttnavn <span style="color:green">#=&gt; &quot;Oline Nordmann&quot;</span>
+ 14| puts navn     <span style="color:green">#=&gt; &quot;Oline Nordmann&quot;</span>
+</pre>
+</td></table>
+</P>
+
+<P> Legg merke til at <CODE>sub</CODE> generer et helt nytt <CODE>String</CODE>-objekt, mens <CODE>sub!</CODE> endrer det faktiske objektet.<BR>
+Metoder som slutter med utropstegn kalles <B>"bang"</B>, <B>"mutator"</B> eller <B>"destruktive"</B> metoder, da de som oftest endrer objektet.  <BR>
+ 
+Ruby bruker denne konvensjonen for navngivelse p&aring; mange metoder, men er ikke p&aring;krevd. <BR>
+Noen metoder slutter ogs&aring; p&aring; sp&oslash;rsm&aring;lstegn (e.g. <CODE>empty?</CODE>) for &aring; indikere at de returnerer true/false.</P>
+
+
+
+
+<HR>
+<A HREF="flat_pres-12.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-10.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc11"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

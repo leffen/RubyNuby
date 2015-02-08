@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.4.2&gt;:  Yield og blocks.</TITLE>
+ <LINK HREF="flat_pres-26.html" REL=next>
+ <LINK HREF="flat_pres-24.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc25" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-26.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-24.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc25"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s25">25.</A> <A HREF="flat_pres.html#toc25">&lt;3.4.2&gt;:  Yield og blocks.</A></H2>
+
+<P>En <B>block</B> er en kodebit, som kan motta argumenter og returnere en verdi. Der slutter likhetene med en metode. </P>
+<P>En block holder ogs&aring; tak i den omliggende konteksten og bindingen. Det betyr at lokale variable er tilgjengelig i block-koden, noe som gj&oslash;r den perfekt til callback, f.eks. i grafiske brukergrensesnitt.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/block1.rb">kode/block1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># En enkel, naiv iterator metode.</span>
+  2| <span style="color:blue">def</span> tell_fingre
+  3|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Tommel&quot;</span>
+  4|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Peke&quot;</span>
+  5|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Lange&quot;</span>
+  6|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Ringe&quot;</span>
+  7|   <span style="color:blue">yield</span> <span style="color:#660066">&quot;Lille&quot;</span>
+  8| <span style="color:blue">end</span>
+  9| 
+ 10| <span style="color:green"># Blocken har tilgang til lokale variabler.</span>
+ 11| postfix = <span style="color:#660066">&quot;finger...&quot;</span>
+ 12| 
+ 13| <span style="color:green"># Vi sender med en block n&aring;r vi kaller iterator-metoden.</span>
+ 14| tell_fingre <span style="color:blue">do</span> |finger|
+ 15|   puts finger + postfix
+ 16| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P> En block er ikke et objekt av effektivitetshensyn, men kan innkapsles i et Proc-objekt. (Via Proc.new, n&oslash;kkelordene proc og lambda, eller via bruk av <CODE><B>&amp;</B></CODE>-prefikset i argumentlista til metodedefinisjonen)  </P>
+
+<HR>
+<A HREF="flat_pres-26.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-24.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc25"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

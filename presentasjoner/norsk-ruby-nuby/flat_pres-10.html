@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;2.3&gt;:  Tekststrenger </TITLE>
+ <LINK HREF="flat_pres-11.html" REL=next>
+ <LINK HREF="flat_pres-9.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc10" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-11.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-9.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc10"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s10">10.</A> <A HREF="flat_pres.html#toc10">&lt;2.3&gt;:  Tekststrenger </A></H2>
+
+<P>Vi kunne ikke skrive ut "Hei verden!" uten &aring; ha litt tekst.<BR>
+I Ruby er tekststrenger instanser av klassen <CODE>String</CODE>.</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/tekst1.rb">kode/tekst1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># String objekter kan instansieres</span>
+  2| navn = String.new(<span style="color:#660066">&quot;Ruby&quot;</span>) <span style="color:green"># veldig eksplisit, eller</span>
+  3| navn = <span style="color:#660066">&quot;Ruby&quot;</span>             <span style="color:green"># implisitt</span>
+  4| 
+  5| <span style="color:green"># Tekst kan adderes...</span>
+  6| fornavn   = <span style="color:#660066">'Ola'</span>
+  7| etternavn = <span style="color:#660066">'Nordmann'</span>
+  8| fullt_navn = etternavn + <span style="color:#660066">', '</span> + fornavn 
+  9| puts fullt_navn <span style="color:green">#=&gt; &quot;Nordmann, Ola&quot;</span>
+ 10| 
+ 11| <span style="color:green">#...multipliseres...</span>
+ 12| <span style="color:#660066">&quot;Ah!&quot;</span> * 2 + <span style="color:#660066">&quot; Tsjo!&quot;</span> <span style="color:green">#=&gt; &quot;Ah!Ah! Tsjo!&quot;</span>
+ 13| 
+ 14| <span style="color:green">#...manipuleres...</span>
+ 15| <span style="color:#660066">&quot;Karakter fire&quot;</span>.sub(<span style="color:#660066">&quot;fire&quot;</span>, <span style="color:#660066">&quot;en&quot;</span>) <span style="color:green">#=&gt;&quot;Karakter en&quot;</span>
+ 16| <span style="color:#660066">&quot;14.99&quot;</span>.to_f <span style="color:green">#=&gt; 14.99</span>
+ 17| 
+ 18| <span style="color:green">#...inspiseres...</span>
+ 19| <span style="color:#660066">&quot;TEAMWORK&quot;</span>.include?(<span style="color:#660066">&quot;I&quot;</span>)  <span style="color:green">#=&gt; false</span>
+ 20| <span style="color:#660066">&quot;Kulturuke&quot;</span>.index(<span style="color:#660066">&quot;tur&quot;</span>)  <span style="color:green">#=&gt; 3 </span>
+</pre>
+</td></table>
+</P>
+<P>Legg merke til at man kan skrive strenger b&aring;de <CODE>"slik"</CODE> (med kr&aring;ket&aelig;r) og <CODE>'slik'</CODE> (med apostrof). 
+Disse to versjonene er ikke bare for syns skyld. </P>
+
+
+<HR>
+<A HREF="flat_pres-11.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-9.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc10"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

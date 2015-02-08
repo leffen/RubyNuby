@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.2.4&gt;:   D&oslash;d og begravelse: Finalize</TITLE>
+ <LINK HREF="flat_pres-38.html" REL=next>
+ <LINK HREF="flat_pres-36.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc37" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-38.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-36.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc37"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s37">37.</A> <A HREF="flat_pres.html#toc37">&lt;4.2.4&gt;:   D&oslash;d og begravelse: Finalize</A></H2>
+
+<P> Objekter f&oslash;des, brukes og d&oslash;r. I Ruby d&oslash;r objektene n&aring;r de hentes av s&oslash;ppelt&oslash;mmeren. (garbage collector) 
+N&aring;r det skjer, er usikkert. Ingen referanser til objektet m&aring; eksistere og garbage collectoren m&aring; startes eksplisitt eller implisitt, som skjer jevnlig.<BR></P>
+
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gc1.rb">kode/gc1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green">#</span>
+  2| streng = <span style="color:#660066">&quot;Hvil i fred.&quot;</span>
+  3| 
+  4| <span style="color:green"># Vi gir en block som skal kj&oslash;res n&aring;r streng objektet d&oslash;r.</span>
+  5| ObjectSpace.define_finalizer(streng) <span style="color:blue">do</span> |id|
+  6|   puts <span style="color:#660066">&quot;Objektet med ID=#{id} er n&aring; d&oslash;dt. &quot;</span>
+  7|   puts <span style="color:#660066">&quot;Rest in peace.&quot;</span>
+  8| <span style="color:blue">end</span>
+  9| 
+ 10| <span style="color:green"># Starter s&oslash;ppelt&oslash;mmeren eksplisitt.</span>
+ 11| puts <span style="color:#660066">&quot;Henter s&oslash;ppel!&quot;</span>
+ 12| GC.start
+ 13| <span style="color:green"># Men ingenting skjer, da det enn&aring; er en referanse til strengen.</span>
+ 14| 
+ 15| <span style="color:green"># Pr&oslash;ver en gang til...</span>
+ 16| streng = <span style="color:blue">nil</span>
+ 17| puts <span style="color:#660066">&quot;Henter mer s&oslash;ppel!&quot;</span>
+ 18| GC.start
+ 19| <span style="color:green"># finalizer blocken blir kj&oslash;rt.</span>
+</pre>
+</td></table>
+</P>
+<P> Legg merke til at objektet allerede er d&oslash;dt n&aring;r finalizer-blocken kalles. Ressurser som m&aring; lukkes eksplisitt, holdes via bindingen til blocken. (Bare pass p&aring; at blocken ikke ogs&aring; holder en referanse til objektet.)</P>
+<P> Flere finalizers kan registreres p&aring; et objekt.</P>
+
+
+
+<HR>
+<A HREF="flat_pres-38.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-36.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc37"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

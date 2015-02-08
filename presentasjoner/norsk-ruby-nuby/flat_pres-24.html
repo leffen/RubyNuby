@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.4.1&gt;:  Iterere over en datastruktur </TITLE>
+ <LINK HREF="flat_pres-25.html" REL=next>
+ <LINK HREF="flat_pres-23.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc24" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-25.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-23.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc24"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s24">24.</A> <A HREF="flat_pres.html#toc24">&lt;3.4.1&gt;:  Iterere over en datastruktur </A></H2>
+
+<P> N&aring;r man skal iterere over datastrukturer, blir indekser lett i veien. <BR>
+S&aring;kalte "off-by-one" feil er ganske vanlige.<BR> Men hvorfor ikke la datastrukturen st&aring; for itereringen?</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/iter2.rb">kode/iter2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| personer = [ <span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;Per&quot;</span>, <span style="color:#660066">&quot;Jan&quot;</span>, <span style="color:#660066">&quot;Line&quot;</span>]
+  2| 
+  3| <span style="color:green"># Den &quot;gamle&quot; naive m&aring;ten</span>
+  4| <span style="color:blue">for</span> i <span style="color:blue">in</span> (0...personer.size) 
+  5|   puts <span style="color:#660066">&quot;Hei &quot;</span> + personer[i]
+  6| <span style="color:blue">end</span>
+  7| 
+  8| <span style="color:green"># Alle objekter som implementerer 'each' kan itereres over</span>
+  9| <span style="color:blue">for</span> person <span style="color:blue">in</span> personer
+ 10|   puts <span style="color:#660066">&quot;Er #{person} tilstede?&quot;</span>
+ 11| <span style="color:blue">end</span>
+ 12| 
+ 13| <span style="color:green"># Ruby-m&aring;ten: Bruke Iterator og en block</span>
+ 14| personer.each <span style="color:blue">do</span> |person|
+ 15|   puts <span style="color:#660066">&quot;Velkommen #{person}&quot;</span>
+ 16| <span style="color:blue">end</span>  
+</pre>
+</td></table>
+</P>
+
+<P> <EM>"Hva er den <CODE><B>|person|</B></CODE>greia?"</EM><BR>
+Det er nesten som en argumentdeklarasjon, men ikke til en funksjon. <BR>
+<CODE><B>do |person|; end</B></CODE> er en <B>block</B>, et veldig viktig konsept i Ruby.</P>
+
+
+<HR>
+<A HREF="flat_pres-25.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-23.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc24"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;2.2&gt;:  Variabler</TITLE>
+ <LINK HREF="flat_pres-10.html" REL=next>
+ <LINK HREF="flat_pres-8.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc9" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-10.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-8.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc9"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s9">9.</A> <A HREF="flat_pres.html#toc9">&lt;2.2&gt;:  Variabler</A></H2>
+
+<P>I Ruby har ikke en variabel noen statisk type. En variabel er bare et navn man forbinder med en referanse til et objekt. 
+(Dette er den korte forklaringen p&aring; hva dynamisk typing er.)</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/variabler1.rb">kode/variabler1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| x = <span style="color:#660066">'Norge'</span>  <span style="color:green"># Se, jeg er en tekst-streng (String).</span>
+  2| x = [1,2,3]  <span style="color:green"># &Oslash;h, jeg mener en Array.</span>
+  3| x = 5        <span style="color:green"># Ups, n&aring; er jeg en Fixnum.</span>
+  4| 
+  5| <span style="color:green"># Tilordninger kan lenkes</span>
+  6| a = b = c = d = 5
+  7| 
+  8| <span style="color:green"># Du trenger ikke ekstra variable for &aring; bytte to verdier</span>
+  9| x = 5
+ 10| y = 3
+ 11| x, y = y, x  <span style="color:green"># N&aring; er x = 3 og y = 5</span>
+ 12| 
+ 13| <span style="color:green"># Denne er kjekk &aring; ha n&aring;r en metode vil returnere flere verdier</span>
+ 14| a,b,c = [<span style="color:#660066">'a'</span>,<span style="color:#660066">'b'</span>,<span style="color:#660066">'c'</span>]
+ 15| 
+ 16| <span style="color:green"># Ruby bruker prefiks for &aring; angi variabel skop</span>
+ 17| $global_variabel   = <span style="color:#660066">'alle kan se meg!'</span>
+ 18| lokal_variabel     = <span style="color:#660066">'s&aring;nn som x, y, a, b, c etc.'</span>
+ 19| @instans_attributt = <span style="color:#660066">'jeg tilh&oslash;rer det gjeldende objekt.'</span>
+ 20| @@klasse_attributt = <span style="color:#660066">'jeg er felles for mange objekter.'</span>
+ 21| KONSTANT_VARIABEL  = <span style="color:#660066">'en selvmotsigelse?'</span>
+</pre>
+</td></table>
+</P>
+
+<P>Attributter kalles ogs&aring; instansvariable eller felt.</P>
+
+<P>Enhver variabel som begynner med stor forbokstav er konstant i Ruby. 
+Konstant vil si at variabelreferansen er konstant, 
+ikke at objektet ikke kan endre tilstand. (&Oslash;nsker du sistnevnte, pr&oslash;v <CODE>freeze</CODE>)</P>
+
+
+
+<HR>
+<A HREF="flat_pres-10.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-8.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc9"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

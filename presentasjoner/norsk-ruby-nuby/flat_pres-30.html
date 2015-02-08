@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.1.1&gt;:   Returverdier</TITLE>
+ <LINK HREF="flat_pres-31.html" REL=next>
+ <LINK HREF="flat_pres-29.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc30" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-31.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-29.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc30"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s30">30.</A> <A HREF="flat_pres.html#toc30">&lt;4.1.1&gt;:   Returverdier</A></H2>
+
+<P> Ruby returnerer normalt den siste verdien i metoden, hvis ikke <CODE><B>return</B></CODE> kalles eksplisitt. </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder2.rb">kode/metoder2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">def</span> legg_sammen( a, b)
+  2|   a + b   <span style="color:green"># det siste uttrykket returneres</span>
+  3| <span style="color:blue">end</span>
+  4| puts legg_sammen(9, 6) <span style="color:green">#=&gt; 15</span>
+  5| 
+  6| <span style="color:green"># fibonacci</span>
+  7| <span style="color:blue">def</span> fib(i)
+  8|   <span style="color:blue">if</span> i &lt;= 1
+  9|     <span style="color:blue">return</span> 1   <span style="color:green"># vi kan returnere eksplisitt</span>
+ 10|   <span style="color:blue">end</span>
+ 11|   <span style="color:blue">return</span> fib(i-1) + fib(i-2)
+ 12| <span style="color:blue">end</span>
+ 13| puts fib(3) <span style="color:green">#=&gt;  3</span>
+ 14| puts fib(5) <span style="color:green">#=&gt;  8</span>
+</pre>
+</td></table>
+</P>
+
+<HR>
+<A HREF="flat_pres-31.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-29.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc30"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.3.2&gt;:   Hash</TITLE>
+ <LINK HREF="flat_pres-23.html" REL=next>
+ <LINK HREF="flat_pres-21.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc22" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-23.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-21.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc22"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s22">22.</A> <A HREF="flat_pres.html#toc22">&lt;3.3.2&gt;:   Hash</A></H2>
+
+<P> Hash ('ordbok'?), ogs&aring; kjent som 'map', 'dictionary' i andre spr&aring;k.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/ordbok1.rb">kode/ordbok1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Hash map / dictionary</span>
+  2| ordbok = {
+  3|   <span style="color:#660066">'ruby'</span>    =&gt; <span style="color:#660066">'Edelsten eller spr&aring;k'</span>,
+  4|   <span style="color:#660066">'python'</span>  =&gt; <span style="color:#660066">'Reptil eller spr&aring;k'</span>,
+  5|   :pi       =&gt; <span style="color:#660066">'Matematisk symbol'</span>,
+  6|   alpha:    <span style="color:#660066">'Gresk symbol for bokstaven A'</span>,
+  7| }
+  8| 
+  9| <span style="color:green"># Oppslag </span>
+ 10| ordbok[<span style="color:#660066">'ruby'</span>]
+ 11| ordbok[:alpha]
+ 12| ordbok[:beta]   <span style="color:green">#=&gt; nil # fordi n&oslash;kkelen ikke finnes</span>
+ 13| ordbok[:pi]
+ 14| ordbok[<span style="color:#660066">'pi'</span>]    <span style="color:green">#=&gt; nil # fordi Symbol og String er forskjellig</span>
+ 15| 
+ 16| ordbok[<span style="color:#660066">'python'</span>] = <span style="color:#660066">'Mener du som i Monty Python?'</span>   <span style="color:green"># Overskriver</span>
+ 17| ordbok[:e] = Math::E    <span style="color:green"># Legger til</span>
+ 18| ordbok[:pi] ||= 3.142   <span style="color:green"># Overskrives ikke, da den allerede finnes</span>
+ 19| 
+ 20| tekst = ordbok.map <span style="color:blue">do</span> |ord, beskrivelse|
+ 21|   <span style="color:#660066">&quot;Ordet '#{ord}' er definert som: #{beskrivelse}.&quot;</span> <span style="color:blue">if</span> beskrivelse
+ 22| <span style="color:blue">end</span>.compact.join(<span style="color:#660066">&quot;\n&quot;</span>)
+ 23| puts tekst
+</pre>
+</td></table>
+</P>
+<P>Om n&oslash;kkelen ikke finnes, returnes 'nil'</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/ordbok2.rb">kode/ordbok2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># N&oslash;sting av hash</span>
+  2| treet = {
+  3|   rot: {
+  4|     stamme: {
+  5|       grener: [
+  6|         {blader: <span style="color:#660066">'gr&oslash;nne'</span>, knopper: <span style="color:#660066">'spirende'</span>},
+  7|         {blader: <span style="color:#660066">'gule'</span>},
+  8|         {blader: <span style="color:#660066">'r&oslash;de'</span>,   bladlus: <span style="color:#660066">'d&oslash;ende'</span>},
+  9|         {blader: <span style="color:#660066">'brune'</span>},
+ 10|         {blader: <span style="color:blue">false</span>, insekter: <span style="color:blue">nil</span>},
+ 11|         {sn&oslash;: <span style="color:#660066">'kald'</span>},
+ 12|       ]
+ 13|     }
+ 14|   }
+ 15| }
+ 16| 
+ 17| puts <span style="color:#660066">&quot;Bladene p&aring; treet har gjennom &aring;ret&quot;</span>
+ 18| treet[:rot][:stamme][:grener].each <span style="color:blue">do</span> |gren|
+ 19|   dikt = gren.collect <span style="color:blue">do</span> |key, verdi|
+ 20|     <span style="color:blue">if</span> verdi
+ 21|       <span style="color:#660066">&quot;#{verdi} #{key}&quot;</span>
+ 22|     <span style="color:blue">else</span>
+ 23|       <span style="color:#660066">&quot;ingen #{key}&quot;</span>
+ 24|     <span style="color:blue">end</span>
+ 25|   <span style="color:blue">end</span>.compact.join(<span style="color:#660066">' med '</span>)
+ 26|   puts dikt
+ 27| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+
+
+<HR>
+<A HREF="flat_pres-23.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-21.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc22"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

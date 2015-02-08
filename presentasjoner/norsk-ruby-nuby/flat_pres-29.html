@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.1&gt;:  Metoder</TITLE>
+ <LINK HREF="flat_pres-30.html" REL=next>
+ <LINK HREF="flat_pres-28.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc29" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-30.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-28.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc29"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s29">29.</A> <A HREF="flat_pres.html#toc29">&lt;4.1&gt;:  Metoder</A></H2>
+
+<P>Ruby har verken prosedyrer eller funksjoner; kun metoder som kalles p&aring; objekter. </P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder1.rb">kode/metoder1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Husker du denne?</span>
+  2| <span style="color:blue">def</span> si_hei
+  3|   puts <span style="color:#660066">&quot;Hei verden!&quot;</span>
+  4| <span style="color:blue">end</span>
+  5| 
+  6| <span style="color:green"># Hva er vel en funksjon uten argumenter?</span>
+  7| <span style="color:blue">def</span> si_hei_til(hva)
+  8|   puts <span style="color:#660066">&quot;Hei #{hva}&quot;</span>
+  9| <span style="color:blue">end</span>
+ 10| 
+ 11| si_hei_til(<span style="color:#660066">&quot;Bergen!&quot;</span>) <span style="color:green">#=&gt; &quot;Hei Bergen!&quot;</span>
+ 12| 
+ 13| <span style="color:green"># Funksjoner kan ta flere argumenter og de kan ha default verdier</span>
+ 14| <span style="color:blue">def</span> send_julegave(til, fra=<span style="color:#660066">&quot;nissen&quot;</span>)
+ 15|   puts <span style="color:#660066">&quot;God jul, #{til}. Hilsen #{fra}.&quot;</span>
+ 16| <span style="color:blue">end</span>
+ 17| 
+ 18| send_julegave(<span style="color:#660066">&quot;Junior&quot;</span> )    <span style="color:green">#=&gt; &quot;God jul, Junior. Hilsen nissen.&quot;</span>
+ 19| send_julegave(<span style="color:#660066">&quot;Ola&quot;</span>, <span style="color:#660066">&quot;far&quot;</span>) <span style="color:green">#=&gt; &quot;God jul, Ola. Hilsen far.&quot;</span>
+</pre>
+</td></table>
+</P>
+<P> Du syntes kanskje det s&aring; lite objekt-orientert ut? Ikke var metodene definert i noen klasse, og ikke kalte vi dem p&aring; noe objekt heller. Det tror du. Alle metoder som defineres p&aring; toppniv&aring; defineres i Object-klassen, og vi har implisitt en toppniv&aring; Object-instans. (Pr&oslash;v <CODE><B>self.type</B></CODE> og se selv.)<BR><BR><BR></P>
+
+<HR>
+<A HREF="flat_pres-30.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-28.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc29"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

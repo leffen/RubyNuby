@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.3.1&gt;:   Array</TITLE>
+ <LINK HREF="flat_pres-22.html" REL=next>
+ <LINK HREF="flat_pres-20.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc21" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-22.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-20.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc21"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s21">21.</A> <A HREF="flat_pres.html#toc21">&lt;3.3.1&gt;:   Array</A></H2>
+
+<P> En line&aelig;r liste med objekter av allverdens typer</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/liste1.rb">kode/liste1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Lister</span>
+  2| fisketyper = [<span style="color:#660066">'torsk'</span>, <span style="color:#660066">'laks'</span>, <span style="color:#660066">'&oslash;rret'</span>, <span style="color:#660066">'sei'</span>]
+  3| 
+  4| pizza  = Array.new
+  5| pizza.push <span style="color:#660066">'pepperoni'</span>    <span style="color:green"># Legge til elementer i listen:</span>
+  6| pizza.unshift <span style="color:#660066">'ananas'</span>
+  7| pizza &lt;&lt; :chorizo
+  8| pizza += %w{kylling biff kj&oslash;ttboller}   <span style="color:green"># Sl&aring; sammen to lister</span>
+  9| 
+ 10| <span style="color:green"># Manipulering</span>
+ 11| puts fisketyper.collect{|fisk| <span style="color:#660066">&quot;Jeg liker ikke &quot;</span> + fisk }.join(<span style="color:#660066">&quot; ei!\n&quot;</span>)
+ 12| 
+ 13| pizza.delete(<span style="color:#660066">'Ananas'</span>)
+ 14| puts <span style="color:#660066">&quot;Jeg vil ha en pizza med #{pizza.join(', ')} og masse ost!&quot;</span>
+</pre>
+</td></table>
+</P>
+<HR>
+<A HREF="flat_pres-22.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-20.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc21"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

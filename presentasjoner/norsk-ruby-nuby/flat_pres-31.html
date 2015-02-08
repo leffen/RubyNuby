@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.1.2&gt;:   Spesielle argumenter</TITLE>
+ <LINK HREF="flat_pres-32.html" REL=next>
+ <LINK HREF="flat_pres-30.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc31" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-32.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-30.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc31"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s31">31.</A> <A HREF="flat_pres.html#toc31">&lt;4.1.2&gt;:   Spesielle argumenter</A></H2>
+
+<P>I tillegg til <CODE><B>&amp;</B></CODE>-prefikset som brukes for &aring; pakke en block gitt til en metode inn i et Proc-objekt, brukes <CODE><B>*</B></CODE>-prefikset for &aring; samle flere argumenter i en liste (Array).</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/metoder3.rb">kode/metoder3.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># * prefikset brukes for &aring; pakke argumentlista inn i en Array</span>
+  2| <span style="color:blue">def</span> list_opp(og_frase, *args)
+  3|   puts args[0..-2].join(<span style="color:#660066">&quot;, &quot;</span>).capitalize +
+  4|     og_frase + args[-1] + <span style="color:#660066">'.'</span>
+  5| <span style="color:blue">end</span>
+  6| 
+  7| list_opp(<span style="color:#660066">&quot; og &quot;</span>, <span style="color:#660066">&quot;epler&quot;</span>, <span style="color:#660066">&quot;p&aelig;rer&quot;</span>, <span style="color:#660066">&quot;bananer&quot;</span>)
+  8|   <span style="color:green">#=&gt; &quot;Epler, p&aelig;rer og bananer.&quot;</span>
+  9| 
+ 10| <span style="color:green"># eller pakke opp en Array for &aring; bruke elementene som argumenter</span>
+ 11| a =  [ <span style="color:#660066">&quot; and &quot;</span>, <span style="color:#660066">&quot;apples&quot;</span>, <span style="color:#660066">&quot;pears&quot;</span>, <span style="color:#660066">&quot;bananas&quot;</span> ]
+ 12| list_opp(*a) <span style="color:green">#=&gt; &quot;Apples, pears and bananas.&quot;</span>
+</pre>
+</td></table>
+</P>
+
+
+<HR>
+<A HREF="flat_pres-32.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-30.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc31"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

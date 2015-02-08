@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.1&gt;:   Hvis, dersom...</TITLE>
+ <LINK HREF="flat_pres-16.html" REL=next>
+ <LINK HREF="flat_pres-14.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc15" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-16.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-14.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc15"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s15">15.</A> <A HREF="flat_pres.html#toc15">&lt;3.1&gt;:   Hvis, dersom...</A></H2>
+
+<P> If-setningen byr ikke p&aring; s&aring; mange overraskelser i Ruby.</P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/hvis1.rb">kode/hvis1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Sp&oslash;r f&oslash;rst om alderen.</span>
+  2| print <span style="color:#660066">&quot;Hvor gammel er du?: &quot;</span>
+  3| alder = gets.to_i
+  4| 
+  5| <span style="color:blue">if</span> alder &lt; 3 <span style="color:blue">then</span> puts <span style="color:#660066">&quot;N&aring; tuller du vel?&quot;</span>; exit <span style="color:blue">end</span>
+  6| 
+  7| <span style="color:blue">if</span> alder &gt;= 18
+  8|   puts <span style="color:#660066">&quot;Du er myndig.&quot;</span>
+  9| <span style="color:blue">elsif</span> alder &gt;= 16
+ 10|   puts <span style="color:#660066">&quot;Du er lovlig.&quot;</span>
+ 11| <span style="color:blue">else</span>
+ 12|   puts <span style="color:#660066">&quot;Sm&aring;en!&quot;</span>
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| <span style="color:green"># 'if' kan ogs&aring; returnere en verdi, s&aring; du slipper</span>
+ 16| <span style="color:green"># &aring; bruke &quot;ternary&quot; (? : ) operatoren hvis du ikke liker den.</span>
+ 17| drikkevare = 
+ 18|   <span style="color:blue">if</span> alder &gt;= 60
+ 19|     <span style="color:#660066">&quot;Sviskejuice&quot;</span>
+ 20|   <span style="color:blue">else</span>
+ 21|     <span style="color:blue">if</span> alder &gt;= 20
+ 22|       <span style="color:#660066">&quot;Sprit&quot;</span>
+ 23|     <span style="color:blue">elsif</span> alder &gt;= 18
+ 24|       <span style="color:#660066">&quot;&Oslash;l og vin&quot;</span>
+ 25|     <span style="color:blue">else</span>
+ 26|       <span style="color:#660066">&quot;Brus&quot;</span>
+ 27|     <span style="color:blue">end</span>	       
+ 28|   <span style="color:blue">end</span>
+ 29| puts <span style="color:#660066">&quot;Kj&oslash;p deg litt #{drikkevare}&quot;</span>
+</pre>
+</td></table>
+</P>
+<P>Merk at <CODE><B>then</B></CODE> n&oslash;kkelordet ikke er n&oslash;dvendig n&aring;r man skriver if-setningen over flere linjer. Noen ting er valgfrie i Ruby forutsatt at uttrykket ikke blir tvetydig. </P>
+<P>
+<DL>
+<DT><B>gets</B><DD>
+<P>get string - henter en tekststreng ifra standard input.</P>
+<DT><B>to_i</B><DD>
+<P>to integer - fors&oslash;ker &aring; gj&oslash;re objektet om til et heltall.</P>
+</DL>
+</P>
+
+
+
+<HR>
+<A HREF="flat_pres-16.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-14.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc15"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

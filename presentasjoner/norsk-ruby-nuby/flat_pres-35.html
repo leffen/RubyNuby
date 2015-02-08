@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.2.2.1&gt;:   Multippel arv</TITLE>
+ <LINK HREF="flat_pres-36.html" REL=next>
+ <LINK HREF="flat_pres-34.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc35" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-36.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-34.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc35"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s35">35.</A> <A HREF="flat_pres.html#toc35">&lt;4.2.2.1&gt;:   Multippel arv</A></H2>
+
+<P> Beklager. Det er ikke lov &aring; la en klasse arve fra mer enn en superklasse i Ruby.</P>
+<P> Derimot har Ruby <B>mixin</B>, som kan legge til funksjonalitet fra flere moduler inn i en klasse. Dvs, du kan bare arve fra en klasse, men kan blande inn funksjonalitet i fra flere moduler.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/modul1.rb">kode/modul1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">class</span> Familie
+  2|   <span style="color:green"># Vi inkluderer funksjonalitet fra modulen kalt Enumerable.</span>
+  3|   include Enumerable
+  4| 
+  5|   <span style="color:green"># Enumerable forventer at each metoden yield'er</span>
+  6|   <span style="color:green"># det som skal itereres over.</span>
+  7|   <span style="color:blue">def</span> each
+  8|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Far&quot;</span>
+  9|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Mor&quot;</span>
+ 10|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;S&oslash;nn&quot;</span>
+ 11|     <span style="color:blue">yield</span> <span style="color:#660066">&quot;Datter&quot;</span>
+ 12|   <span style="color:blue">end</span>
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| f = Familie.new
+ 16| 
+ 17| <span style="color:green"># include? og sort metodene er mikset inn fra Enumerable.</span>
+ 18| puts f.include?(<span style="color:#660066">&quot;S&oslash;nn&quot;</span>) <span style="color:green">#=&gt; true</span>
+ 19| puts f.sort.join(<span style="color:#660066">&quot;, &quot;</span>)  <span style="color:green">#=&gt; &quot;Datter, Far, Mor, S&oslash;nn&quot;</span>
+</pre>
+</td></table>
+</P>
+<P>Dette tilbyr multippel arv av funksjonalitet.<BR></P>
+
+<HR>
+<A HREF="flat_pres-36.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-34.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc35"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

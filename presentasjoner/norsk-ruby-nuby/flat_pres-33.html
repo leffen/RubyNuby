@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.2.1&gt;:   Attributter</TITLE>
+ <LINK HREF="flat_pres-34.html" REL=next>
+ <LINK HREF="flat_pres-32.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc33" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-34.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-32.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc33"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s33">33.</A> <A HREF="flat_pres.html#toc33">&lt;4.2.1&gt;:   Attributter</A></H2>
+
+<P> Ruby lar deg ikke f&aring; tak i et objekts attributter (felter, dataverdier, instansvariable) direkte. Alle attributter er "private".  Enhver tilgang fra utsiden til objektet g&aring;r via metodekall, s&aring;kalte get/set metoder.</P>
+<P>Instansvariable er "private" p&aring; en m&aring;te som er mer som protected i andre spr&aring;k; metoder i sub- og superklasser har tilgang. Men andre instanser har ikke tilgang, selv ikke instanser av samme klasse.<BR></P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klasse2.rb">kode/klasse2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Vi vil bruke Person-klassen videre</span>
+  2| require_relative <span style="color:#660066">'klasse1'</span> 
+  3| 
+  4| <span style="color:green"># Klasser er &quot;&aring;pne&quot; skop, og kan enkelt utvides.</span>
+  5| <span style="color:blue">class</span> Person  
+  6|   <span style="color:green"># Ruby tillater deg ikke &aring; f&aring; tak i attributtene</span>
+  7|   <span style="color:green"># fra utsiden av objektet. Du m&aring; g&aring; via metodekall.</span>
+  8| 
+  9|   <span style="color:green">#  get-metode</span>
+ 10|   <span style="color:blue">def</span> alder
+ 11|     @alder
+ 12|   <span style="color:blue">end</span>
+ 13|   <span style="color:green"># set-metode</span>
+ 14|   <span style="color:blue">def</span> alder=( ny_alder )
+ 15|     @alder = ny_alder
+ 16|   <span style="color:blue">end</span>
+ 17| 
+ 18|   <span style="color:green"># tungvint? Jepp, s&aring; Ruby har en snarvei:</span>
+ 19|   attr_accessor :alder     <span style="color:green"># definerer metodene over automatisk</span>
+ 20| 
+ 21|   <span style="color:green"># Vi vil ogs&aring; gjerne kunne lese navnene til personen</span>
+ 22|   attr_reader   :etternavn, :fornavn
+ 23| 
+ 24| <span style="color:blue">end</span>
+ 25| 
+ 26| <span style="color:blue">if</span> <span style="color:blue">__FILE__</span> == $0 <span style="color:green"># Kun n&aring;r vi kj&oslash;rer denne filen:</span>
+ 27|   p = Person.new( <span style="color:#660066">&quot;Nordmann&quot;</span>, <span style="color:#660066">&quot;Baby&quot;</span> )
+ 28|   p.alder = 3     <span style="color:green"># Vi setter alderen</span>
+ 29|   puts p.alder    <span style="color:green">#=&gt; 3</span>
+ 30|   p.alder += 1    <span style="color:green"># &Oslash;k alderen med et &aring;r</span>
+ 31|   puts p.alder    <span style="color:green">#=&gt; 4</span>
+ 32|   puts p.fornavn  <span style="color:green">#=&gt; &quot;Baby&quot;</span>
+ 33| <span style="color:blue">end</span>
+</pre>
+</td></table>
+
+<DL>
+<DT><B>:alder, :etternavn, :fornavn</B><DD>
+<P>Disse er symboler. (instanser av <CODE>Symbol</CODE>-klassen) De ligner litt p&aring; String, men kan ikke endres, de er "internert" og begrenser seg til lovlige navn p&aring; klasser, metoder, variabler o.l. 
+(Symbolet for instansvariabelen <CODE>@alder</CODE>, metoden <CODE>alder</CODE> og den lokale 
+variabelen <CODE>alder</CODE> er alle sammen <CODE><B>:alder</B></CODE>.)</P>
+<DT><B>attr_accessor, attr_reader, attr_writer</B><DD>
+<P>Dette er metoder i <CODE>Module</CODE>-klassen som lager get/set metoder for deg. Som argument tar de symbolene til attributtene du vil lage get/set metoder for. </P>
+</DL>
+</P>
+
+
+<HR>
+<A HREF="flat_pres-34.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-32.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc33"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

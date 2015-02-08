@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.2&gt;:   L&oslash;kker - while</TITLE>
+ <LINK HREF="flat_pres-19.html" REL=next>
+ <LINK HREF="flat_pres-17.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc18" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-19.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-17.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc18"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s18">18.</A> <A HREF="flat_pres.html#toc18">&lt;3.2&gt;:   L&oslash;kker - while</A></H2>
+
+<P> Hvis ikke du er fra Bergen opprinnelig, s&aring; har du vel falt for denne sp&oslash;ken en gang...</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/gjenta1.rb">kode/gjenta1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># while - gjenta s&aring; lenge noe er sant</span>
+  2| <span style="color:blue">begin</span>
+  3|   print <span style="color:#660066">&quot;En gutt og ei jente satt i ett tre. \n&quot;</span>
+  4|   print <span style="color:#660066">&quot;S&aring; falt gutten ned. \n&quot;</span>
+  5|   print <span style="color:#660066">&quot;  Hvem satt igjen? :&gt; &quot;</span>
+  6|   svar = gets.chomp.downcase
+  7| <span style="color:blue">end</span> <span style="color:blue">while</span> svar.index(<span style="color:#660066">&quot;jenta&quot;</span>)
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>index</B><DD>
+<P>gir indeksen til hvor i strengen det gitte argumentet finnes eller nil om
+det ikke finnes.</P>
+</DL>
+</P>
+
+<HR>
+<A HREF="flat_pres-19.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-17.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc18"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

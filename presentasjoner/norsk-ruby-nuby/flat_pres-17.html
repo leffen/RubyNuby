@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.1.2&gt;:  Case</TITLE>
+ <LINK HREF="flat_pres-18.html" REL=next>
+ <LINK HREF="flat_pres-16.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc17" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-18.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-16.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc17"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s17">17.</A> <A HREF="flat_pres.html#toc17">&lt;3.1.2&gt;:  Case</A></H2>
+
+<P>Ruby har ogs&aring; case-konstruksjonen, som ofte er et bedre valg enn en rekke elsif'er mot samme variabel. </P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/case1.rb">kode/case1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| print <span style="color:#660066">&quot;Er du gutt eller jente?: &quot;</span>
+  2| svar = gets.downcase.chomp
+  3| 
+  4| <span style="color:green"># case er ogs&aring; kjent som switch/case i andre spr&aring;k</span>
+  5| <span style="color:blue">case</span> svar
+  6|   <span style="color:blue">when</span> <span style="color:#660066">&quot;intetkj&oslash;nn&quot;</span>
+  7|     puts <span style="color:#660066">&quot;Hei!&quot;</span>
+  8|   <span style="color:blue">when</span> <span style="color:#660066">&quot;jente&quot;</span>, <span style="color:#660066">&quot;kvinne&quot;</span>, <span style="color:#660066">&quot;dame&quot;</span>
+  9|     puts <span style="color:#660066">&quot;Heisann s&oslash;ta!&quot;</span>
+ 10|   <span style="color:blue">when</span> <span style="color:#660066">&quot;gutt&quot;</span>, <span style="color:#660066">&quot;mann&quot;</span>, <span style="color:#660066">&quot;herre&quot;</span>
+ 11|     puts <span style="color:#660066">&quot;Heisann kjekken!&quot;</span>
+ 12|   <span style="color:blue">else</span> 
+ 13|     puts <span style="color:#660066">&quot;God dag herr/fru?&quot;</span>
+ 14|   <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P> Legg merke til at en <CODE><B>when</B></CODE> blokk kan sl&aring; ut p&aring; flere oppgitte verdier. Man kan ogs&aring; bruke regul&aelig;re uttrykk, <CODE>Range</CODE>-objekter, klasser etc. 
+Du kan ogs&aring; lage dine egne objekter som kan brukes her 
+ved &aring; implementere <CODE><B>===</B></CODE> operatoren, som kalles b&aring;de "relationship operator" og "case equality operator". 
+(Ja, det er 3 likhetstegn.) </P>
+
+
+<HR>
+<A HREF="flat_pres-18.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-16.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc17"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

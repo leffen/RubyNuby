@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.1.1&gt;:   Forutsatt, med mindre...</TITLE>
+ <LINK HREF="flat_pres-17.html" REL=next>
+ <LINK HREF="flat_pres-15.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc16" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-17.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-15.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc16"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s16">16.</A> <A HREF="flat_pres.html#toc16">&lt;3.1.1&gt;:   Forutsatt, med mindre...</A></H2>
+
+<P>Mulighetene til &aring; skrive logiske uttrykk som er n&aelig;rmere hvordan vi snakker, gj&oslash;r Ruby mer lesbart, men kan ogs&aring; forvirre.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/hvis2.rb">kode/hvis2.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| print <span style="color:#660066">&quot;Liker du Ruby? [ja/nei]:&quot;</span>
+  2| svar = gets.chomp.downcase 
+  3| 
+  4| <span style="color:green"># if kan ogs&aring; brukes etter uttrykk</span>
+  5| puts <span style="color:#660066">&quot;Jeg liker ogs&aring; Ruby!&quot;</span> <span style="color:blue">if</span> svar==<span style="color:#660066">&quot;ja&quot;</span>
+  6| 
+  7| <span style="color:green"># 'unless' er det motsatte av 'if'</span>
+  8| puts <span style="color:#660066">&quot;La oss kode litt Ruby.&quot;</span> <span style="color:blue">unless</span> svar==<span style="color:#660066">&quot;nei&quot;</span>
+  9| 
+ 10| <span style="color:green"># men b&oslash;r brukes forsiktig</span>
+ 11| <span style="color:blue">unless</span> svar[0] == ?j
+ 12|   puts <span style="color:#660066">&quot;Mener du at du ikke liker Ruby?&quot;</span>
+ 13| <span style="color:blue">else</span>
+ 14|   puts <span style="color:#660066">&quot;Doble negasjoner er forvirrende...&quot;</span>
+ 15| <span style="color:blue">end</span>
+</pre>
+</td></table>
+</P>
+<P>
+<DL>
+<DT><B>chomp</B><DD>
+<P>fjerner et eventuelt newline-tegn i fra slutten av strengen.</P>
+<DT><B>downcase</B><DD>
+<P>gj&oslash;r store bokstaver om til sm&aring;.</P>
+</DL>
+
+Merk at chomp og downcase ikke har noen '!', s&aring; de returnerer kopier som har blitt modifisert. De endrer ikke objektet de blir kalt p&aring;.</P>
+
+<HR>
+<A HREF="flat_pres-17.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-15.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc16"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;2.3.2&gt;:  Skrive ut tekst</TITLE>
+ <LINK HREF="flat_pres-13.html" REL=next>
+ <LINK HREF="flat_pres-11.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc12" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-13.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-11.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc12"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s12">12.</A> <A HREF="flat_pres.html#toc12">&lt;2.3.2&gt;:  Skrive ut tekst</A></H2>
+
+<P> Det er mer enn en m&aring;te &aring; fl&aring; en katt p&aring;, og der er ogs&aring; mer enn en m&aring;te &aring; skrive ut tekst i Ruby. </P>
+
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/utput1.rb">kode/utput1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># Tekst kan skrives ut</span>
+  2| navn = <span style="color:#660066">'Finn'</span>
+  3| puts <span style="color:#660066">'Jeg heter '</span> + navn
+  4| 
+  5| <span style="color:green"># Liker du ikke puts?</span>
+  6| print <span style="color:#660066">&quot;Jeg heter &quot;</span> + navn + <span style="color:#660066">&quot;.\n&quot;</span>
+  7| 
+  8| <span style="color:green"># Liker du C?</span>
+  9| printf <span style="color:#660066">&quot;Jeg heter %s!\n&quot;</span>, navn
+ 10| 
+ 11| <span style="color:green"># Forelska i C++?</span>
+ 12| STDOUT &lt;&lt; <span style="color:#660066">&quot;Ikke Bjarne... &quot;</span> &lt;&lt;
+ 13|   <span style="color:#660066">&quot;Ikke Jan-Thomas... &quot;</span> &lt;&lt;
+ 14|   <span style="color:#660066">&quot;Jeg heter &quot;</span> &lt;&lt; navn &lt;&lt; <span style="color:#660066">&quot;!!!\n&quot;</span>
+ 15| 
+ 16| <span style="color:green"># Tekst-streng interpolering.</span>
+ 17| puts <span style="color:#660066">&quot;Jeg heter fremdeles #{navn}&quot;</span>
+ 18| puts <span style="color:#660066">&quot;Jeg blir #{Time.now.year-1978} &aring;r i &aring;r&quot;</span>
+</pre>
+</td></table>
+</P>
+
+<P> Her ser vi hvorfor vi b&aring;de bruker "kr&aring;ket&aelig;r" og 'apostrof' for &aring; angi tekststrenger. Med kr&aring;ket&aelig;r kan vi escape tegn (slik som <CODE><B>\n</B></CODE> som betyr ny linje), og kj&oslash;re Ruby uttrykk inne i tekststrengen. </P>
+
+
+
+<HR>
+<A HREF="flat_pres-13.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-11.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc12"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

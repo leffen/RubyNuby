@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;3.4&gt;:   Iterasjon - Iterator-pattern og 'yield'</TITLE>
+ <LINK HREF="flat_pres-24.html" REL=next>
+ <LINK HREF="flat_pres-22.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc23" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-24.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-22.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc23"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s23">23.</A> <A HREF="flat_pres.html#toc23">&lt;3.4&gt;:   Iterasjon - Iterator-pattern og 'yield'</A></H2>
+
+<P> For l&oslash;kken finnes fremdeles i Ruby, men hvor Python har gjort for-l&oslash;kken glupere, har Ruby g&aring;tt videre og tatt i bruk Enumertor-pattern'et.</P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/iter1.rb">kode/iter1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:green"># La oss skrive ut 7-gange-tabellen</span>
+  2| tall = 7
+  3| 
+  4| <span style="color:green"># Ruby har for-l&oslash;kker som de fleste spr&aring;k</span>
+  5| <span style="color:blue">for</span> i <span style="color:blue">in</span> (1..10)
+  6|   puts <span style="color:#660066">&quot;#{i} gange #{tall} er #{i*tall}&quot;</span>
+  7| <span style="color:blue">end</span>
+  8| 
+  9| <span style="color:green"># 5-gange-tabellen</span>
+ 10| tall = 5
+ 11| 
+ 12| <span style="color:green"># men for-l&oslash;kkens dager er talte. </span>
+ 13| <span style="color:green"># for-l&oslash;kken over er syntaktisk sukker for</span>
+ 14| <span style="color:green"># f&oslash;lgende bruk av iterator-metoden each.</span>
+ 15| (1..10).each <span style="color:blue">do</span> |i|
+ 16|   puts <span style="color:#660066">&quot;#{i} gange #{tall} er #{i*tall}&quot;</span>
+ 17| <span style="color:blue">end</span>  
+</pre>
+</td></table>
+</P>
+<P> <CODE><B>(1..10)</B></CODE> lager et <CODE>Range</CODE>-objekt, som spenner i fra og med 1, til og med 10. Dersom du ikke &oslash;nsker &aring; inkludere 10, kan du bruke 3 punktum, for eksempel s&aring; spenner <CODE><B>(1...10)</B></CODE> i fra 1, til og med 9. </P>
+
+
+<HR>
+<A HREF="flat_pres-24.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-22.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc23"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>

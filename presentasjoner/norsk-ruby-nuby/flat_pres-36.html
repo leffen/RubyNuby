@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+ <META NAME="GENERATOR" CONTENT="LinuxDoc-Tools 0.9.69">
+ <TITLE>En nybegynnerintroduksjon til programmeringsspr&aring;ket Ruby: &lt;4.2.3&gt;:   Klassevariabler</TITLE>
+ <LINK HREF="flat_pres-37.html" REL=next>
+ <LINK HREF="flat_pres-35.html" REL=previous>
+ <LINK HREF="flat_pres.html#toc36" REL=contents>
+</HEAD>
+<BODY>
+<A HREF="flat_pres-37.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-35.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc36"><IMG SRC="toc.png" ALT="Contents"></A>
+<HR>
+<H2><A NAME="s36">36.</A> <A HREF="flat_pres.html#toc36">&lt;4.2.3&gt;:   Klassevariabler</A></H2>
+
+<P> Klassevariabler er variabler som deles mellom alle instanser av klassen, samt instanser av subklasser. (tilsvarende <B>static</B> variabler i Java)<BR></P>
+<P>
+<table >
+      <tr style="background-color:#F0D0D0" ><td>
+<div style="margin-top:1em;font-family:sans-serif"><A HREF="kode/klassevar1.rb">kode/klassevar1.rb</A></div>
+<tr style="background-color:#FFF0F0"><td>
+<pre style="margin-top:0">
+  1| <span style="color:blue">class</span> Bil
+  2|   <span style="color:green"># En klassevariabel for &aring; telle antall biler i verden.</span>
+  3|   @@num_biler = 0
+  4|   <span style="color:blue">def</span> initialize
+  5|     @@num_biler += 1
+  6|   <span style="color:blue">end</span>
+  7|   <span style="color:blue">def</span> Bil.antall
+  8|     @@num_biler
+  9|   <span style="color:blue">end</span>
+ 10| <span style="color:blue">end</span>
+ 11| 
+ 12| <span style="color:blue">class</span> Lada &lt; Bil
+ 13| <span style="color:blue">end</span>
+ 14| 
+ 15| <span style="color:blue">class</span> Yugo &lt; Bil
+ 16|   <span style="color:blue">def</span> krasj
+ 17|     <span style="color:green"># klassevariabelen er felles for alle instanser av Bil,</span>
+ 18|     <span style="color:green"># samt instanser av subklasser av bil</span>
+ 19|     @@num_biler -= 1
+ 20|   <span style="color:blue">end</span>
+ 21| <span style="color:blue">end</span>
+ 22| 
+ 23| lada = Lada.new
+ 24| yugo = Yugo.new
+ 25| puts Bil.antall <span style="color:green">#=&gt; 2</span>
+ 26| 
+ 27| yugo.krasj
+ 28| puts Bil.antall <span style="color:green">#=&gt; 1</span>
+</pre>
+</td></table>
+</P>
+
+<HR>
+<A HREF="flat_pres-37.html"><IMG SRC="next.png" ALT="Next"></A>
+<A HREF="flat_pres-35.html"><IMG SRC="prev.png" ALT="Previous"></A>
+<A HREF="flat_pres.html#toc36"><IMG SRC="toc.png" ALT="Contents"></A>
+</BODY>
+</HTML>
