@@ -20,7 +20,7 @@ Kort om Ruby før vi titter på litt kode.
 <itemize>
 <item>et objekt-orientert programmeringsspråk
 <item>et skriptspråk
-<item>dynamisk typet
+<item>dynamisk (men sterk) typing
 <item>lett å begynne med
 <item>lesbart og samtidig enkelt å uttrykke seg i
 <item>føles "kjent" (PoLS - Principle of Least Surprise)
@@ -62,15 +62,25 @@ Kort om Ruby før vi titter på litt kode.
 <p> 
 	På <url url="http://www.ruby-lang.org/" name="Ruby sin hjemmeside"> 
 	finner du kildekode, dokumentasjon til standardbiblioteket, bindinger til andre bibliotek og programmer, slides, etc.
+<p>
+  Anbefaler å innstallere via Ruby Version Manager - <url url="http://rvm.io/" name="rvm.io">
+  - da denne lar deg ha flere versjoner installert på en gang uten å komme i konflikt med system-versjonen.
 
+<p>
+<tt>
+rvm install 2.2   <newline>
+rvm use 2.2       <newline>
+</tt>
+</pre>
 
+<p>På Windows kan det være enklere å bruke en vanling installer, som du finner på <url url="http://rubyinstaller.org/">RubyInstaller.org</url>
 
-
+<!--
 <p>Siden begynnelsen av årtusenet har det kommet flere engelske bøker om Ruby. Her er ett par anbefalinger:
 <itemize>
 <item><em><url url="http://pine.fm/LearnToProgram/" name="Learn to Program"></em> (2nd Ed) - Chris Pine </item>
-<item><em>The Ruby Way</em> - Hal Fulton
 </itemize>
+-->
 
 
 
@@ -162,7 +172,8 @@ Disse to versjonene er ikke bare for syns skyld.
 <p> Legg merke til at <tt>sub</tt> generer et helt nytt <tt>String</tt>-objekt, mens <tt>sub!</tt> endrer det faktiske objektet.<newline>
  Metoder som slutter med utropstegn kalles <bf>"bang"</bf>, <bf>"mutator"</bf> eller <bf>"destruktive"</bf> metoder, da de som oftest endrer objektet.  <newline>
 <!-- Mange metoder vil finnes i både bang og non-bang versjoner.--> 
-Ruby bruker denne konvensjonen for navngivelse på mange metoder, men er ikke påkrevd.
+Ruby bruker denne konvensjonen for navngivelse på mange metoder, men er ikke påkrevd. <newline>
+Noen metoder slutter også på spørsmålstegn (e.g. <tt>empty?</tt>) for å indikere at de returnerer true/false.
 
 
 <!--<REM> 
@@ -276,10 +287,6 @@ det ikke finnes.
 <p>Om nøkkelen ikke finnes, returnes 'nil'
 <p><htmlurl url="kode/ordbok2.rb" name="SOURCE_CODE">
 
-<!--
-<sect2> Annet...
-<p> .. som er verdt å nevne er Set, 
--->
 
 <sect1> Iterasjon - Iterator-pattern og 'yield'
 <p> For løkken finnes fremdeles i Ruby, men hvor Python har gjort for-løkken glupere, har Ruby gått videre og tatt i bruk Enumertor-pattern'et.
@@ -387,7 +394,7 @@ Dette er metoder i <tt>Module</tt>-klassen som lager get/set metoder for deg. So
 <p> Beklager. Det er ikke lov å la en klasse arve fra mer enn en superklasse i Ruby.
 <p> Derimot har Ruby <bf>mixin</bf>, som kan legge til funksjonalitet fra flere moduler inn i en klasse. Dvs, du kan bare arve fra en klasse, men kan blande inn funksjonalitet i fra flere moduler.
 <p><htmlurl url="kode/modul1.rb" name="SOURCE_CODE">
-<p>I kontrast til Java tilbyr dette multippel arv av funksjonalitet. Java bruker <bf>interface</bf> til å "etterligne" multippel arv, men tilbyr ikke arv av implementasjon og løser noe som er et ikke-problem når man har dynamisk typing.
+<p>Dette tilbyr multippel arv av funksjonalitet.
 <newline>
 
 <sect2> Klassevariabler
@@ -433,11 +440,27 @@ Målet er å gjette et tall med minst mulig forsøk, gitt litt tilbakemelding p�
 
 <p>(Det finnes en mer lesbar alternativ til POSIX regexp formatet som kan skrives over flere linjer med indentering.)
 
+<sect>Gems - Ruby-biblioteker
+<p> Det finnes uhorvelig mange biblioteker for Ruby. Disse kalles for 'gems' og de fleste kan du finne på <url url="https://rubygems.org/" name="Rubygems.org">
+<tt>
+gem install 
+require '...'
+gem install console 
+gem install hirb
+</tt>
 
-<!--
+
 <sect>Oppgaveforslag
+<sect1>Tripp trapp tresko
 <p>
--->
+<itemize>
+<item><tt>Brett</tt>Lag en klasse "Brett" som representerer ett 3x3 spillebrett.
+<item><tt>display</tt>Legg til en metode for å skrive ut brettet med posisjoner.
+<item><tt>input</tt>Bruk 'gets' metoden i en løkke for å angi neste posisjon for annenhver spiller.
+<item><tt>won?</tt>Sjekk om noen av spillerne har vunnet.
+<item><tt>AIPlayer</tt>Kan du lage en AI-spiller du kan spille mot?
+</itemize>
+
 
 
 
@@ -450,6 +473,7 @@ Målet er å gjette et tall med minst mulig forsøk, gitt litt tilbakemelding p�
 <item> <tt>C#</tt> IronRuby
 <item> <tt>C</tt> Ruby (MRI versjonen) er skrevet i C... Lenk i vei.
 <item> <tt>JavaScript</tt> Opal? (http://opalrb.org/)
+</itemize>
 
 <p>"Ja, men, vi kjører på ..."
 <itemize>
