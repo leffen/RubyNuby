@@ -60,7 +60,7 @@ Kort om Ruby før vi titter på litt kode.
 
 <sect1>Hvor finner jeg Ruby?
 <p> 
-	På <url url="http://www.ruby-lang.org/" name="Ruby sin hjemmeside"> 
+	På <url url="http://www.ruby-lang.org/" name="Ruby sin hjemmeside (ruby-lang.org)"> 
 	finner du kildekode, dokumentasjon til standardbiblioteket, bindinger til andre bibliotek og programmer, slides, etc.
 <p>
   Anbefaler å innstallere via Ruby Version Manager - <url url="http://rvm.io/" name="rvm.io">
@@ -73,7 +73,7 @@ rvm use 2.2       <newline>
 </tt>
 </pre>
 
-<p>På Windows kan det være enklere å bruke en vanling installer, som du finner på <url url="http://rubyinstaller.org/">RubyInstaller.org</url>
+<p>På Windows kan det være enklere å bruke en vanling installer, som du finner på <url url="http://rubyinstaller.org/ name="RubyInstaller.org></url>
 
 <!--
 <p>Siden begynnelsen av årtusenet har det kommet flere engelske bøker om Ruby. Her er ett par anbefalinger:
@@ -442,26 +442,14 @@ Målet er å gjette et tall med minst mulig forsøk, gitt litt tilbakemelding p�
 
 <sect>Gems - Ruby-biblioteker
 <p> Det finnes uhorvelig mange biblioteker for Ruby. Disse kalles for 'gems' og de fleste kan du finne på <url url="https://rubygems.org/" name="Rubygems.org">
-<tt>
-gem install 
-require '...'
-gem install console 
-gem install hirb
-</tt>
-
-
-<sect>Oppgaveforslag
-<sect1>Tripp trapp tresko
-<p>
-<itemize>
-<item><tt>Brett</tt>Lag en klasse "Brett" som representerer ett 3x3 spillebrett.
-<item><tt>display</tt>Legg til en metode for å skrive ut brettet med posisjoner.
-<item><tt>input</tt>Bruk 'gets' metoden i en løkke for å angi neste posisjon for annenhver spiller.
-<item><tt>won?</tt>Sjekk om noen av spillerne har vunnet.
-<item><tt>AIPlayer</tt>Kan du lage en AI-spiller du kan spille mot?
-</itemize>
-
-
+<p>Fra kommandolinjen:
+<verb>
+gem install colorize
+irb
+require 'colorize'
+puts "Pass opp!".red
+</verb>
+<p>For større prosjekter bruker man gjerne <tt>bundler</tt> for å holde styr på hvilke versjoner av hvilke gems man benytter.
 
 
 
@@ -480,6 +468,22 @@ gem install hirb
 <item> <tt>Android</tt> JRuby + Ruboto
 <item> <tt>iOS</tt> RubyMotion
 </itemize>
+
+
+
+
+<sect>Oppgaveforslag
+<sect1>Tripp trapp tresko
+<p>
+<itemize>
+<item> <tt>Brett</tt> - Lag en klasse "Brett" som representerer ett 3x3 spillebrett.
+<item> <tt>display</tt> - Legg til en metode for å skrive ut brettet med posisjoner.
+<item> <tt>input</tt> - Bruk 'gets' metoden i en løkke for å angi neste posisjon for annenhver spiller.
+<item> <tt>won?</tt> - Sjekk om noen av spillerne har vunnet.
+<item> <tt>AIPlayer</tt> - Kan du lage en AI-spiller du kan spille mot?
+</itemize>
+
+
 
 
 
